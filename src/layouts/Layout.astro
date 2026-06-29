@@ -1,0 +1,34 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = 'El Meu Foc | Arrocería y Brasería en Alicante',
+  description = 'Arrocería y brasería en Alicante. Arroz a la leña con socarrat, carnes y pescados frescos a la brasa. Reserva tu mesa en El Meu Foc.',
+} = Astro.props;
+---
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <!-- SEO Local -->
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href={Astro.url.href} />
+  <!-- Open Graph -->
+  <meta property="og:type" content="restaurant" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:locale" content="es_ES" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <slot />
+</body>
+</html>
