@@ -1,0 +1,6 @@
+# Never let Git touch line endings in binary/image formats
+*.pdf binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary

@@ -74,8 +74,8 @@ const THEFORK = 'https://www.thefork.es/restaurante/el-meu-foc-r841568';
         <hr class="rule-ember" style="margin:28px 0 30px" />
         <p class="lead-p">
           Aquí no hay trucos. El caldo lleva horas al fuego antes de que entre
-          el primer cliente. Los pescados llegan de la lonja; las verduras,
-          del mercado de temporada. Cada plato lleva dentro el madrugón de
+          el primer cliente. Los pescados llegan de la lonja; las verduras y los productos son de la zona, ya que, apostamos por el crecimiento de la economia de kilometro cero.
+          Cada plato lleva dentro el madrugón de
           quien lo cocina y el deseo sincero de que en tu mesa te sientas cuidado.
         </p>
         <p class="creed">
@@ -133,14 +133,25 @@ const THEFORK = 'https://www.thefork.es/restaurante/el-meu-foc-r841568';
       <div class="esp-bloque">
         <div class="esp-icon"></div>
         <!-- H3: "Arroz a la leña Alicante" -->
-        <h3>Arroz a la Leña en Alicante</h3>
+        <h3>Arroz en Alicante</h3>
         <p>
           El caldo entra al fuego antes de que abra el restaurante.
-          El grano se cuece a su ritmo, sobre leña, hasta que el socarrat
+          El grano se cuece a su ritmo, hasta que el socarrat
           cruje solo. Así es el arroz en El Meu Foc: fondo artesanal,
           grano en su punto, tradición alicantina.
         </p>
       </div>
+    </div>
+    <!-- Platos insignia — texto para indexación SEO, sin precios -->
+    <div class="signature-dishes">
+      <span class="sd-label">Platos insignia de la casa</span>
+      <ul class="sd-list">
+        <li>Arroz Mi Foc</li>
+        <li>Arroz Senyoret</li>
+        <li>Rabo de toro y setas</li>
+        <li>Chuletón madurado 30 días</li>
+        <li>Presa ibérica a la brasa</li>
+      </ul>
     </div>
   </div>
 </section>
@@ -154,12 +165,12 @@ const THEFORK = 'https://www.thefork.es/restaurante/el-meu-foc-r841568';
     <div class="sec-head">
       <span class="eyebrow">Nuestra alma</span>
       <h2 class="h2" style="color:var(--cream)">Dónde comer arroz<br>en Alicante — El Meu Foc.</h2>
-      <p class="note">cocidos a fuego de leña, sin prisa</p>
+      <p class="note">cocidos a fuego lento, sin prisa</p>
     </div>
     <div class="dish-grid">
       <article class="dish">
         <div class="img-slot" style="width:100%;height:clamp(240px,26vw,340px)">
-          <span class="img-slot-label">Foto: arroz MI FOC</span>
+          <img src="/assets/arroz-mi-foc.jpg" alt="Arroz Mi Foc con torreznos, setas y pimiento asado, servido en paella" />
         </div>
         <span class="badge">Nuestro insignia</span>
         <div class="dt">
@@ -170,18 +181,18 @@ const THEFORK = 'https://www.thefork.es/restaurante/el-meu-foc-r841568';
       </article>
       <article class="dish">
         <div class="img-slot" style="width:100%;height:clamp(240px,26vw,340px)">
-          <span class="img-slot-label">Foto: arroz Brisa Marina</span>
+          <span class="img-slot-label">Foto: arroz Pulpo con tomate seco</span>
         </div>
         <span class="badge" style="opacity:0;pointer-events:none">·</span>
         <div class="dt">
-          <span class="dn">Brisa Marina</span>
+          <span class="dn">Arroz con potente sabor a mar.</span>
           <span class="dp">19,5 €</span>
         </div>
-        <p class="dd">Ventresca de atún, shiitake y katsuobushi.</p>
+        <p class="dd">Pulpo y tomate seco.</p>
       </article>
       <article class="dish">
         <div class="img-slot" style="width:100%;height:clamp(240px,26vw,340px)">
-          <span class="img-slot-label">Foto: arroz La Muntanyeta</span>
+          <img src="/assets/arroz-la-muntanyeta.jpg" alt="Arroz La Muntanyeta con secreto ibérico, garbanzos y ajetes tiernos" />
         </div>
         <span class="badge" style="opacity:0;pointer-events:none">·</span>
         <div class="dt">
@@ -191,9 +202,16 @@ const THEFORK = 'https://www.thefork.es/restaurante/el-meu-foc-r841568';
         <p class="dd">Secreto ibérico, garbanzos y ajetes tiernos.</p>
       </article>
     </div>
-    <div style="margin-top:clamp(40px,5vw,64px)">
-      <a class="btn btn-ghost" href="/carta">Ver todos los arroces y brasas <span class="ar">→</span></a>
+    <div class="teaser" style="margin-top:clamp(40px,5vw,64px)">
+      <p class="tcats">Entrantes · Arroces · Rossellat · Brasas · Vinos · Postres</p>
+      <div class="teaser-ctas">
+        <a class="btn btn-ghost" href="/carta">Abrir la carta <span class="ar">→</span></a>
+        <a class="btn btn-ghost" href="/carta-el-meu-foc.pdf" target="_blank" rel="noopener noreferrer">
+          Descubra nuestra Carta Completa y Bodega (PDF) <span class="ar">→</span>
+        </a>
+      </div>
     </div>
+    <p class="teaser-note">La carta se actualiza a diario según el mercado y la lonja, para preservar siempre la frescura del producto.</p>
   </div>
 </section>
 
@@ -215,27 +233,20 @@ const THEFORK = 'https://www.thefork.es/restaurante/el-meu-foc-r841568';
     </div>
     <div class="gallery">
       <div class="img-slot g-tall"><span class="img-slot-label">La sala</span></div>
-      <div class="img-slot"><span class="img-slot-label">Detalle de mesa</span></div>
+      <div class="img-slot">
+        <img src="/assets/entrante-esgarraet-mesa.jpg" alt="Detalle de mesa: entrante de esgarraet con salazón y copa de vino" />
+      </div>
       <div class="img-slot"><span class="img-slot-label">La brasa</span></div>
       <div class="img-slot g-wide"><span class="img-slot-label">Plato de brasa</span></div>
-      <div class="img-slot"><span class="img-slot-label">Postre</span></div>
-      <div class="img-slot"><span class="img-slot-label">Barra / vinos</span></div>
-      <div class="img-slot g-wide"><span class="img-slot-label">Ambiente / terraza</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     CARTA TEASER
-══════════════════════════════════════ -->
-<section class="section surf-paper" style="padding-top:0">
-  <div class="wrap">
-    <div class="teaser">
-      <div>
-        <h2 class="h2" style="font-size:clamp(34px,4.6vw,60px)">La carta completa</h2>
-        <p class="tcats">Entrantes · Arroces · Rossellat · Brasas · Vinos · Postres</p>
+      <div class="img-slot">
+        <img src="/assets/postre-milhojas.jpg" alt="Milhojas de postre con crema y ralladura de naranja" />
       </div>
-      <a class="btn btn-ink" href="/carta">Abrir la carta <span class="ar">→</span></a>
+      <div class="img-slot">
+        <img src="/assets/bodega-vinos.jpg" alt="Botellero de la bodega de El Meu Foc" />
+      </div>
+      <div class="img-slot g-wide">
+        <img src="/assets/ambiente-brindis.jpg" alt="Brindis con copas de vino en el ambiente del restaurante" />
+      </div>
     </div>
   </div>
 </section>
@@ -261,8 +272,8 @@ const THEFORK = 'https://www.thefork.es/restaurante/el-meu-foc-r841568';
           <div class="it">
             <b>Dirección</b>
             <span>
-              Calle del Restaurante, 00 · Bajo<br>
-              03001 — Alicante (Alacant)
+              Calle Mexico, 25, local 8 · Babel<br>
+              03008 — Alicante (Alacant)
             </span>
           </div>
         </div>
@@ -270,8 +281,9 @@ const THEFORK = 'https://www.thefork.es/restaurante/el-meu-foc-r841568';
           <div class="it">
             <b>Horario</b>
             <span>
-              Martes a domingo · 13:00–16:00 y 20:00–23:30<br>
-              Lunes cerrado
+              Miercoles a Domingo · 13:00–16:00<br>
+              Viernes y Sábado · 20:00–23:30<br>
+              Lunes y Martes cerrado
             </span>
           </div>
         </div>
@@ -279,8 +291,8 @@ const THEFORK = 'https://www.thefork.es/restaurante/el-meu-foc-r841568';
           <div class="it">
             <b>Reservas</b>
             <span>
-              +34 000 000 000<br>
-              reservas@elmeufoc.es
+              <a href="tel:+34673694605">+34 673 69 46 05</a><br>
+              restauranteelmeufoc@gmail.com
             </span>
           </div>
         </div>
@@ -290,16 +302,23 @@ const THEFORK = 'https://www.thefork.es/restaurante/el-meu-foc-r841568';
             <span>@elmeufoc</span>
           </div>
         </div>
-        <div style="margin-top:8px">
-          <a class="btn" href={THEFORK} target="_blank" rel="noopener noreferrer">
-            Reservar en TheFork <span class="ar">→</span>
-          </a>
-        </div>
       </div>
-      <div class="loc-map">
-        <div class="img-slot" style="width:100%;height:100%;min-height:340px">
-          <span class="img-slot-label">Mapa / foto de la fachada del restaurante</span>
-        </div>
+      <div class="loc-map map-embed" style="width:100%;height:100%;min-height:340px">
+        <iframe
+          src="https://www.google.com/maps?q=Calle+Mexico+25+03008+Alicante&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Mapa de El Meu Foc"
+          aria-hidden="true"
+          tabindex="-1"
+        ></iframe>
+        <a
+          class="map-overlay-link"
+          href="https://www.google.com/maps/search/?api=1&query=Calle+Mexico+25+03008+Alicante"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Cómo llegar a El Meu Foc en Google Maps"
+        ></a>
       </div>
     </div>
   </div>
@@ -370,7 +389,7 @@ const THEFORK = 'https://www.thefork.es/restaurante/el-meu-foc-r841568';
 <footer class="ft">
   <div class="wrap">
     <div class="ft-grid">
-      <div class="fcol" style="max-width:300px">
+      <div class="fcol">
         <img class="ft-logo" src="/assets/logo-white.png" alt="El Meu Foc" />
         <p style="margin-top:16px;font-style:italic;font-family:var(--serif);font-size:21px">
           El arroz como lenguaje. El fuego como memoria. Alicante como hogar.
@@ -379,17 +398,18 @@ const THEFORK = 'https://www.thefork.es/restaurante/el-meu-foc-r841568';
       <div class="fcol">
         <h4>Visítanos</h4>
         <p>
-          Calle del Restaurante, 00<br>
-          03001 — Alicante<br>
-          Mar–Dom · 13:00–16:00 / 20:00–23:30<br>
-          <em>Lunes cerrado</em>
+          Calle Mexico, 25, local 8<br>
+          03008 — Alicante<br>
+          Mierc–Dom · 13:00–16:00<br>
+          Viern–Sáb · 20:00–23:30<br>
+          <em>Lunes y Martes cerrado</em>
         </p>
       </div>
       <div class="fcol">
         <h4>Contacto</h4>
         <p>
-          <a href="tel:+34000000000">+34 000 000 000</a><br>
-          <a href="mailto:reservas@elmeufoc.es">reservas@elmeufoc.es</a><br>
+          <a href="tel:+34673694605">+34 673 69 46 05</a><br>
+          <a href="mailto:restauranteelmeufoc@gmail.com">restauranteelmeufoc@gmail.com</a><br>
           <a href="https://g.page/elmeufoc/review" target="_blank" rel="noopener noreferrer">⭐ Déjanos tu reseña en Google</a>
         </p>
       </div>
