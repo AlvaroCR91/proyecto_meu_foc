@@ -22,7 +22,7 @@ export default function Nav({ logoSrc }: { logoSrc: string }) {
         <a className="lnk" href="#historia">Historia</a>
         <a className="lnk" href="#especialidades">Especialidades</a>
         <a className="lnk" href="#restaurante">Restaurante</a>
-        <a className="lnk" href="/carta">Carta</a>
+        <a className="lnk" href="#arroces">Carta</a>
         <a className="lnk" href="#llegar">Cómo llegar</a>
         <a className="btn" href={THEFORK} target="_blank" rel="noopener noreferrer">
           Reservar mesa <span className="ar">→</span>

@@ -3,7 +3,17 @@ import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav';
 import '../styles/landing.css';
 
-const THEFORK = 'https://www.thefork.es/restaurante/el-meu-foc-r841568';
+import Hero from '../components/sections/Hero.astro';
+import Historia from '../components/sections/Historia.astro';
+import Especialidades from '../components/sections/Especialidades.astro';
+import Arroces from '../components/sections/Arroces.astro';
+import Menus from '../components/sections/Menus.astro';
+import Restaurante from '../components/sections/Restaurante.astro';
+import ComoLlegar from '../components/sections/ComoLlegar.astro';
+import Reserve from '../components/sections/Reserve.astro';
+import Finale from '../components/sections/Finale.astro';
+import Footer from '../components/sections/Footer.astro';
+import Lightbox from '../components/sections/Lightbox.astro';
 ---
 
 <Layout
@@ -14,466 +24,17 @@ const THEFORK = 'https://www.thefork.es/restaurante/el-meu-foc-r841568';
 <!-- NAV — React island con scroll state -->
 <Nav logoSrc="/assets/logo-white.png" client:load />
 
-<!-- ══════════════════════════════════════
-     HERO
-══════════════════════════════════════ -->
-<section class="hero surf-ember" id="top">
-  <div class="bgslot">
-    <div class="img-slot">
-      <img src="/assets/sala-general.jpg" alt="Sala de El Meu Foc, restaurante de arroces y brasas en Alicante" />
-    </div>
-  </div>
-  <div class="scrim"></div>
-  <div class="sparks">
-    <i style="left:10%;animation-duration:8s;animation-delay:.2s"></i>
-    <i style="left:24%;animation-duration:9.5s;animation-delay:1.4s"></i>
-    <i style="left:38%;animation-duration:7s;animation-delay:.7s"></i>
-    <i style="left:52%;animation-duration:8.6s;animation-delay:2.1s"></i>
-    <i style="left:66%;animation-duration:7.4s;animation-delay:.5s"></i>
-    <i style="left:80%;animation-duration:9.1s;animation-delay:1.7s"></i>
-    <i style="left:90%;animation-duration:7.8s;animation-delay:2.6s"></i>
-  </div>
-  <div class="hero-in wrap">
-    <div class="eyebrow" style="margin-bottom:18px">Restaurante &nbsp;·&nbsp; Arroces y brasas &nbsp;·&nbsp; Alicante</div>
-    <p class="hand kicker">des del cor —</p>
-    <!-- H1 con keyword principal -->
-    <h1 class="h1">
-      <span class="hl">Arrocería y Brasería</span>
-      <span class="hl ital">en Alicante.</span>
-    </h1>
-    <p class="sub">
-      Fondos cocinados desde primera hora, producto fresco de la lonja y la huerta,
-      brasa que se huele desde la puerta. Sin artificios: solo fuego y cariño.
-    </p>
-    <div class="cta-row">
-      <a class="btn" href={THEFORK} target="_blank" rel="noopener noreferrer">
-        Reservar mesa <span class="ar">→</span>
-      </a>
-      <a class="btn btn-ghost" href="/carta">Ver la carta</a>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     HISTORIA / ORIGEN
-     H2: keyword "restaurante producto fresco Alicante"
-══════════════════════════════════════ -->
-<section class="section surf-paper" id="historia">
-  <div class="veg" data-side="left" style="top:14%;left:50%;width:clamp(84px,11vw,148px)">
-    <img class="veg-img" src="/assets/veg-ajo.png" alt="" />
-  </div>
-  <div class="veg veg-extra" data-side="right" style="top:58%;left:50%;width:clamp(96px,12vw,166px)">
-    <img class="veg-img" src="/assets/veg-alcachofa.png" alt="" />
-  </div>
-  <div class="wrap">
-    <div class="story-grid story">
-      <div class="text">
-        <div class="eyebrow" style="margin-bottom:18px">Nuestra casa</div>
-        <!-- H2: "Restaurante producto fresco Alicante" -->
-        <h2 class="h2">Cocinamos con<br>producto, nada más.</h2>
-        <hr class="rule-ember" style="margin:28px 0 30px" />
-        <p class="lead-p">
-          Aquí no hay trucos. El caldo lleva horas al fuego antes de que entre
-          el primer cliente. Los pescados llegan de la lonja; las verduras y los productos son de la zona, ya que, apostamos por el crecimiento de la economia de kilometro cero.
-          Cada plato lleva dentro el madrugón de
-          quien lo cocina y el deseo sincero de que en tu mesa te sientas cuidado.
-        </p>
-        <p class="creed">
-          No cocinamos para impresionar.<br>
-          Cocinamos para que repitas.
-        </p>
-        <p class="sign">— La familia de El Meu Foc</p>
-      </div>
-      <div class="photo">
-        <div class="img-slot" style="width:100%;height:clamp(360px,46vw,560px)">
-          <span class="img-slot-label">Foto: las manos en la cocina / el cocinero junto al fuego</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     ESPECIALIDADES
-     H2: keyword "Brasería en Alicante"
-     H3: "Restaurante de carne a la brasa Alicante" / "Arroz a la leña Alicante"
-══════════════════════════════════════ -->
-<section class="section surf-ember" id="especialidades">
-  <div class="veg" data-side="left" style="top:20%;left:50%;width:clamp(98px,12vw,170px)">
-    <img class="veg-img" src="/assets/veg-cebolla.png" alt="" />
-  </div>
-  <div class="veg veg-extra" data-side="right" style="top:64%;left:50%;width:clamp(112px,14vw,200px)">
-    <img class="veg-img" src="/assets/veg-calabacin.png" alt="" />
-  </div>
-  <div class="sparks">
-    <i style="left:14%;animation-duration:8.4s;animation-delay:.4s"></i>
-    <i style="left:30%;animation-duration:9.2s;animation-delay:1.5s"></i>
-    <i style="left:48%;animation-duration:7.1s;animation-delay:.9s"></i>
-    <i style="left:64%;animation-duration:8.8s;animation-delay:2.2s"></i>
-    <i style="left:82%;animation-duration:7.6s;animation-delay:1.1s"></i>
-  </div>
-  <div class="wrap" style="position:relative;z-index:2">
-    <div class="sec-head sec-head--right">
-      <span class="eyebrow">Lo que hacemos bien</span>
-      <!-- H2: "Brasería en Alicante" -->
-      <h2 class="h2" style="color:var(--cream)">Brasa y arroz —<br>las dos almas del local.</h2>
-    </div>
-    <div class="esp-grid">
-      <div class="esp-bloque">
-        <div class="esp-icon"></div>
-        <!-- H3: "Restaurante de carne a la brasa Alicante" -->
-        <h3>Restaurante de Carne a la Brasa en Alicante</h3>
-        <p>
-          Entrecots, presa ibérica, lubinas y ventrescas que entran al fuego
-          con su tiempo, sin prisas. El humo hace el trabajo; nosotros,
-          solo vigilamos el punto. Las brasas en El Meu Foc no se apagan
-          hasta que el último plato sale a la sala.
-        </p>
-      </div>
-      <div class="esp-bloque">
-        <div class="esp-icon"></div>
-        <!-- H3: "Arroz a la leña Alicante" -->
-        <h3>Arroz en Alicante</h3>
-        <p>
-          El caldo entra al fuego antes de que abra el restaurante.
-          El grano se cuece a su ritmo, hasta que el socarrat
-          cruje solo. Así es el arroz en El Meu Foc: fondo artesanal,
-          grano en su punto, tradición alicantina.
-        </p>
-      </div>
-    </div>
-    <!-- Platos insignia — texto para indexación SEO, sin precios -->
-    <div class="signature-dishes">
-      <span class="sd-label">Platos insignia de la casa</span>
-      <ul class="sd-list">
-        <li>Arroz Mi Foc</li>
-        <li>Arroz Senyoret</li>
-        <li>Rabo de toro y setas</li>
-        <li>Chuletón madurado 30 días</li>
-        <li>Presa ibérica a la brasa</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     ARROCES — muestra
-     keyword "arrocería en Alicante" / "dónde comer arroz en Alicante"
-══════════════════════════════════════ -->
-<section class="section surf-ember" id="arroces">
-  <div class="wrap" style="position:relative;z-index:2">
-    <div class="sec-head">
-      <span class="eyebrow">Nuestra alma</span>
-      <h2 class="h2" style="color:var(--cream)">Dónde comer arroz<br>en Alicante — El Meu Foc.</h2>
-      <p class="note">cocidos a fuego lento, sin prisa</p>
-    </div>
-    <div class="dish-grid">
-      <article class="dish">
-        <div class="img-slot" style="width:100%;height:clamp(240px,26vw,340px)">
-          <img src="/assets/arroz-mi-foc.jpg" alt="Arroz Mi Foc con torreznos, setas y pimiento asado, servido en paella" />
-        </div>
-        <span class="badge">Nuestro insignia</span>
-        <div class="dt">
-          <span class="dn">Mi Foc</span>
-          <span class="dp">19,5 €</span>
-        </div>
-        <p class="dd">Torreznos, setas y pimiento asado.</p>
-      </article>
-      <article class="dish">
-        <div class="img-slot" style="width:100%;height:clamp(240px,26vw,340px)">
-          <span class="img-slot-label">Foto: arroz Pulpo con tomate seco</span>
-        </div>
-        <span class="badge" style="opacity:0;pointer-events:none">·</span>
-        <div class="dt">
-          <span class="dn">Arroz con potente sabor a mar.</span>
-          <span class="dp">19,5 €</span>
-        </div>
-        <p class="dd">Pulpo y tomate seco.</p>
-      </article>
-      <article class="dish">
-        <div class="img-slot" style="width:100%;height:clamp(240px,26vw,340px)">
-          <span class="img-slot-label">Foto: arroz La Muntanyeta</span>
-        </div>
-        <span class="badge" style="opacity:0;pointer-events:none">·</span>
-        <div class="dt">
-          <span class="dn">La Muntanyeta</span>
-          <span class="dp">19,5 €</span>
-        </div>
-        <p class="dd">Secreto ibérico, garbanzos y ajetes tiernos.</p>
-      </article>
-    </div>
-    <div class="teaser" style="margin-top:clamp(40px,5vw,64px)">
-      <p class="tcats">Entrantes · Arroces · Rossellat · Brasas · Vinos · Postres</p>
-      <div class="teaser-ctas">
-        <a class="btn btn-ghost" href="/carta">Abrir la carta <span class="ar">→</span></a>
-        <a class="btn btn-ghost" href="/carta-el-meu-foc.pdf" target="_blank" rel="noopener noreferrer">
-          Descubra nuestra Carta Completa y Bodega (PDF) <span class="ar">→</span>
-        </a>
-      </div>
-    </div>
-    <p class="teaser-note">La carta se actualiza a diario según el mercado y la lonja, para preservar siempre la frescura del producto.</p>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     MENÚS — menú arrocero cerrado
-══════════════════════════════════════ -->
-<section class="section surf-paper" id="menus">
-  <div class="wrap">
-    <div class="sec-head sec-head--right">
-      <span class="eyebrow">Para compartir en mesa</span>
-      <h2 class="h2">Menú Arrocero</h2>
-      <p class="note">pensado para disfrutar sin prisa, entre dos o más</p>
-    </div>
-    <div class="menu-card">
-      <div class="menu-price">
-        <span class="mp-amount">25 €</span>
-        <span class="mp-unit">por persona &nbsp;·&nbsp; mínimo 2 personas</span>
-      </div>
-      <ul class="menu-includes">
-        <li>Entrante a elegir de la carta <em>(uno por persona)</em></li>
-        <li>Pan con alioli</li>
-        <li>Arroz a elegir de la carta <span class="star">*</span></li>
-        <li>Postre</li>
-        <li>Café</li>
-      </ul>
-      <p class="menu-note"><span class="star">*</span> Algunos arroces llevan un suplemento indicado en la carta.</p>
-    </div>
-    <div class="teaser" style="margin-top:clamp(40px,5vw,64px)">
-      <p class="tcats">¿Buscas otra opción? Consulta el resto de nuestros menús</p>
-      <div class="teaser-ctas">
-        <a class="btn" href="/menus-el-meu-foc.pdf" target="_blank" rel="noopener noreferrer">
-          Ver el resto de menús (PDF) <span class="ar">→</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     RESTAURANTE / GALERÍA
-══════════════════════════════════════ -->
-<section class="section surf-paper" id="restaurante">
-  <div class="veg veg-extra" data-side="left" style="top:16%;left:50%;width:clamp(98px,12vw,160px)">
-    <img class="veg-img" src="/assets/veg-calabacin.png" alt="" />
-  </div>
-  <div class="veg" data-side="right" style="top:60%;left:50%;width:clamp(76px,9vw,120px)">
-    <img class="veg-img" src="/assets/veg-ajo.png" alt="" />
-  </div>
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow">El restaurante</span>
-      <h2 class="h2">Un lugar donde<br>sentirse a gusto.</h2>
-      <p class="note">pasa, que el fuego ya está encendido</p>
-    </div>
-    <div class="gallery">
-      <div class="img-slot g-tall">
-        <img src="/assets/sala-mesas-arte.jpg" alt="Sala interior de El Meu Foc con mesas puestas y cuadros en la pared" />
-      </div>
-      <div class="img-slot">
-        <img src="/assets/detalle-mesa.jpg" alt="Detalle de mesa puesta en El Meu Foc" />
-      </div>
-      <div class="img-slot"><span class="img-slot-label">La brasa</span></div>
-      <div class="img-slot g-wide">
-        <img src="/assets/arroz-la-muntanyeta.jpg" alt="Plato de arroz a la brasa con maridaje de vino en El Meu Foc" />
-      </div>
-      <div class="img-slot">
-        <img src="/assets/postre-milhojas.jpg" alt="Milhojas de postre con crema y ralladura de naranja" />
-      </div>
-      <div class="img-slot">
-        <img src="/assets/rincon-vinos.jpg" alt="Rincón de la bodega y selección de vinos de El Meu Foc" />
-      </div>
-      <div class="img-slot g-wide">
-        <img src="/assets/fachada-terraza.jpg" alt="Fachada y terraza de El Meu Foc de noche" />
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     CÓMO LLEGAR — SEO Local
-     H2: "Dónde comer arroz en Alicante" + zona/barrio
-══════════════════════════════════════ -->
-<section class="section surf-paper" id="llegar" style="padding-top:0">
-  <div class="veg veg-extra" data-side="left" style="top:34%;left:50%;width:clamp(86px,10vw,140px)">
-    <img class="veg-img" src="/assets/veg-alcachofa.png" alt="" />
-  </div>
-  <div class="wrap">
-    <div class="sec-head sec-head--right" style="margin-bottom:clamp(34px,4vw,56px)">
-      <!-- eyebrow con keyword -->
-      <span class="eyebrow">Arrocería en Alicante · Cómo llegar</span>
-      <!-- H2 con keyword SEO local -->
-      <h2 class="h2">Restaurante de Arroces y Brasas<br>en Babel, Alicante.</h2>
-    </div>
-    <div class="loc-grid">
-      <div class="loc-info">
-        <div class="info-row">
-          <div class="it">
-            <b>Dirección</b>
-            <span>
-              Calle Mexico, 25, local 8 · Babel<br>
-              03008 — Alicante (Alacant)
-            </span>
-          </div>
-        </div>
-        <div class="info-row">
-          <div class="it">
-            <b>Horario</b>
-            <span>
-              Miercoles a Domingo · 13:00–16:00<br>
-              Viernes y Sábado · 20:00–23:30<br>
-              Lunes y Martes cerrado
-            </span>
-          </div>
-        </div>
-        <div class="info-row">
-          <div class="it">
-            <b>Reservas</b>
-            <span>
-              <a href="tel:+34673694605">+34 673 69 46 05</a><br>
-              restauranteelmeufoc@gmail.com
-            </span>
-          </div>
-        </div>
-        <div class="info-row">
-          <div class="it">
-            <b>Síguenos</b>
-            <span>@elmeufoc</span>
-          </div>
-        </div>
-      </div>
-      <div class="loc-map map-embed" style="width:100%;height:100%;min-height:340px">
-        <iframe
-          src="https://www.google.com/maps?q=Calle+Mexico+25+03008+Alicante&output=embed"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          title="Mapa de El Meu Foc"
-          aria-hidden="true"
-          tabindex="-1"
-        ></iframe>
-        <a
-          class="map-overlay-link"
-          href="https://www.google.com/maps/search/?api=1&query=Calle+Mexico+25+03008+Alicante"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Cómo llegar a El Meu Foc en Google Maps"
-        ></a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     RESERVE BAND
-══════════════════════════════════════ -->
-<section class="section surf-ember reserve">
-  <div class="sparks">
-    <i style="left:18%;animation-duration:8s;animation-delay:.3s"></i>
-    <i style="left:36%;animation-duration:9.3s;animation-delay:1.6s"></i>
-    <i style="left:54%;animation-duration:7.2s;animation-delay:.8s"></i>
-    <i style="left:72%;animation-duration:8.7s;animation-delay:2.3s"></i>
-    <i style="left:86%;animation-duration:7.7s;animation-delay:1.2s"></i>
-  </div>
-  <div class="wrap" style="position:relative;z-index:2">
-    <p class="hand">reserva tu sitio en la mesa —</p>
-    <h2 class="h2" style="color:var(--cream);margin:8px 0 30px">
-      El fuego ya está<br>encendido.
-    </h2>
-    <a class="btn" href={THEFORK} target="_blank" rel="noopener noreferrer">
-      Reservar mesa <span class="ar">→</span>
-    </a>
-    <div class="fork">Reserva gestionada con TheFork</div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     FINALE · FLAMES + LOGO
-══════════════════════════════════════ -->
-<section class="finale surf-ember" id="finale">
-  <div class="flames" aria-hidden="true">
-    <span class="bed"></span>
-    <span class="flame" style="left:50%;width:32%;height:96%;margin-left:-16%;--d:1.7s;--dl:0s"></span>
-    <span class="flame core" style="left:50%;width:17%;height:74%;margin-left:-8.5%;--d:1.3s;--dl:.2s"></span>
-    <span class="flame" style="left:31%;width:24%;height:72%;margin-left:-12%;--d:2.1s;--dl:.5s"></span>
-    <span class="flame" style="left:69%;width:24%;height:76%;margin-left:-12%;--d:1.9s;--dl:.35s"></span>
-    <span class="flame" style="left:17%;width:20%;height:52%;margin-left:-10%;--d:2.3s;--dl:.7s"></span>
-    <span class="flame" style="left:83%;width:20%;height:56%;margin-left:-10%;--d:2s;--dl:.15s"></span>
-    <span class="flame core" style="left:38%;width:11%;height:56%;margin-left:-5.5%;--d:1.5s;--dl:.6s"></span>
-    <span class="flame core" style="left:62%;width:11%;height:58%;margin-left:-5.5%;--d:1.6s;--dl:.4s"></span>
-  </div>
-  <div class="sparks">
-    <i style="left:22%;animation-duration:6.5s;animation-delay:.2s"></i>
-    <i style="left:40%;animation-duration:7.8s;animation-delay:1.1s"></i>
-    <i style="left:56%;animation-duration:6.9s;animation-delay:.6s"></i>
-    <i style="left:72%;animation-duration:8.2s;animation-delay:1.8s"></i>
-  </div>
-  <div class="veg veg-finale" data-side="left" style="top:15%;left:50%;width:clamp(86px,10vw,150px)">
-    <img class="veg-img" src="/assets/veg-cebolla.png" alt="" />
-  </div>
-  <div class="veg veg-finale" data-side="right" style="top:21%;left:50%;width:clamp(78px,9vw,130px)">
-    <img class="veg-img" src="/assets/veg-ajo.png" alt="" />
-  </div>
-  <div class="finale-in">
-    <p class="hand pre">gràcies de tot cor —</p>
-    <div class="logo-wrap">
-      <img src="/assets/logo-white.png" alt="El Meu Foc" />
-    </div>
-    <p class="closing">El arroz como lenguaje. El fuego como memoria. Alicante como hogar.</p>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     FOOTER — datos de contacto
-══════════════════════════════════════ -->
-<footer class="ft">
-  <div class="wrap">
-    <div class="ft-grid">
-      <div class="fcol">
-        <img class="ft-logo" src="/assets/logo-white.png" alt="El Meu Foc" />
-        <p style="margin-top:16px;font-style:italic;font-family:var(--serif);font-size:21px">
-          El arroz como lenguaje. El fuego como memoria. Alicante como hogar.
-        </p>
-      </div>
-      <div class="fcol">
-        <h4>Visítanos</h4>
-        <p>
-          Calle Mexico, 25, local 8<br>
-          03008 — Alicante<br>
-          Mierc–Dom · 13:00–16:00<br>
-          Viern–Sáb · 20:00–23:30<br>
-          <em>Lunes y Martes cerrado</em>
-        </p>
-      </div>
-      <div class="fcol">
-        <h4>Contacto</h4>
-        <p>
-          <a href="tel:+34673694605">+34 673 69 46 05</a><br>
-          <a href="mailto:restauranteelmeufoc@gmail.com">restauranteelmeufoc@gmail.com</a><br>
-          <a href="https://g.page/elmeufoc/review" target="_blank" rel="noopener noreferrer">⭐ Déjanos tu reseña en Google</a>
-        </p>
-      </div>
-      <div class="fcol">
-        <h4>Reserva</h4>
-        <p>
-          <a href={THEFORK} target="_blank" rel="noopener noreferrer">Reservar en TheFork →</a><br>
-          <a href="/carta">Ver la carta →</a><br>
-          <a href="https://www.instagram.com/elmeufoc" target="_blank" rel="noopener noreferrer">@elmeufoc en Instagram</a>
-        </p>
-      </div>
-    </div>
-    <div class="copy">
-      <span>© 2026 El Meu Foc · Restaurante · Alicante</span>
-      <span>Hecho con fuego, en Alicante.</span>
-    </div>
-  </div>
-</footer>
-
-<!-- ══════════════════════════════════════
-     LIGHTBOX — ampliar fotos de la galería
-══════════════════════════════════════ -->
-<div class="lightbox" id="lightbox">
-  <img src="" alt="" />
-</div>
+<Hero />
+<Historia />
+<Especialidades />
+<Arroces />
+<Menus />
+<Restaurante />
+<ComoLlegar />
+<Reserve />
+<Finale />
+<Footer />
+<Lightbox />
 
 </Layout>
 
@@ -487,21 +48,45 @@ const THEFORK = 'https://www.thefork.es/restaurante/el-meu-foc-r841568';
   const lbImg = lightbox?.querySelector('img');
   if (!lightbox || !lbImg) return;
 
+  let isOpen = false;
+
+  function open(src: string, alt: string) {
+    lbImg.src = src;
+    lbImg.alt = alt;
+    lightbox.classList.add('open');
+    if (!isOpen) {
+      isOpen = true;
+      // añade una entrada al historial: así el botón "atrás" cierra la imagen
+      // en vez de sacar al usuario de la página
+      history.pushState({ lightbox: true }, '');
+    }
+  }
+
+  function close() {
+    if (!isOpen) return;
+    lightbox.classList.remove('open');
+    isOpen = false;
+    if (history.state && history.state.lightbox) {
+      history.back();
+    }
+  }
+
   document.querySelectorAll('.gallery .img-slot img').forEach(img => {
     img.addEventListener('click', () => {
-      lbImg.src = (img as HTMLImageElement).src;
-      lbImg.alt = (img as HTMLImageElement).alt;
-      lightbox.classList.add('open');
+      open((img as HTMLImageElement).src, (img as HTMLImageElement).alt);
     });
   });
 
-  function close() {
-    lightbox?.classList.remove('open');
-  }
+  // clic en cualquier punto del lightbox (fondo o la propia foto) lo cierra
   lightbox.addEventListener('click', close);
-  lbImg.addEventListener('click', e => e.stopPropagation());
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') close();
+  });
+  window.addEventListener('popstate', () => {
+    if (isOpen) {
+      lightbox.classList.remove('open');
+      isOpen = false;
+    }
   });
 })();
 

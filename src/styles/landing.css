@@ -247,6 +247,7 @@ a { color: inherit; text-decoration: none; }
 
 /* zigzag: alterna el lado del título por sección */
 .sec-head--right { margin-left: auto; text-align: right; }
+.sec-head--center { margin-left: auto; margin-right: auto; text-align: center; }
 
 /* ── historia / story ── */
 .story-grid {
@@ -389,14 +390,21 @@ a { color: inherit; text-decoration: none; }
 }
 .menu-card .star { color: var(--ember); font-style: normal; }
 
-/* menú arrocero: bloque de texto a la derecha, a juego con el título */
-#menus .menu-card { margin-left: auto; text-align: right; }
-#menus .menu-price { justify-content: flex-end; }
-#menus .menu-includes li { padding-left: 0; padding-right: 28px; }
-#menus .menu-includes li::before { left: auto; right: 0; }
+/* menú arrocero: todo centrado, con la tarjeta destacada por un borde */
+#menus .menu-card {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  border: 1px solid rgba(199,90,38,.4);
+  border-radius: 4px;
+  padding: clamp(28px,4vw,48px) clamp(24px,4vw,56px);
+}
+#menus .menu-price { justify-content: center; }
+#menus .menu-includes { align-items: center; }
+#menus .menu-includes li { padding: 0; }
+#menus .menu-includes li::before { position: static; margin-right: 8px; }
 #menus .teaser { flex-direction: column; align-items: center; justify-content: center; text-align: center; }
 #menus .teaser .tcats { text-align: center; }
-#menus .teaser-note { text-align: right; }
 
 /* ── galería ── */
 .gallery {
