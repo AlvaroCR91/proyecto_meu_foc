@@ -155,9 +155,12 @@ import Lightbox from '../components/sections/Lightbox.astro';
     let fp = 0;
     if (finaleEl) {
       const ftop = finaleEl.getBoundingClientRect().top + sy;
-      const maxScroll = Math.max(1, document.documentElement.scrollHeight - vh);
+      // el progreso se mide solo por lo que se tarda en entrar en la sección
+      // (de "toca el borde inferior" a "toca el borde superior"), sin depender
+      // de la altura del footer que viene después
       const startScroll = ftop - vh;
-      fp = Math.max(0, Math.min(1, (sy - startScroll) / Math.max(1, maxScroll - startScroll)));
+      const endScroll = ftop;
+      fp = Math.max(0, Math.min(1, (sy - startScroll) / Math.max(1, endScroll - startScroll)));
     }
     vegs.forEach(v => {
       const isFin = v.classList.contains('veg-finale');
