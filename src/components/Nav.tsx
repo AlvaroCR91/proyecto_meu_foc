@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-
-const THEFORK = 'https://www.thefork.es/restaurante/el-meu-foc-r841568';
+import { THEFORK } from '../lib/constants';
 
 export default function Nav({ logoSrc }: { logoSrc: string }) {
   const [scrolled, setScrolled] = useState(false);

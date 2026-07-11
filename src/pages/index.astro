@@ -44,9 +44,14 @@ import Lightbox from '../components/sections/Lightbox.astro';
 
 /* ── lightbox de la galería ── */
 (function () {
-  const lightbox = document.getElementById('lightbox');
-  const lbImg = lightbox?.querySelector('img');
-  if (!lightbox || !lbImg) return;
+  const lightboxEl = document.getElementById('lightbox');
+  const lbImgEl = lightboxEl?.querySelector('img');
+  if (!lightboxEl || !lbImgEl) return;
+
+  // tipado no-nulo explícito: a diferencia de "lightboxEl"/"lbImgEl",
+  // TS conserva esta garantía dentro de open()/close(), que se llaman más tarde
+  const lightbox: HTMLElement = lightboxEl;
+  const lbImg: HTMLImageElement = lbImgEl;
 
   let isOpen = false;
 

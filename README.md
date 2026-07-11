@@ -1,69 +1,37 @@
-# React + TypeScript + Vite
+# El Meu Foc
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Web de El Meu Foc, arrocería y brasería en Alicante. Construida con [Astro](https://astro.build) y una isla de [React](https://react.dev) para la navegación.
 
-Currently, two official plugins are available:
+## Estructura
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+src/
+  components/
+    Nav.tsx                 nav con estado de scroll (isla React)
+    sections/               un componente por sección de la home
+  layouts/
+    Layout.astro            <head>, meta tags, fuentes
+  lib/
+    constants.ts            constantes compartidas (enlace de TheFork)
+  pages/
+    index.astro             home: importa y ordena las secciones
+    carta.astro              carta completa en formato de páginas
+  styles/
+    landing.css              estilos de la home
+    carta.css                estilos de la carta
+public/
+  assets/                    fotos, logos, ilustraciones
+  *.pdf                      cartas descargables (carta, bebidas, menús)
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Comandos
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Todos los comandos se ejecutan desde la raíz del proyecto (`proyecto_meu_foc/`):
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+| Comando           | Acción                                      |
+| :---------------- | :------------------------------------------- |
+| `npm install`      | Instala las dependencias                     |
+| `npm run dev`      | Levanta el servidor de desarrollo             |
+| `npm run build`    | Genera la build de producción en `./dist/`    |
+| `npm run preview`  | Previsualiza la build de producción           |
+| `npx astro check`  | Comprueba tipos de TypeScript en los `.astro` |
