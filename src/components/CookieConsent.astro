@@ -1,0 +1,110 @@
+<!-- ══════════════════════════════════════
+     AVISO DE COOKIES
+══════════════════════════════════════ -->
+<div class="cookie-banner" id="cookie-banner" hidden>
+  <div class="cookie-banner__text">
+    <p>
+      Usamos cookies propias, necesarias para el funcionamiento de la web, y de terceros
+      (Google Maps) para mostrarte cómo llegar al restaurante. Puedes aceptarlas o
+      rechazarlas. Más información en nuestra
+      <a href="/politica-cookies">Política de Cookies</a>.
+    </p>
+  </div>
+  <div class="cookie-banner__actions">
+    <button type="button" class="btn btn-ghost cookie-btn" id="cookie-reject">Rechazar</button>
+    <button type="button" class="btn cookie-btn" id="cookie-accept">Aceptar</button>
+  </div>
+</div>
+
+<style>
+  .cookie-banner {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 22px clamp(20px, 5vw, 48px);
+    background: #100b08;
+    border-top: 1px solid rgba(244, 236, 220, 0.12);
+    box-shadow: 0 -12px 40px -12px rgba(0, 0, 0, 0.6);
+  }
+  .cookie-banner[hidden] { display: none; }
+  .cookie-banner__text {
+    flex: 1 1 420px;
+    font-family: var(--body);
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(244, 236, 220, 0.75);
+  }
+  .cookie-banner__text a {
+    color: var(--ember-2);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .cookie-banner__actions {
+    display: flex;
+    gap: 14px;
+    flex: 0 0 auto;
+  }
+  .cookie-btn.btn {
+    padding: 12px 26px;
+    font-size: 15px;
+  }
+</style>
+
+<script>
+  const CONSENT_KEY = 'meufoc_cookie_consent';
+
+  type Consent = 'accepted' | 'rejected';
+
+  function getConsent(): Consent | null {
+    return localStorage.getItem(CONSENT_KEY) as Consent | null;
+  }
+
+  function setConsent(value: Consent) {
+    localStorage.setItem(CONSENT_KEY, value);
+    document.dispatchEvent(new CustomEvent('meufoc:cookie-consent', { detail: value }));
+  }
+
+  // API mínima que otros componentes (p. ej. el mapa) usan para
+  // saber si ya hay consentimiento o para pedirlo ellos mismos.
+  (window as any).meufocCookieConsent = { get: getConsent, set: setConsent };
+
+  const banner = document.getElementById('cookie-banner') as HTMLElement | null;
+  const acceptBtn = document.getElementById('cookie-accept');
+  const rejectBtn = document.getElementById('cookie-reject');
+
+  // El banner es "fixed" al fondo: sin este hueco, tapa el pie de página
+  // (incluido el enlace al Aviso Legal) mientras está visible.
+  function syncBodyOffset() {
+    if (banner && !banner.hasAttribute('hidden')) {
+      document.body.style.paddingBottom = banner.offsetHeight + 'px';
+    } else {
+      document.body.style.paddingBottom = '';
+    }
+  }
+
+  function hideBanner() {
+    banner?.setAttribute('hidden', '');
+    syncBodyOffset();
+  }
+
+  if (!getConsent()) banner?.removeAttribute('hidden');
+  syncBodyOffset();
+  window.addEventListener('resize', syncBodyOffset);
+
+  acceptBtn?.addEventListener('click', () => {
+    setConsent('accepted');
+    hideBanner();
+  });
+
+  rejectBtn?.addEventListener('click', () => {
+    setConsent('rejected');
+    hideBanner();
+  });
+</script>

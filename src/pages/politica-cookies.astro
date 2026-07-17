@@ -1,0 +1,126 @@
+---
+import Layout from '../layouts/Layout.astro';
+import '../styles/landing.css';
+---
+
+<Layout
+  title="Política de Cookies — El Meu Foc"
+  description="Política de cookies del sitio web de El Meu Foc, restaurante de arroces y brasas en Alicante."
+>
+
+<section class="section surf-paper legal-page">
+  <div class="wrap legal-wrap">
+    <a class="legal-back" href="/">← Volver a la web</a>
+    <div class="eyebrow">El Meu Foc</div>
+    <h1 class="h2" style="margin-top:14px">Política de Cookies</h1>
+    <hr class="rule-ember" style="margin:26px 0 40px" />
+
+    <div class="legal-body">
+      <h2>1. ¿Qué son las cookies?</h2>
+      <p>
+        Las cookies son pequeños archivos que un sitio web instala en el navegador del
+        usuario para almacenar y recuperar información sobre su visita. En cumplimiento del
+        artículo 22.2 de la Ley 34/2002 (LSSI-CE) y del Reglamento (UE) 2016/679 (RGPD), te
+        informamos sobre las cookies que utiliza <strong>restaurantemeufoc.es</strong>.
+      </p>
+
+      <h2>2. Cookies propias</h2>
+      <p>
+        Utilizamos una única cookie técnica propia, almacenada en tu navegador
+        (<code>localStorage</code>, no una cookie HTTP), que guarda tu decisión sobre este
+        aviso de cookies para no volver a mostrártelo en cada visita. No tiene fines
+        publicitarios ni de análisis.
+      </p>
+      <ul>
+        <li><strong>Nombre:</strong> <code>meufoc_cookie_consent</code></li>
+        <li><strong>Finalidad:</strong> recordar si aceptaste o rechazaste las cookies de terceros</li>
+        <li><strong>Duración:</strong> persistente, hasta que borres los datos de navegación</li>
+      </ul>
+
+      <h2>3. Cookies de terceros</h2>
+      <p>
+        Al aceptar las cookies, esta web carga el mapa incrustado de <strong>Google Maps</strong>
+        en la sección "Cómo llegar", que puede instalar sus propias cookies en tu navegador
+        para su funcionamiento y con fines propios de Google. Este sitio no controla dichas
+        cookies; puedes consultar la política de privacidad de Google en
+        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">policies.google.com/privacy</a>.
+      </p>
+      <p>
+        Si rechazas las cookies, el mapa no se carga y en su lugar se muestra un enlace que
+        abre la ubicación directamente en Google Maps, en una pestaña nueva, sin instalar
+        ninguna cookie en esta web.
+      </p>
+
+      <h2>4. Cómo gestionar o retirar tu consentimiento</h2>
+      <p>
+        Puedes cambiar tu decisión en cualquier momento borrando los datos de navegación
+        (almacenamiento local) de este sitio desde la configuración de tu navegador, lo que
+        hará que el aviso de cookies vuelva a mostrarse en tu siguiente visita. También
+        puedes configurar tu navegador para bloquear o eliminar cookies de terceros con
+        carácter general; ten en cuenta que esto puede afectar al funcionamiento de otros
+        sitios web.
+      </p>
+
+      <h2>5. Más información</h2>
+      <p>
+        Para conocer quién es el responsable de este sitio web y cómo tratamos tus datos
+        personales, consulta nuestro <a href="/aviso-legal">Aviso Legal</a>.
+      </p>
+    </div>
+  </div>
+</section>
+
+</Layout>
+
+<style>
+  .legal-page { min-height: 100vh; }
+  .legal-wrap { max-width: 860px; padding-block: clamp(48px, 8vw, 90px); }
+  .legal-back {
+    display: inline-block;
+    margin-bottom: 34px;
+    font-size: 16px;
+    color: var(--ink-soft);
+    border-bottom: 1px solid transparent;
+  }
+  .legal-back:hover { color: var(--ember); border-color: var(--ember); }
+  .legal-body h2 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(22px, 2.6vw, 28px);
+    color: var(--ink);
+    margin-top: 44px;
+    margin-bottom: 14px;
+  }
+  .legal-body h2:first-child { margin-top: 0; }
+  .legal-body p {
+    font-family: var(--body);
+    font-size: 18px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+    margin-bottom: 14px;
+  }
+  .legal-body ul {
+    margin: 0 0 14px 20px;
+    padding: 0;
+  }
+  .legal-body li {
+    font-family: var(--body);
+    font-size: 18px;
+    line-height: 1.9;
+    color: var(--ink-soft);
+  }
+  .legal-body code {
+    font-family: monospace;
+    font-size: 0.9em;
+    background: rgba(43,30,22,.08);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  .legal-body a {
+    color: var(--ember);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .legal-body a:hover { color: var(--ember-2); }
+  .legal-body strong { color: var(--ink); }
+</style>

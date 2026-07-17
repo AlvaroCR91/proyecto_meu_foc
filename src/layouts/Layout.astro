@@ -1,4 +1,6 @@
 ---
+import CookieConsent from '../components/CookieConsent.astro';
+
 export interface Props {
   title?: string;
   description?: string;
@@ -30,5 +32,6 @@ const {
 </head>
 <body>
   <slot />
+  <CookieConsent />
 </body>
 </html>
