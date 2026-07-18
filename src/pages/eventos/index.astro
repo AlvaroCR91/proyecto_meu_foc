@@ -1,0 +1,118 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import EventList from '../../components/eventos/EventList';
+import SubscribeForm from '../../components/eventos/SubscribeForm';
+import Lightbox from '../../components/sections/Lightbox.astro';
+import '../../styles/landing.css';
+import '../../styles/eventos.css';
+---
+
+<Layout
+  title="Eventos — El Meu Foc"
+  description="Próximos eventos, catas y jornadas gastronómicas en El Meu Foc, Alicante."
+>
+
+<div class="wrap">
+  <a class="back-link" href="/">← Volver a la web</a>
+</div>
+
+<section class="section surf-paper">
+  <div class="wrap">
+    <div class="sec-head sec-head--center">
+      <span class="eyebrow">El Meu Foc</span>
+      <h1 class="h2">Nuestros <span class="ital">eventos</span></h1>
+      <p class="lead-p">Jornadas gastronómicas, catas y noches especiales alrededor del fuego y el arroz.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section surf-ember">
+  <div class="wrap">
+    <div class="sec-head sec-head--center">
+      <span class="eyebrow">Próximas fechas</span>
+      <h2 class="h2" style="color:var(--cream)">Reserva la fecha</h2>
+    </div>
+    <EventList client:load />
+  </div>
+</section>
+
+<section class="section surf-paper">
+  <div class="wrap">
+    <div class="sec-head sec-head--center">
+      <span class="eyebrow">Momentos de la casa</span>
+      <h2 class="h2">Eventos anteriores</h2>
+    </div>
+    <div class="gallery" style="margin-top:48px">
+      <div class="img-slot g-wide"><span class="img-slot-label">Fotos de eventos anteriores — próximamente</span></div>
+      <div class="img-slot"><span class="img-slot-label">Fotos de eventos anteriores — próximamente</span></div>
+      <div class="img-slot g-tall"><span class="img-slot-label">Fotos de eventos anteriores — próximamente</span></div>
+      <div class="img-slot"><span class="img-slot-label">Fotos de eventos anteriores — próximamente</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section surf-paper">
+  <div class="wrap">
+    <div class="sec-head sec-head--center">
+      <span class="eyebrow">No te lo pierdas</span>
+      <h2 class="h2">Entérate antes que nadie</h2>
+    </div>
+    <SubscribeForm client:load />
+  </div>
+</section>
+
+<Lightbox />
+
+</Layout>
+
+<script>
+  // Igual que el lightbox de la home, pero con delegación de eventos: las
+  // imágenes de los eventos las pinta React después de cargar la página, así
+  // que no existen todavía cuando este script arranca.
+  (function () {
+    const lightboxEl = document.getElementById('lightbox');
+    const lbImgEl = lightboxEl?.querySelector('img');
+    if (!lightboxEl || !lbImgEl) return;
+
+    const lightbox: HTMLElement = lightboxEl;
+    const lbImg: HTMLImageElement = lbImgEl;
+    let isOpen = false;
+
+    function open(src: string, alt: string) {
+      lbImg.src = src;
+      lbImg.alt = alt;
+      lightbox.classList.add('open');
+      if (!isOpen) {
+        isOpen = true;
+        history.pushState({ lightbox: true }, '');
+      }
+    }
+
+    function close() {
+      if (!isOpen) return;
+      lightbox.classList.remove('open');
+      isOpen = false;
+      if (history.state && history.state.lightbox) {
+        history.back();
+      }
+    }
+
+    document.addEventListener('click', (e) => {
+      const target = (e.target as HTMLElement).closest<HTMLImageElement>(
+        '.event-card-image, .gallery .img-slot img'
+      );
+      if (target) open(target.src, target.alt);
+    });
+
+    lightbox.addEventListener('click', close);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') close();
+    });
+    window.addEventListener('popstate', () => {
+      if (isOpen) {
+        lightbox.classList.remove('open');
+        isOpen = false;
+      }
+    });
+  })();
+</script>
