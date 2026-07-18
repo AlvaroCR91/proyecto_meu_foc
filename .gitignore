@@ -14,6 +14,7 @@ dist-ssr
 .astro/
 .env
 .env.production
+server/eventos-api/uploads/
 
 # Editor directories and files
 .vscode/*

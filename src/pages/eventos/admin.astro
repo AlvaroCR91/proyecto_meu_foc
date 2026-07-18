@@ -1,0 +1,23 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AdminPanel from '../../components/eventos/AdminPanel';
+import '../../styles/landing.css';
+import '../../styles/eventos.css';
+---
+
+<Layout
+  title="Admin Eventos — El Meu Foc"
+  description="Panel de gestión de eventos."
+  robots="noindex, nofollow"
+>
+
+<section class="section surf-paper">
+  <div class="wrap admin-shell">
+    <a class="back-link" href="/eventos">← Volver a eventos</a>
+    <span class="eyebrow" style="display:block;margin-top:24px">Panel privado</span>
+    <h1 class="h2">Gestión de eventos</h1>
+    <AdminPanel client:load />
+  </div>
+</section>
+
+</Layout>

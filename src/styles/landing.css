@@ -159,6 +159,7 @@ a { color: inherit; text-decoration: none; }
 .hd .brand img { width: 54px; transition: width .35s; }
 .hd.scrolled .brand img { width: 46px; }
 .hd .brand .bn { font-family: var(--hand); font-size: 30px; color: var(--cream); line-height: .9; }
+.hd-right { display: flex; align-items: center; gap: 34px; }
 .nav { display: flex; align-items: center; gap: 34px; }
 .nav a.lnk {
   font-family: var(--body);
@@ -170,6 +171,30 @@ a { color: inherit; text-decoration: none; }
   transition: opacity .2s, color .2s;
 }
 .nav a.lnk:hover { opacity: 1; color: var(--ember-2); }
+
+/* ── menú hamburguesa (solo visible en móvil) ── */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+.menu-toggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--cream);
+  transition: transform .25s ease, opacity .2s ease;
+}
+.hd.menu-open .menu-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hd.menu-open .menu-toggle span:nth-child(2) { opacity: 0; }
+.hd.menu-open .menu-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 /* ── buttons ── */
 .btn {
@@ -641,9 +666,42 @@ a { color: inherit; text-decoration: none; }
   .ft .fcol:first-child { grid-column: 1 / -1; max-width: none; }
 }
 @media (max-width: 680px) {
-  .nav a.lnk { display: none; }
+  .menu-toggle { display: flex; }
   .hd .btn { padding: 11px 18px; font-size: 14px; letter-spacing: .1em; }
   .hd .brand .bn { display: none; }
+
+  .nav {
+    position: fixed;
+    top: 84px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    background: rgba(15,10,7,.98);
+    backdrop-filter: blur(10px);
+    padding: 24px clamp(28px,8vw,60px) 40px;
+    transform: translateY(-16px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .25s ease, transform .25s ease, visibility 0s linear .25s;
+    overflow-y: auto;
+  }
+  .hd.menu-open .nav {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    transition: opacity .25s ease, transform .25s ease;
+  }
+  .nav a.lnk {
+    display: block;
+    font-size: 22px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(244,236,220,.1);
+    opacity: 1;
+  }
+
   .hero .sub { max-width: 100%; }
   .teaser { flex-direction: column; align-items: flex-start; }
   .ft-grid { grid-template-columns: 1fr; gap: 34px; }
