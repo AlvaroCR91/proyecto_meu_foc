@@ -29,6 +29,9 @@ async function apiFetch<T = any>(path: string, opts: RequestInit = {}): Promise<
 export const getEventos = () =>
   apiFetch<{ eventos: Evento[] }>('/api/eventos');
 
+export const getEventosPasados = () =>
+  apiFetch<{ eventos: Evento[] }>('/api/eventos/pasados-con-imagen');
+
 export const subscribe = (email: string) =>
   apiFetch('/api/suscribirse', { method: 'POST', body: JSON.stringify({ email }) });
 

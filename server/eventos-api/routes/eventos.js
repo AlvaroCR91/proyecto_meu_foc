@@ -23,6 +23,21 @@ router.get('/eventos', async (req, res, next) => {
   }
 });
 
+// GET /api/eventos/pasados-con-imagen — público, eventos ya celebrados que
+// subieron foto al crearse. Alimenta la galeria "Eventos anteriores": en
+// cuanto la fecha de un evento pasa, su imagen aparece aqui sola, sin tocar
+// nada a mano.
+router.get('/eventos/pasados-con-imagen', async (req, res, next) => {
+  try {
+    const [rows] = await pool.query(
+      'SELECT id, titulo, fecha, imagen_placeholder FROM eventos WHERE fecha < NOW() AND imagen_placeholder IS NOT NULL ORDER BY fecha DESC'
+    );
+    res.json({ ok: true, eventos: rows });
+  } catch (err) {
+    next(err);
+  }
+});
+
 // POST /api/admin/nuevo-evento — protegido, la barrera real es requireAdmin,
 // nunca el gating de la UI en el cliente. Multipart: campos de texto +
 // imagen opcional (uploadEventImage ya valida tipo/tamaño antes de llegar aquí).

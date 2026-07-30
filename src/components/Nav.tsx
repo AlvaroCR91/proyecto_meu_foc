@@ -30,6 +30,24 @@ export default function Nav({ logoSrc }: { logoSrc: string }) {
     return () => document.removeEventListener('keydown', onKey);
   }, [menuOpen]);
 
+  useEffect(() => {
+    // Al volver mediante el boton "atras", el navegador puede restaurar la
+    // pagina desde la bfcache a mitad de la transicion de cierre del menu.
+    // Forzamos que quede cerrado para evitar que se vea a medio animar.
+    function onPageShow(e: PageTransitionEvent) {
+      if (e.persisted) setMenuOpen(false);
+    }
+    window.addEventListener('pageshow', onPageShow);
+    return () => window.removeEventListener('pageshow', onPageShow);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [menuOpen]);
+
   function closeMenu() {
     setMenuOpen(false);
   }

@@ -669,6 +669,18 @@ a { color: inherit; text-decoration: none; }
   .menu-toggle { display: flex; }
   .hd .btn { padding: 11px 18px; font-size: 14px; letter-spacing: .1em; }
   .hd .brand .bn { display: none; }
+  /* Altura del header fija en movil: el panel del menu usa "top: 84px" y no
+     debe desajustarse segun el estado .scrolled (que en desktop encoge el padding). */
+  .hd.scrolled { padding-top: 16px; padding-bottom: 16px; }
+  .hd.scrolled .brand img { width: 54px; }
+  /* backdrop-filter en el header crea un "containing block" para sus hijos
+     con position:fixed, asi que el panel del menu (fixed) se posicionaba
+     respecto al header (~85px) en vez de respecto a toda la pantalla,
+     quedando cortado a media altura. Se desactiva mientras el menu esta abierto. */
+  .hd.menu-open { backdrop-filter: none; }
+  /* El banner de cookies (z-index:999) tapaba y bloqueaba los clics de los
+     ultimos enlaces del menu movil mientras el banner seguia visible. */
+  .hd.menu-open { z-index: 1000; }
 
   .nav {
     position: fixed;

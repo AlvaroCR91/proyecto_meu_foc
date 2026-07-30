@@ -42,11 +42,25 @@ import '../../styles/eventos.css';
       <span class="eyebrow">Momentos de la casa</span>
       <h2 class="h2">Eventos anteriores</h2>
     </div>
-    <div class="gallery" style="margin-top:48px">
-      <div class="img-slot g-wide"><span class="img-slot-label">Fotos de eventos anteriores — próximamente</span></div>
-      <div class="img-slot"><span class="img-slot-label">Fotos de eventos anteriores — próximamente</span></div>
-      <div class="img-slot g-tall"><span class="img-slot-label">Fotos de eventos anteriores — próximamente</span></div>
-      <div class="img-slot"><span class="img-slot-label">Fotos de eventos anteriores — próximamente</span></div>
+    <div class="gallery" id="eventos-gallery" style="margin-top:48px">
+      <div class="img-slot g-wide">
+        <img src="/assets/muestra.jpeg" alt="Selección de tapas y cervezas artesanas servida en una cata de El Meu Foc" />
+      </div>
+      <div class="img-slot">
+        <img src="/assets/cata_maridaje.jpeg" alt="Cartel del evento Cata de Maridaje en El Meu Foc" />
+      </div>
+      <div class="img-slot g-tall">
+        <img src="/assets/tus_sentidos.jpeg" alt="Cartel del evento &quot;Un banquete que despierta tus sentidos&quot; en El Meu Foc" />
+      </div>
+      <div class="img-slot">
+        <img src="/assets/cena_cata.jpg" alt="Cartel de la Cena con Cata de Vinos, en colaboración con Bodega Las Virtudes" />
+      </div>
+      <div class="img-slot">
+        <img src="/assets/menu_solidario.jpeg" alt="Cartel del Menú Solidario a beneficio de la protectora de animales Asoka el Grande" />
+      </div>
+      <div class="img-slot">
+        <img src="/assets/cena_cata_2.jpg" alt="Cartel de la Cena con Cata de Vinos — Un camino, dos historias" />
+      </div>
     </div>
   </div>
 </section>
@@ -114,5 +128,33 @@ import '../../styles/eventos.css';
         isOpen = false;
       }
     });
+  })();
+</script>
+
+<script>
+  // Cuando la fecha de un evento con foto ya ha pasado, su imagen se suma
+  // sola a "Eventos anteriores" (el lightbox de arriba ya funciona con
+  // delegación de eventos, así que estas imágenes añadidas después también
+  // abren el visor al hacer clic sin nada más que hacer aquí).
+  import { getEventosPasados } from '../../components/eventos/api';
+
+  (async function () {
+    const gallery = document.getElementById('eventos-gallery');
+    if (!gallery) return;
+
+    const { ok, data } = await getEventosPasados();
+    if (!ok || !data.eventos?.length) return;
+
+    for (const evento of data.eventos) {
+      if (!evento.imagen_placeholder) continue;
+      const slot = document.createElement('div');
+      slot.className = 'img-slot';
+      const img = document.createElement('img');
+      img.src = evento.imagen_placeholder;
+      img.alt = `Foto del evento ${evento.titulo}`;
+      img.loading = 'lazy';
+      slot.appendChild(img);
+      gallery.appendChild(slot);
+    }
   })();
 </script>
