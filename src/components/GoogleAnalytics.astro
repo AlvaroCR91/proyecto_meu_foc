@@ -1,0 +1,29 @@
+---
+import { GA_MEASUREMENT_ID } from '../lib/constants';
+---
+<script is:inline define:vars={{ GA_MEASUREMENT_ID }}>
+  let gaLoaded = false;
+
+  function loadGA() {
+    if (gaLoaded || !GA_MEASUREMENT_ID || GA_MEASUREMENT_ID.indexOf('XXXX') !== -1) return;
+    gaLoaded = true;
+
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_MEASUREMENT_ID;
+    document.head.appendChild(script);
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { window.dataLayer.push(arguments); }
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', GA_MEASUREMENT_ID, { anonymize_ip: true });
+  }
+
+  const consent = window.meufocCookieConsent?.get();
+  if (consent === 'accepted') loadGA();
+
+  document.addEventListener('meufoc:cookie-consent', (e) => {
+    if (e.detail === 'accepted') loadGA();
+  });
+</script>
