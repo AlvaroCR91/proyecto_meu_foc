@@ -1,5 +1,22 @@
 ---
 import { THEFORK } from '../../lib/constants';
+import type { Lang } from '../../i18n/ui';
+
+const { lang } = Astro.props as { lang: Lang };
+const tx = {
+  es: {
+    hand: 'reserva tu sitio en la mesa —',
+    h2: 'Las brasas ya están<br>encendidas.',
+    reservar: 'Reservar mesa',
+    fork: 'Reserva gestionada con TheFork',
+  },
+  en: {
+    hand: 'save your seat at the table —',
+    h2: 'The embers are<br>already lit.',
+    reservar: 'Book a table',
+    fork: 'Bookings managed through TheFork',
+  },
+}[lang];
 ---
 
 <!-- ══════════════════════════════════════
@@ -14,13 +31,11 @@ import { THEFORK } from '../../lib/constants';
     <i style="left:86%;animation-duration:7.7s;animation-delay:1.2s"></i>
   </div>
   <div class="wrap" style="position:relative;z-index:2">
-    <p class="hand">reserva tu sitio en la mesa —</p>
-    <h2 class="h2" style="color:var(--cream);margin:8px 0 30px">
-      Las brasas ya están<br>encendidas.
-    </h2>
+    <p class="hand">{tx.hand}</p>
+    <h2 class="h2" style="color:var(--cream);margin:8px 0 30px" set:html={tx.h2} />
     <a class="btn" href={THEFORK} target="_blank" rel="noopener noreferrer">
-      Reservar mesa <span class="ar">→</span>
+      {tx.reservar} <span class="ar">→</span>
     </a>
-    <div class="fork">Reserva gestionada con TheFork</div>
+    <div class="fork">{tx.fork}</div>
   </div>
 </section>

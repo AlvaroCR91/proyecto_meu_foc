@@ -1,0 +1,330 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import '../styles/carta.css';
+import logoWhite from '../assets/logo-white.png';
+import logoInk from '../assets/logo-ink.png';
+import brasaParrilla from '../assets/brasa-parrilla.jpg';
+import arrozMiFoc from '../assets/arroz-mi-foc.jpg';
+import rossellatSepiaGambas from '../assets/rossellat-sepia-gambas.jpg';
+import type { Lang } from '../i18n/ui';
+import { localePath } from '../i18n/utils';
+
+const { lang } = Astro.props as { lang: Lang };
+// texto en el idioma de la página: L('español', 'inglés')
+const L = (es: string, en: string) => (lang === 'en' ? en : es);
+---
+
+<Layout
+  title={L('Carta de arroces, paellas y brasas en Alicante | El Meu Foc', 'Menu: Rice, Paella & Grill in Alicante | El Meu Foc')}
+  description={L('Carta de El Meu Foc, arrocería en Alicante: arroces y paellas con socarrat, rossellat (fideuà), carnes y pescados a la brasa de carbón, entrantes y postres.', 'El Meu Foc menu, rice restaurant in Alicante: rice dishes and paellas with socarrat, rossellat (fideuà), charcoal-grilled meat and fish, starters, desserts.')}
+>
+
+<div class="stage" id="stage">
+  <a class="back-link" href={localePath(lang, '/')}>{L('← Volver a la web', '← Back to the site')}</a>
+  <div class="feed" id="feed">
+
+    <!-- ══ 01 PORTADA ══ -->
+    <section class="page ember" data-screen-label="01 · Portada">
+      <div class="sparks">
+        <i style="left:12%;animation-duration:7.5s;animation-delay:.2s"></i>
+        <i style="left:22%;animation-duration:9s;animation-delay:1.4s"></i>
+        <i style="left:34%;animation-duration:6.6s;animation-delay:.7s"></i>
+        <i style="left:46%;animation-duration:8.4s;animation-delay:2.1s"></i>
+        <i style="left:56%;animation-duration:7s;animation-delay:.4s"></i>
+        <i style="left:67%;animation-duration:9.6s;animation-delay:1.1s"></i>
+        <i style="left:78%;animation-duration:6.9s;animation-delay:2.6s"></i>
+        <i style="left:88%;animation-duration:8.1s;animation-delay:.9s"></i>
+      </div>
+      <div class="inner" style="align-items:center;text-align:center;justify-content:space-between;padding-top:120px;padding-bottom:148px">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:34px">
+          <Image src={logoWhite} width={360} height={352} alt="El Meu Foc" style="width:360px;height:auto;display:block" />
+          <div class="eyebrow" style="white-space:nowrap;letter-spacing:.3em"><Fragment set:html={L('Restaurante &nbsp;·&nbsp; Alicante', 'Restaurant &nbsp;·&nbsp; Alicante')} /></div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:30px">
+          <div class="kicker-hand">des del cor —</div>
+          <h1 class="h-title" style="font-size:118px;color:var(--cream)">
+            {lang === 'en'
+              ? <Fragment>We cook<br>with fire,<br><span style="font-style:italic;color:var(--ember-2)">we serve<br>with love.</span></Fragment>
+              : <Fragment>Cocinamos<br>con fuego,<br>
+            <span style="font-style:italic;color:var(--ember-2)">servimos<br>con amor.</span></Fragment>}
+          </h1>
+          <div class="coal" style="margin-top:6px"></div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:48px">
+          <p class="margin-note" style="font-size:46px;color:var(--cream);opacity:.92">{L('«Pasa, que el fuego ya está encendido.»', '“Come in, the fire is already lit.”')}</p>
+          <div class="eyebrow" style="color:#c98b5a;font-size:23px;white-space:nowrap;letter-spacing:.16em"><Fragment set:html={L('Arroces &nbsp;·&nbsp; Brasas &nbsp;·&nbsp; Producto de territorio', 'Rice &nbsp;·&nbsp; Grill &nbsp;·&nbsp; Local produce')} /></div>
+        </div>
+      </div>
+    </section>
+    <div class="cap"><span>01</span> &nbsp;·&nbsp; {L('Portada', 'Cover')}</div>
+
+    <!-- ══ 02 NUESTRA HISTORIA ══ -->
+    <section class="page paper" data-screen-label="02 · Nuestra historia">
+      <div class="frame"></div>
+      <div class="inner">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div>
+            <div class="eyebrow">{L('Nuestra casa', 'Our home')}</div>
+            <h2 class="h-title" style="font-size:88px;margin-top:18px"><Fragment set:html={L('Empezamos<br>con poco.', 'We started<br>small.')} /></h2>
+          </div>
+          <Image src={logoInk} width={150} height={147} alt="El Meu Foc" style="width:150px;height:auto;opacity:.92;display:block" />
+        </div>
+        <hr class="rule-ember" style="margin:40px 0 50px" />
+        <div style="display:flex;gap:56px;align-items:flex-start">
+          <div style="flex:1">
+            <p class="letter-p drop">{L('Una brasa, un puñado de arroz y las ganas de dar de comer como se da en casa: con tiempo, con las manos y con cariño. De ahí venimos.', 'A grill, a handful of rice and the wish to feed people the way you do at home: taking time, by hand and with love. That’s where we come from.')}</p>
+            <p class="letter-p">{L('Cada plato que sale de esta cocina lleva dentro el madrugón de quien lo prepara, el respeto por el producto de nuestra tierra y el deseo sincero de que en tu mesa te sientas cuidado.', 'Every dish that leaves this kitchen carries the early start of the person who makes it, respect for the produce of our land and the sincere wish that you feel looked after at your table.')}</p>
+            <p class="letter-p" style="font-family:var(--serif);font-style:italic;font-size:40px;color:var(--ink)">
+              <Fragment set:html={L('No cocinamos para impresionar.<br>Cocinamos para cuidarte.', 'We don’t cook to impress.<br>We cook to look after you.')} />
+            </p>
+          </div>
+          <figure style="width:300px;flex:none;display:flex;flex-direction:column;gap:14px">
+            <div class="img-slot" style="width:300px;height:420px">
+              <Image src={brasaParrilla} width={1100} height={825} format="webp" quality={80} alt={L('Manos avivando la brasa en la parrilla de El Meu Foc', 'Hands stoking the embers on the El Meu Foc grill')} />
+            </div>
+            <figcaption class="photo-cap">{L('Las manos que cocinan tu mesa', 'The hands that cook for your table')}</figcaption>
+          </figure>
+        </div>
+        <div style="margin-top:auto;display:flex;flex-direction:column;gap:30px">
+          <hr class="rule" />
+          <p class="creed"><Fragment set:html={L('El arroz como lenguaje. El fuego como memoria.<br>Alicante como hogar.', 'Rice as a language. Fire as memory.<br>Alicante as home.')} /></p>
+          <div style="display:flex;justify-content:space-between;align-items:flex-end">
+            <p class="sign">{L('— La familia de El Meu Foc', '— The El Meu Foc family')}</p>
+            <p class="margin-note" style="font-size:46px;transform:rotate(-6deg)">fet amb amor</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="cap"><span>02</span> &nbsp;·&nbsp; {L('Una carta para ti', 'A letter for you')}</div>
+
+    <!-- ══ 03 ENTRANTES ══ -->
+    <section class="page paper" data-screen-label="03 · Entrantes">
+      <div class="frame"></div>
+      <div class="inner">
+        <Image src={logoInk} width={128} height={125} alt="El Meu Foc" style="width:128px;height:auto;align-self:center;margin-bottom:30px;display:block" />
+        <div class="section-head" style="justify-content:center">
+          <h2 class="section-title" style="font-size:74px">{L('Entrantes', 'Starters')}</h2>
+        </div>
+        <p class="margin-note" style="font-size:38px;text-align:center;margin-top:4px">{L('para empezar, para compartir', 'to start, to share')}</p>
+        <div class="cols" style="justify-content:flex-end;margin:34px 0 6px">
+          <div class="c">{L('½ Ración', '½ Portion')}</div>
+          <div class="c">{L('Ración', 'Portion')}</div>
+        </div>
+        <hr class="rule" />
+        <div style="margin-top:6px">
+          <div class="item"><span class="nm">{L('Pan', 'Bread')} <em>{L('(unidad)', '(each)')}</em></span><span class="lead"></span><span class="pr two"><span class="half"></span><span class="full">1,0&nbsp;€</span></span></div>
+          <div class="item"><span class="nm">{L('Pan sin gluten', 'Gluten-free bread')} <em>{L('(unidad)', '(each)')}</em></span><span class="lead"></span><span class="pr two"><span class="half"></span><span class="full">1,5&nbsp;€</span></span></div>
+          <div class="item"><span class="nm">{L('Tomate y alioli', 'Tomato and alioli')}</span><span class="lead"></span><span class="pr two"><span class="half"></span><span class="full">2,0&nbsp;€</span></span></div>
+          <div class="item"><span class="nm">{L('Ensaladilla rusa', 'Russian potato salad')}</span><span class="lead"></span><span class="pr two"><span class="half">4,7&nbsp;€</span><span class="full">8,0&nbsp;€</span></span></div>
+          <div class="item"><span class="nm">{L('Marinera en pan integral con anchoa ahumada', 'Marinera on wholemeal bread with smoked anchovy')}</span><span class="lead"></span><span class="pr two"><span class="half"></span><span class="full">4,0&nbsp;€</span></span></div>
+          <div class="item"><span class="nm">Patatas bravas</span><span class="lead"></span><span class="pr two"><span class="half">5,9&nbsp;€</span><span class="full">10,0&nbsp;€</span></span></div>
+          <div class="item"><span class="nm">{L('Tomate rosa con ventresca de atún', 'Pink tomato with tuna belly')}</span><span class="lead"></span><span class="pr two"><span class="half">7,0&nbsp;€</span><span class="full">12,0&nbsp;€</span></span></div>
+          <div class="item"><span class="nm">{L('Tomate rosa con selección de salazones', 'Pink tomato with a selection of cured fish')}</span><span class="lead"></span><span class="pr two"><span class="half">8,0&nbsp;€</span><span class="full">14,0&nbsp;€</span></span></div>
+          <div class="item"><span class="nm">{L('Torreznos de Soria 100% a la brasa', 'Soria pork torreznos, 100% chargrilled')}</span><span class="lead"></span><span class="pr two"><span class="half">8,0&nbsp;€</span><span class="full">13,5&nbsp;€</span></span></div>
+          <div class="item"><span class="nm">Pericana</span><span class="lead"></span><span class="pr two"><span class="half">9,0&nbsp;€</span><span class="full">16,0&nbsp;€</span></span></div>
+          <div class="item"><span class="nm">{L('Verduras de temporada a la brasa', 'Chargrilled seasonal vegetables')}</span><span class="lead"></span><span class="pr two"><span class="half"></span><span class="full">13,0&nbsp;€</span></span></div>
+          <div class="item"><span class="nm">{L('Ensalada de brotes tiernos', 'Tender shoots salad')}<span class="desc">{L('tomate cherry confitado, requesón de cabra, piñones garrapiñados y vinagreta de naranja', 'confit cherry tomato, goat’s curd, candied pine nuts and orange vinaigrette')}</span></span><span class="lead"></span><span class="pr two"><span class="half">7,5&nbsp;€</span><span class="full">12,0&nbsp;€</span></span></div>
+        </div>
+        <div class="section-head" style="margin-top:46px;align-items:center;gap:16px">
+          <span class="coal"></span>
+          <h3 class="section-title" style="font-size:46px">{L('Entrantes especiales', 'Special starters')}</h3>
+        </div>
+        <p class="margin-note" style="font-size:34px;margin:2px 0 10px">{L('de la casa, con mimo', 'from the house, with care')}</p>
+        <div>
+          <div class="item"><span class="nm">{L('Carpaccio de ternera al estilo foc', 'Beef carpaccio, foc style')}</span><span class="lead"></span><span class="pr">16,0&nbsp;€</span></div>
+          <div class="item"><span class="nm">{L('Atún de Sorra con esgarraet de pimientos asados', 'Sorra tuna with esgarraet of roasted peppers')}</span><span class="lead"></span><span class="pr">18,0&nbsp;€</span></div>
+          <div class="item"><span class="nm">{L('Vieiras del Pacífico con aceite de perejil y lima', 'Pacific scallops with parsley and lime oil')} <em>{L('(unidad)', '(each)')}</em></span><span class="lead"></span><span class="pr">3,0&nbsp;€</span></div>
+          <div class="item"><span class="nm">{L('Mejillones al estilo foc', 'Mussels, foc style')} <em>(1 kilo)</em></span><span class="lead"></span><span class="pr">18,0&nbsp;€</span></div>
+          <div class="item"><span class="nm">{L('Langostino con alcachofa confitada', 'King prawn with confit artichoke')}</span><span class="lead"></span><span class="pr">20,0&nbsp;€</span></div>
+        </div>
+        <p class="foot-note center" style="margin-top:auto">{L('* Platos no incluidos en el menú arrocero', '* Dishes not included in the rice menu')}</p>
+      </div>
+    </section>
+    <div class="cap"><span>03</span> &nbsp;·&nbsp; {L('Entrantes', 'Starters')}</div>
+
+    <!-- ══ 04 ARROCES ══ -->
+    <section class="page paper" data-screen-label="04 · Arroces">
+      <div class="frame"></div>
+      <div class="inner" style="padding:80px 92px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end">
+          <div>
+            <div class="eyebrow">{L('Nuestra alma', 'Our soul')}</div>
+            <h2 class="h-title" style="font-size:96px;margin-top:10px">{L('Arroces', 'Rice dishes')}</h2>
+          </div>
+          <p class="margin-note" style="font-size:40px;transform:rotate(-5deg);max-width:300px;text-align:right">
+            <Fragment set:html={L('el lenguaje<br>de nuestra tierra', 'the language<br>of our land')} />
+          </p>
+        </div>
+        <figure style="margin:30px 0 26px;display:flex;flex-direction:column;gap:12px">
+          <div class="img-slot" style="width:100%;height:300px">
+            <Image src={arrozMiFoc} width={900} height={1126} format="webp" quality={80} alt={L('Arroz Mi Foc en paella, insignia de El Meu Foc', 'Mi Foc rice in a paella pan, El Meu Foc’s signature dish')} />
+          </div>
+        </figure>
+        <div class="insignia">
+          <div class="item" style="padding:4px 0">
+            <span class="nm">MI FOC<span class="desc">{L('nuestro arroz insignia · torreznos, setas y pimiento asado', 'our signature rice · pork crackling, mushrooms and roasted pepper')}</span></span>
+            <span class="lead"></span><span class="pr">19,5&nbsp;€</span>
+          </div>
+        </div>
+        <div style="margin-top:6px">
+          <div class="item"><span class="nm">{L('Magro y verduras', 'Lean pork and vegetables')}</span><span class="lead"></span><span class="pr">19,5&nbsp;€</span></div>
+          <div class="item"><span class="nm">Senyoret</span><span class="lead"></span><span class="pr">18,0&nbsp;€</span></div>
+          <div class="item"><span class="nm">{L('Pulpo y tomate seco', 'Octopus and sun-dried tomato')}</span><span class="lead"></span><span class="pr">19,5&nbsp;€</span></div>
+          <div class="item"><span class="nm">{L('Rabo de toro y setas', 'Oxtail and mushrooms')}</span><span class="lead"></span><span class="pr">19,5&nbsp;€</span></div>
+          <div class="item"><span class="nm">{L('Negro de sepia y alioli', 'Black cuttlefish rice with alioli')}</span><span class="lead"></span><span class="pr">18,5&nbsp;€</span></div>
+          <div class="item"><span class="nm">Brisa Marina <em>{L('· ventresca de atún, shiitake, katsuobushi', '· tuna belly, shiitake, katsuobushi')}</em></span><span class="lead"></span><span class="pr">19,5&nbsp;€</span></div>
+          <div class="item"><span class="nm">La Muntanyeta <em>{L('· secreto ibérico, garbanzos, ajetes tiernos', '· Iberian pork secreto, chickpeas, tender garlic shoots')}</em></span><span class="lead"></span><span class="pr">19,5&nbsp;€</span></div>
+          <div class="item"><span class="nm">Del Huerto <em>{L('· verduras asadas a la brasa', '· chargrilled vegetables')}</em></span><span class="lead"></span><span class="pr">16,9&nbsp;€</span></div>
+        </div>
+        <div class="section-head" style="margin-top:30px;align-items:center;gap:16px">
+          <span class="coal"></span>
+          <h3 class="section-title" style="font-size:44px">{L('Arroces especiales', 'Special rice dishes')} <span class="star">**</span></h3>
+        </div>
+        <div style="margin-top:2px">
+          <div class="item"><span class="nm">Fondo Marino <em>{L('· vieiras del Pacífico y buey de mar', '· Pacific scallops and brown crab')}</em></span><span class="lead"></span><span class="pr">23,0&nbsp;€</span></div>
+          <div class="item"><span class="nm">El nieto consentido <em>{L('· costilla de ternera a baja Tª y espárragos', '· slow-cooked beef rib and asparagus')}</em></span><span class="lead"></span><span class="pr">20,0&nbsp;€</span></div>
+          <div class="item"><span class="nm">El viejo puerto <em>{L('· rape y carpaccio de gambas', '· monkfish and prawn carpaccio')}</em></span><span class="lead"></span><span class="pr">25,0&nbsp;€</span></div>
+          <div class="item"><span class="nm">La casa vieja <em>{L('· nuestra versión de arroz al horno', '· our take on oven-baked rice')}</em></span><span class="lead"></span><span class="pr">22,0&nbsp;€</span></div>
+        </div>
+        <p class="foot-note center" style="margin-top:auto">
+          <span class="star">**</span> <Fragment set:html={L('Suplemento de 3&nbsp;€ p.p. en el menú arrocero &nbsp;·&nbsp; consulta también nuestro <em>rossellat</em>', '3&nbsp;€ p.p. supplement on the rice menu &nbsp;·&nbsp; also try our <em>rossellat</em>')} />
+        </p>
+      </div>
+    </section>
+    <div class="cap"><span>04</span> &nbsp;·&nbsp; {L('Arroces · nuestra alma', 'Rice dishes · our soul')}</div>
+
+    <!-- ══ 05 ROSSELLAT ══ -->
+    <section class="page paper" data-screen-label="05 · Rossellat">
+      <div class="frame"></div>
+      <div class="inner">
+        <Image src={logoInk} width={128} height={125} alt="El Meu Foc" style="width:128px;height:auto;align-self:center;margin-bottom:26px;display:block" />
+        <div class="section-head" style="justify-content:center">
+          <h2 class="section-title" style="font-size:74px">Rossellat</h2>
+        </div>
+        <p class="margin-note" style="font-size:38px;text-align:center;margin-top:4px">{L('fideuà a la brasa, con nuestro sello', 'fideuà cooked over embers, with our own touch')}</p>
+        <figure style="margin:34px 0 6px;display:flex;flex-direction:column;gap:12px">
+          <div class="img-slot" style="width:100%;height:300px">
+            <Image src={rossellatSepiaGambas} width={1000} height={830} format="webp" quality={80} alt={L('Rossellat de sepia y gambas de El Meu Foc', 'El Meu Foc cuttlefish and prawn rossellat')} />
+          </div>
+        </figure>
+        <hr class="rule" style="margin-top:22px" />
+        <div style="margin-top:6px">
+          <div class="item"><span class="nm">{L('Gamba y sepia', 'Prawn and cuttlefish')} <span class="star">**</span></span><span class="lead"></span><span class="pr">23,0&nbsp;€</span></div>
+          <div class="item"><span class="nm">{L('Pato y foie', 'Duck and foie gras')} <span class="star">**</span></span><span class="lead"></span><span class="pr">26,0&nbsp;€</span></div>
+          <div class="item"><span class="nm">{L('Negro con chipirones, pimiento asado y alioli', 'Black with baby squid, roasted pepper and alioli')}</span><span class="lead"></span><span class="pr">19,5&nbsp;€</span></div>
+          <div class="item"><span class="nm">Del Huerto <em>{L('· verduras asadas a la brasa', '· chargrilled vegetables')}</em></span><span class="lead"></span><span class="pr">17,5&nbsp;€</span></div>
+        </div>
+        <p class="foot-note center" style="margin-top:auto">
+          <span class="star">**</span> <Fragment set:html={L('Suplemento de 3&nbsp;€ p.p. en el menú arrocero', '3&nbsp;€ p.p. supplement on the rice menu')} />
+        </p>
+      </div>
+    </section>
+    <div class="cap"><span>05</span> &nbsp;·&nbsp; Rossellat</div>
+
+    <!-- ══ 06 BRASAS ══ -->
+    <section class="page paper" data-screen-label="06 · Brasas">
+      <div class="frame"></div>
+      <div class="inner">
+        <Image src={logoInk} width={128} height={125} alt="El Meu Foc" style="width:128px;height:auto;align-self:center;margin-bottom:26px;display:block" />
+        <div class="section-head" style="justify-content:center">
+          <h2 class="section-title" style="font-size:74px">{L('Brasas', 'From the grill')}</h2>
+        </div>
+        <p class="margin-note" style="font-size:38px;text-align:center;margin-top:4px">{L('al fuego, sin prisa', 'over the fire, unhurried')}</p>
+        <div class="section-head" style="margin-top:44px;align-items:center;gap:16px">
+          <span class="coal"></span><h3 class="section-title" style="font-size:44px">{L('Carnes', 'Meat')}</h3>
+        </div>
+        <hr class="rule" style="margin-top:10px" />
+        <div>
+          <div class="item"><span class="nm">{L('Solomillo de ternera', 'Beef tenderloin')}</span><span class="lead"></span><span class="pr">28,0&nbsp;€</span></div>
+          <div class="item"><span class="nm">{L('Entrecot', 'Entrecôte')}</span><span class="lead"></span><span class="pr">22,5&nbsp;€</span></div>
+          <div class="item"><span class="nm">{L('Chuletón de 1 kilo', '1 kilo bone-in rib steak')}</span><span class="lead"></span><span class="pr">44,0&nbsp;€</span></div>
+          <div class="item"><span class="nm">{L('Presa ibérica', 'Iberian pork presa')}</span><span class="lead"></span><span class="pr">26,0&nbsp;€</span></div>
+          <div class="item"><span class="nm">{L('Costilla de ternera a baja temperatura', 'Slow-cooked beef rib')}</span><span class="lead"></span><span class="pr">24,5&nbsp;€</span></div>
+          <div class="item"><span class="nm">{L('Secreto ibérico', 'Iberian pork secreto')}</span><span class="lead"></span><span class="pr">24,0&nbsp;€</span></div>
+        </div>
+        <div class="section-head" style="margin-top:36px;align-items:center;gap:16px">
+          <span class="coal"></span><h3 class="section-title" style="font-size:44px">{L('Pescados', 'Fish')}</h3>
+        </div>
+        <hr class="rule" style="margin-top:10px" />
+        <div>
+          <div class="item"><span class="nm">{L('Lubina', 'Sea bass')}</span><span class="lead"></span><span class="pr">22,5&nbsp;€</span></div>
+          <div class="item"><span class="nm">{L('Sepia', 'Cuttlefish')}</span><span class="lead"></span><span class="pr">19,5&nbsp;€</span></div>
+          <div class="item"><span class="nm">{L('Pata de pulpo', 'Octopus leg')} <em>(300 g)</em></span><span class="lead"></span><span class="pr">26,0&nbsp;€</span></div>
+          <div class="item"><span class="nm">{L('Ventresca de atún rojo', 'Bluefin tuna belly')}</span><span class="lead"></span><span class="pr">32,0&nbsp;€</span></div>
+        </div>
+        <div class="section-head" style="margin-top:36px;align-items:center;gap:16px">
+          <span class="coal"></span><h3 class="section-title" style="font-size:44px">{L('Brasas especiales', 'Grill specials')}</h3>
+        </div>
+        <div style="margin-top:6px">
+          <div class="item"><span class="nm">{L('Pescado de temporada', 'Seasonal fish')}</span><span class="lead"></span><span class="pr" style="width:auto;font-style:italic;color:var(--ink-soft)">{L('según mercado', 'market price')}</span></div>
+          <div class="item"><span class="nm">{L('Chuletón madurado 30 días', '30-day aged bone-in rib steak')} <em>(1 kilo)</em></span><span class="lead"></span><span class="pr" style="width:auto;font-style:italic;color:var(--ink-soft)">{L('según mercado', 'market price')}</span></div>
+        </div>
+        <p class="foot-note center" style="margin-top:auto">
+          <Fragment set:html={L('Todos los platos de brasa se acompañan de una guarnición:<br>patatas, ensalada o verduras.', 'All grilled dishes come with a side of your choice:<br>potatoes, salad or vegetables.')} />
+        </p>
+      </div>
+    </section>
+    <div class="cap"><span>06</span> &nbsp;·&nbsp; {L('Brasas', 'Grill')}</div>
+
+    <!-- ══ 07 CIERRE ══ -->
+    <section class="page ember" data-screen-label="07 · Cierre">
+      <div class="sparks">
+        <i style="left:16%;animation-duration:8s;animation-delay:.3s"></i>
+        <i style="left:28%;animation-duration:9.4s;animation-delay:1.7s"></i>
+        <i style="left:41%;animation-duration:6.8s;animation-delay:.9s"></i>
+        <i style="left:53%;animation-duration:8.6s;animation-delay:2.3s"></i>
+        <i style="left:64%;animation-duration:7.2s;animation-delay:.5s"></i>
+        <i style="left:74%;animation-duration:9.1s;animation-delay:1.3s"></i>
+        <i style="left:84%;animation-duration:7.6s;animation-delay:2.8s"></i>
+      </div>
+      <div class="inner" style="align-items:center;text-align:center;justify-content:center;gap:60px">
+        <p class="kicker-hand" style="font-size:64px">gràcies de tot cor —</p>
+        <h2 class="h-title" style="font-size:86px;line-height:1.04;color:var(--cream);white-space:nowrap">
+          {lang === 'en'
+            ? <Fragment>Rice as a<br><span style="font-style:italic;color:var(--ember-2)">language.</span><br>
+          Fire as<br><span style="font-style:italic;color:var(--ember-2)">memory.</span><br>
+          Alicante as<br><span style="font-style:italic;color:var(--ember-2)">home.</span></Fragment>
+            : <Fragment>El arroz como<br><span style="font-style:italic;color:var(--ember-2)">lenguaje.</span><br>
+          El fuego como<br><span style="font-style:italic;color:var(--ember-2)">memoria.</span><br>
+          Alicante como<br><span style="font-style:italic;color:var(--ember-2)">hogar.</span></Fragment>}
+        </h2>
+        <div class="coal"></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:26px;margin-top:8px">
+          <Image src={logoWhite} width={210} height={205} alt="El Meu Foc" style="width:210px;height:auto;display:block" />
+          <div class="eyebrow" style="color:#c98b5a"><Fragment set:html={L('Hasta pronto &nbsp;·&nbsp; gracias por preferirnos', 'See you soon &nbsp;·&nbsp; thank you for choosing us')} /></div>
+        </div>
+      </div>
+    </section>
+    <div class="cap"><span>07</span> &nbsp;·&nbsp; {L('Cierre', 'Closing')}</div>
+
+  </div><!-- /feed -->
+</div><!-- /stage -->
+
+</Layout>
+
+<script>
+(function () {
+  const feed = document.getElementById('feed') as HTMLElement | null;
+  const stage = document.getElementById('stage') as HTMLElement | null;
+  let lastWidth = window.innerWidth;
+  function fit() {
+    if (!feed || !stage) return;
+    const s = Math.min(1, (window.innerWidth - 48) / 1080);
+    feed.style.transform = `scale(${s})`;
+    stage.style.height = feed.offsetHeight * s + 'px';
+  }
+  function onResize() {
+    // en movil, mostrar/ocultar la barra de direcciones al hacer scroll
+    // dispara "resize" sin que cambie el ancho real: si se recalcula igual,
+    // se ve como si la pagina "recargara" cada vez que se vuelve arriba
+    if (window.innerWidth === lastWidth) return;
+    lastWidth = window.innerWidth;
+    fit();
+  }
+  window.addEventListener('resize', onResize);
+  if (document.fonts?.ready) document.fonts.ready.then(fit);
+  window.addEventListener('load', fit);
+  fit();
+})();
+</script>

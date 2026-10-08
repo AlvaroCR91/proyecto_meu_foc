@@ -1,0 +1,249 @@
+---
+import Layout from '../layouts/Layout.astro';
+import '../styles/landing.css';
+import LangSwitch from '../components/LangSwitch';
+import type { Lang } from '../i18n/ui';
+import { localePath, altPath } from '../i18n/utils';
+
+const { lang } = Astro.props as { lang: Lang };
+// texto en el idioma de la página: L('español', 'inglés')
+const L = (es: string, en: string) => (lang === 'en' ? en : es);
+---
+
+<Layout
+  title={L('Aviso Legal — El Meu Foc', 'Legal Notice — El Meu Foc')}
+  description={L('Aviso legal del sitio web de El Meu Foc, restaurante de arroces y brasas en Alicante.', 'Legal notice for the website of El Meu Foc, rice and grill restaurant in Alicante.')}
+>
+
+<section class="section surf-paper legal-page">
+  <div class="wrap legal-wrap">
+    <div class="legal-top">
+      <a class="legal-back" href={localePath(lang, '/')}>{L('← Volver a la web', '← Back to the site')}</a>
+      <LangSwitch lang={lang} esHref={altPath(Astro.url.pathname, 'es')} enHref={altPath(Astro.url.pathname, 'en')} />
+    </div>
+    <div class="eyebrow">El Meu Foc</div>
+    <h1 class="h2" style="margin-top:14px">{L('Aviso Legal', 'Legal Notice')}</h1>
+    <hr class="rule-ember" style="margin:26px 0 40px" />
+    {lang === 'en' && (
+      <p class="legal-note">This is a courtesy translation. In the event of any discrepancy, the Spanish version prevails.</p>
+    )}
+
+    <div class="legal-body">
+      {lang === 'en' ? (
+        <Fragment>
+      <h2>1. Identification details</h2>
+      <p>
+        In compliance with article 10 of Spanish Law 34/2002, of 11 July, on Information
+        Society Services and Electronic Commerce (LSSI-CE), the following details are
+        provided:
+      </p>
+      <ul>
+        <li><strong>Owner:</strong> Fernando José Fernandes Martínez</li>
+        <li><strong>Tax ID (NIF/NIE):</strong> Y3877786T</li>
+        <li><strong>Trading name:</strong> El Meu Foc</li>
+        <li><strong>Address:</strong> Calle México, 25, local 8, 03008 Alicante (Alicante), Spain</li>
+        <li><strong>Email:</strong> <a href="mailto:restauranteelmeufoc@gmail.com">restauranteelmeufoc@gmail.com</a></li>
+        <li><strong>Phone:</strong> <a href="tel:+34673694605">+34 673 69 46 05</a></li>
+        <li><strong>Activity:</strong> Restaurant — rice dishes and grill</li>
+      </ul>
+
+      <h2>2. Purpose</h2>
+      <p>
+        This legal notice governs the use of the website <strong>restaurantemeufoc.es</strong>
+        (hereinafter, the "Website"), for which the owner identified above is responsible.
+        Browsing the Website makes you a user and implies full acceptance of the conditions
+        set out in this legal notice.
+      </p>
+
+      <h2>3. Terms of use</h2>
+      <p>
+        Users undertake to make appropriate and lawful use of the Website and of the content
+        and services offered on it, in accordance with applicable law, this legal notice,
+        generally accepted morals and good customs, and public order. Use of the Website for
+        unlawful or harmful purposes, or in any way that may cause damage or prevent its
+        normal operation, is prohibited.
+      </p>
+
+      <h2>4. Intellectual and industrial property</h2>
+      <p>
+        All content on the Website (texts, photographs, graphics, images, logos, as well as
+        its design and source code) is owned by El Meu Foc or by third parties who have
+        authorised its use, and is protected by intellectual and industrial property law.
+        Its reproduction, distribution or public communication, in whole or in part, without
+        the express authorisation of the owner is prohibited.
+      </p>
+
+      <h2>5. Third-party links</h2>
+      <p>
+        The Website includes links to third-party services (such as TheFork for bookings,
+        Instagram and Google Maps) over which the owner has no control and for whose content
+        the owner accepts no responsibility. These links are provided for information
+        purposes only.
+      </p>
+
+      <h2>6. Personal data protection</h2>
+      <p>
+        Any personal data that users may provide by email, by phone or through third-party
+        forms linked from this Website (for example, bookings managed by TheFork) will be
+        processed by Fernando José Fernandes Martínez, as data controller, for the sole
+        purpose of handling the request or enquiry made, in accordance with Regulation (EU)
+        2016/679 (GDPR) and Spanish Organic Law 3/2018 on the Protection of Personal Data
+        and the Guarantee of Digital Rights (LOPDGDD).
+      </p>
+      <p>
+        Users may exercise their rights of access, rectification, erasure, objection,
+        restriction of processing and portability by sending an email to
+        <a href="mailto:restauranteelmeufoc@gmail.com">restauranteelmeufoc@gmail.com</a>,
+        stating the right they wish to exercise and attaching a copy of a document proving
+        their identity.
+      </p>
+
+      <h2>7. Applicable law and jurisdiction</h2>
+      <p>
+        These conditions are governed by Spanish law. For any dispute arising from the use
+        of the Website, the parties submit to the Courts and Tribunals of Alicante, unless
+        consumer and user protection law establishes another jurisdiction.
+      </p>
+        </Fragment>
+      ) : (
+        <Fragment>
+      <h2>1. Datos identificativos</h2>
+      <p>
+        En cumplimiento del artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la
+        Sociedad de la Información y de Comercio Electrónico (LSSI-CE), se informa de los
+        siguientes datos:
+      </p>
+      <ul>
+        <li><strong>Titular:</strong> Fernando José Fernandes Martínez</li>
+        <li><strong>NIF/NIE:</strong> Y3877786T</li>
+        <li><strong>Nombre comercial:</strong> El Meu Foc</li>
+        <li><strong>Domicilio:</strong> Calle México, 25, local 8, 03008 Alicante (Alicante)</li>
+        <li><strong>Correo electrónico:</strong> <a href="mailto:restauranteelmeufoc@gmail.com">restauranteelmeufoc@gmail.com</a></li>
+        <li><strong>Teléfono:</strong> <a href="tel:+34673694605">+34 673 69 46 05</a></li>
+        <li><strong>Actividad:</strong> Restauración — arrocería y brasería</li>
+      </ul>
+
+      <h2>2. Objeto</h2>
+      <p>
+        El presente aviso legal regula el uso del sitio web
+        <strong>restaurantemeufoc.es</strong> (en adelante, el "Sitio Web"), del que es
+        responsable el titular arriba identificado. La navegación por el Sitio Web atribuye
+        la condición de usuario e implica la aceptación plena de las condiciones incluidas
+        en este aviso legal.
+      </p>
+
+      <h2>3. Condiciones de uso</h2>
+      <p>
+        El usuario se compromete a hacer un uso adecuado y lícito del Sitio Web, así como de
+        los contenidos y servicios que en él se ofrecen, de conformidad con la legislación
+        aplicable, el presente aviso legal, la moral y buenas costumbres generalmente
+        aceptadas y el orden público. Queda prohibido el uso del Sitio Web con fines ilícitos
+        o lesivos, o que de cualquier forma puedan causar perjuicio o impedir el normal
+        funcionamiento del mismo.
+      </p>
+
+      <h2>4. Propiedad intelectual e industrial</h2>
+      <p>
+        Todos los contenidos del Sitio Web (textos, fotografías, gráficos, imágenes,
+        logotipos, así como su diseño y código fuente) son titularidad de El Meu Foc o de
+        terceros que han autorizado su uso, y están protegidos por la normativa de propiedad
+        intelectual e industrial. Queda prohibida su reproducción, distribución o
+        comunicación pública, total o parcial, sin autorización expresa del titular.
+      </p>
+
+      <h2>5. Enlaces a terceros</h2>
+      <p>
+        El Sitio Web incluye enlaces a servicios de terceros (como TheFork para
+        reservas, Instagram y Google Maps) sobre los que el titular no ejerce ningún tipo de
+        control y de cuyo contenido no se hace responsable. La presencia de estos enlaces
+        tiene una finalidad meramente informativa.
+      </p>
+
+      <h2>6. Protección de datos personales</h2>
+      <p>
+        Los datos personales que el usuario pueda facilitar a través del correo electrónico,
+        teléfono o formularios de terceros vinculados desde este Sitio Web (por ejemplo,
+        reservas gestionadas por TheFork) serán tratados por Fernando José Fernandes
+        Martínez, como responsable del tratamiento, con la única finalidad de atender la
+        solicitud o consulta realizada, conforme al Reglamento (UE) 2016/679 (RGPD) y la Ley
+        Orgánica 3/2018 de Protección de Datos Personales y garantía de los derechos
+        digitales (LOPDGDD).
+      </p>
+      <p>
+        El usuario puede ejercer sus derechos de acceso, rectificación, supresión,
+        oposición, limitación del tratamiento y portabilidad enviando un correo a
+        <a href="mailto:restauranteelmeufoc@gmail.com">restauranteelmeufoc@gmail.com</a>,
+        indicando el derecho que desea ejercer y adjuntando copia de un documento que
+        acredite su identidad.
+      </p>
+
+      <h2>7. Legislación aplicable y jurisdicción</h2>
+      <p>
+        Las presentes condiciones se rigen por la legislación española. Para cualquier
+        controversia derivada del uso del Sitio Web, las partes se someten a los Juzgados y
+        Tribunales de Alicante, salvo que la normativa de consumidores y usuarios establezca
+        otro fuero.
+      </p>
+        </Fragment>
+      )}
+    </div>
+  </div>
+</section>
+
+</Layout>
+
+<style>
+  .legal-page { min-height: 100vh; }
+  /* "Volver a la web" + banderas de idioma en la misma línea */
+  .legal-top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .legal-top :global(.lang-switch) { margin-top: 1px; }
+  .legal-note {
+    font-family: var(--body);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--ink-soft);
+    margin-bottom: 34px;
+  }
+  .legal-wrap { max-width: 860px; padding-block: clamp(48px, 8vw, 90px); }
+  .legal-back {
+    display: inline-block;
+    margin-bottom: 34px;
+    font-size: 16px;
+    color: var(--ink-soft);
+    border-bottom: 1px solid transparent;
+  }
+  .legal-back:hover { color: var(--ember); border-color: var(--ember); }
+  .legal-body h2 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(22px, 2.6vw, 28px);
+    color: var(--ink);
+    margin-top: 44px;
+    margin-bottom: 14px;
+  }
+  .legal-body h2:first-child { margin-top: 0; }
+  .legal-body p {
+    font-family: var(--body);
+    font-size: 18px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+    margin-bottom: 14px;
+  }
+  .legal-body ul {
+    margin: 0 0 14px 20px;
+    padding: 0;
+  }
+  .legal-body li {
+    font-family: var(--body);
+    font-size: 18px;
+    line-height: 1.9;
+    color: var(--ink-soft);
+  }
+  .legal-body a {
+    color: var(--ember);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .legal-body a:hover { color: var(--ember-2); }
+  .legal-body strong { color: var(--ink); }
+</style>

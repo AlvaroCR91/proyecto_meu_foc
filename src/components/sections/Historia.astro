@@ -1,36 +1,56 @@
+---
+import { Image } from 'astro:assets';
+import brasaParrilla from '../../assets/brasa-parrilla.jpg';
+import vegAjo from '../../assets/veg-ajo.png';
+import vegAlcachofa from '../../assets/veg-alcachofa.png';
+import type { Lang } from '../../i18n/ui';
+
+const { lang } = Astro.props as { lang: Lang };
+const tx = {
+  es: {
+    eyebrow: 'Nuestra casa',
+    h2: 'Cocinamos con<br>producto, nada más.',
+    lead: 'Aquí no hay trucos. El caldo lleva horas al fuego antes de que entre el primer cliente. Los pescados llegan de la lonja; las verduras y los productos son de la zona, ya que, apostamos por el crecimiento de la economia de kilometro cero. Cada plato lleva dentro el madrugón de quien lo cocina y el deseo sincero de que en tu mesa te sientas cuidado.',
+    creed: 'No cocinamos para impresionar.<br>\n          Cocinamos para que repitas.',
+    sign: '— La familia de El Meu Foc',
+    alt: 'Manos avivando la brasa en la parrilla de El Meu Foc',
+  },
+  en: {
+    eyebrow: 'Our home',
+    h2: 'We cook with<br>good produce, nothing else.',
+    lead: 'There are no tricks here. The stock has been on the fire for hours before the first guest walks in. The fish comes straight from the fish market; the vegetables and other produce are local, because we believe in supporting the zero-mile economy. Every dish carries the early start of the person who cooks it and the sincere wish that you feel looked after at your table.',
+    creed: 'We don’t cook to impress.<br>\n          We cook so you’ll come back.',
+    sign: '— The El Meu Foc family',
+    alt: 'Hands stoking the embers on the El Meu Foc grill',
+  },
+}[lang];
+---
+
 <!-- ══════════════════════════════════════
      HISTORIA / ORIGEN
      H2: keyword "restaurante producto fresco Alicante"
 ══════════════════════════════════════ -->
 <section class="section surf-paper" id="historia">
   <div class="veg" data-side="left" style="top:14%;left:50%;width:clamp(84px,11vw,148px)">
-    <img class="veg-img" src="/assets/veg-ajo.png" alt="" />
+    <Image class="veg-img" src={vegAjo} width={360} height={360} alt="" />
   </div>
   <div class="veg veg-extra" data-side="right" style="top:58%;left:50%;width:clamp(96px,12vw,166px)">
-    <img class="veg-img" src="/assets/veg-alcachofa.png" alt="" />
+    <Image class="veg-img" src={vegAlcachofa} width={360} height={360} alt="" />
   </div>
   <div class="wrap">
     <div class="story-grid story">
       <div class="text">
-        <div class="eyebrow" style="margin-bottom:18px">Nuestra casa</div>
+        <div class="eyebrow" style="margin-bottom:18px">{tx.eyebrow}</div>
         <!-- H2: "Restaurante producto fresco Alicante" -->
-        <h2 class="h2">Cocinamos con<br>producto, nada más.</h2>
+        <h2 class="h2" set:html={tx.h2} />
         <hr class="rule-ember" style="margin:28px 0 30px" />
-        <p class="lead-p">
-          Aquí no hay trucos. El caldo lleva horas al fuego antes de que entre
-          el primer cliente. Los pescados llegan de la lonja; las verduras y los productos son de la zona, ya que, apostamos por el crecimiento de la economia de kilometro cero.
-          Cada plato lleva dentro el madrugón de
-          quien lo cocina y el deseo sincero de que en tu mesa te sientas cuidado.
-        </p>
-        <p class="creed">
-          No cocinamos para impresionar.<br>
-          Cocinamos para que repitas.
-        </p>
-        <p class="sign">— La familia de El Meu Foc</p>
+        <p class="lead-p">{tx.lead}</p>
+        <p class="creed" set:html={tx.creed} />
+        <p class="sign">{tx.sign}</p>
       </div>
       <div class="photo">
         <div class="img-slot" style="width:100%;height:clamp(360px,46vw,560px)">
-          <img src="/assets/brasa-parrilla.jpg" alt="Manos avivando la brasa en la parrilla de El Meu Foc" />
+          <Image src={brasaParrilla} width={1100} height={825} format="webp" quality={80} alt={tx.alt} />
         </div>
       </div>
     </div>

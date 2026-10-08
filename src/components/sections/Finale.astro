@@ -1,3 +1,16 @@
+---
+import { Image } from 'astro:assets';
+import logoWhite from '../../assets/logo-white.png';
+import vegCebolla from '../../assets/veg-cebolla.png';
+import vegAjo from '../../assets/veg-ajo.png';
+import type { Lang } from '../../i18n/ui';
+
+const { lang } = Astro.props as { lang: Lang };
+const closing = lang === 'en'
+  ? 'Rice as a language. Fire as memory. Alicante as home.'
+  : 'El arroz como lenguaje. El fuego como memoria. Alicante como hogar.';
+---
+
 <!-- ══════════════════════════════════════
      FINALE · FLAMES + LOGO
 ══════════════════════════════════════ -->
@@ -20,16 +33,16 @@
     <i style="left:72%;animation-duration:8.2s;animation-delay:1.8s"></i>
   </div>
   <div class="veg veg-finale" data-side="left" style="top:15%;left:50%;width:clamp(86px,10vw,150px)">
-    <img class="veg-img" src="/assets/veg-cebolla.png" alt="" />
+    <Image class="veg-img" src={vegCebolla} width={400} height={401} alt="" />
   </div>
   <div class="veg veg-finale" data-side="right" style="top:21%;left:50%;width:clamp(78px,9vw,130px)">
-    <img class="veg-img" src="/assets/veg-ajo.png" alt="" />
+    <Image class="veg-img" src={vegAjo} width={360} height={360} alt="" />
   </div>
   <div class="finale-in">
     <p class="hand pre">gràcies de tot cor —</p>
     <div class="logo-wrap">
-      <img src="/assets/logo-white.png" alt="El Meu Foc" />
+      <Image src={logoWhite} width={614} height={601} alt="El Meu Foc" />
     </div>
-    <p class="closing">El arroz como lenguaje. El fuego como memoria. Alicante como hogar.</p>
+    <p class="closing">{closing}</p>
   </div>
 </section>

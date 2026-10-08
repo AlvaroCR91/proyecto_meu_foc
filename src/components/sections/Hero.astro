@@ -1,5 +1,31 @@
 ---
+import { Image } from 'astro:assets';
 import { THEFORK } from '../../lib/constants';
+import salaGeneral from '../../assets/sala-general.jpg';
+import type { Lang } from '../../i18n/ui';
+import { localePath } from '../../i18n/utils';
+
+const { lang } = Astro.props as { lang: Lang };
+const tx = {
+  es: {
+    alt: 'Sala de El Meu Foc, restaurante de arroces y brasas en Alicante',
+    eyebrow: 'Restaurante &nbsp;·&nbsp; Arroces y brasas &nbsp;·&nbsp; Alicante',
+    h1a: 'Arrocería y Brasería',
+    h1b: 'en Alicante.',
+    sub: 'Fondos cocinados desde primera hora, producto fresco de la lonja y la huerta, brasa que se huele desde la puerta. Sin artificios: solo fuego y cariño.',
+    reservar: 'Reservar mesa',
+    carta: 'Ver la carta',
+  },
+  en: {
+    alt: 'Dining room at El Meu Foc, rice and grill restaurant in Alicante',
+    eyebrow: 'Restaurant &nbsp;·&nbsp; Rice dishes &amp; grill &nbsp;·&nbsp; Alicante',
+    h1a: 'Rice & Grill Restaurant',
+    h1b: 'in Alicante.',
+    sub: 'Stocks simmering since first thing in the morning, fresh produce from the fish market and the local market gardens, embers you can smell from the door. No frills: just fire and care.',
+    reservar: 'Book a table',
+    carta: 'See the menu',
+  },
+}[lang];
 ---
 
 <!-- ══════════════════════════════════════
@@ -8,7 +34,7 @@ import { THEFORK } from '../../lib/constants';
 <section class="hero surf-ember" id="top">
   <div class="bgslot">
     <div class="img-slot">
-      <img src="/assets/sala-general.jpg" alt="Sala de El Meu Foc, restaurante de arroces y brasas en Alicante" />
+      <Image src={salaGeneral} width={995} height={696} format="webp" quality={80} alt={tx.alt} />
     </div>
   </div>
   <div class="scrim"></div>
@@ -22,22 +48,19 @@ import { THEFORK } from '../../lib/constants';
     <i style="left:90%;animation-duration:7.8s;animation-delay:2.6s"></i>
   </div>
   <div class="hero-in wrap">
-    <div class="eyebrow" style="margin-bottom:18px">Restaurante &nbsp;·&nbsp; Arroces y brasas &nbsp;·&nbsp; Alicante</div>
+    <div class="eyebrow" style="margin-bottom:18px" set:html={tx.eyebrow} />
     <p class="hand kicker">des del cor —</p>
     <!-- H1 con keyword principal -->
     <h1 class="h1">
-      <span class="hl">Arrocería y Brasería</span>
-      <span class="hl ital">en Alicante.</span>
+      <span class="hl">{tx.h1a}</span>
+      <span class="hl ital">{tx.h1b}</span>
     </h1>
-    <p class="sub">
-      Fondos cocinados desde primera hora, producto fresco de la lonja y la huerta,
-      brasa que se huele desde la puerta. Sin artificios: solo fuego y cariño.
-    </p>
+    <p class="sub">{tx.sub}</p>
     <div class="cta-row">
       <a class="btn" href={THEFORK} target="_blank" rel="noopener noreferrer">
-        Reservar mesa <span class="ar">→</span>
+        {tx.reservar} <span class="ar">→</span>
       </a>
-      <a class="btn btn-ghost" href="/carta-el-meu-foc.pdf" target="_blank" rel="noopener noreferrer">Ver la carta</a>
+      <a class="btn btn-ghost" href={localePath(lang, '/carta')}>{tx.carta}</a>
     </div>
   </div>
 </section>

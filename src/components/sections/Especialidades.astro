@@ -1,14 +1,45 @@
+---
+import { Image } from 'astro:assets';
+import vegCebolla from '../../assets/veg-cebolla.png';
+import vegCalabacin from '../../assets/veg-calabacin.png';
+import type { Lang } from '../../i18n/ui';
+
+const { lang } = Astro.props as { lang: Lang };
+const tx = {
+  es: {
+    eyebrow: 'Lo que hacemos bien',
+    h2: 'Brasa y arroz —<br>las dos almas del local.',
+    h3a: 'Restaurante de Carne a la Brasa en Alicante',
+    pa: 'Entrecots, presa ibérica, lubinas y ventrescas que entran al fuego con su tiempo, sin prisas. El humo hace el trabajo; nosotros, solo vigilamos el punto. Las brasas en El Meu Foc no se apagan hasta que el último plato sale a la sala.',
+    h3b: 'Arroz y paellas en Alicante',
+    pb: 'El caldo entra al fuego antes de que abra el restaurante. El grano se cuece a su ritmo en la paella, hasta que el socarrat cruje solo. Así es el arroz en El Meu Foc: fondo artesanal, grano en su punto, tradición alicantina.',
+    sdLabel: 'Platos insignia de la casa',
+    sd: ['Arroz Mi Foc', 'Arroz Senyoret', 'Rabo de toro y setas', 'Chuletón madurado 30 días', 'Presa ibérica a la brasa'],
+  },
+  en: {
+    eyebrow: 'What we do best',
+    h2: 'Embers and rice —<br>the two souls of the house.',
+    h3a: 'Chargrilled Meat Restaurant in Alicante',
+    pa: 'Entrecôtes, Iberian pork presa, sea bass and tuna belly go onto the fire in their own time, unhurried. The smoke does the work; we just keep an eye on the cooking point. The embers at El Meu Foc don’t go out until the last dish has reached the dining room.',
+    h3b: 'Rice and paella in Alicante',
+    pb: 'The stock goes on the fire before the restaurant opens. The grain cooks at its own pace in the paella pan, until the socarrat crackles all by itself. That’s rice at El Meu Foc: handmade stock, grain cooked just right, Alicante tradition.',
+    sdLabel: 'House signature dishes',
+    sd: ['Mi Foc rice', 'Senyoret rice', 'Oxtail and mushrooms', '30-day aged bone-in rib steak', 'Chargrilled Iberian pork presa'],
+  },
+}[lang];
+---
+
 <!-- ══════════════════════════════════════
      ESPECIALIDADES
      H2: keyword "Brasería en Alicante"
-     H3: "Restaurante de carne a la brasa Alicante" / "Arroz a la leña Alicante"
+     H3: "Restaurante de carne a la brasa Alicante" / "Arroz y paellas en Alicante"
 ══════════════════════════════════════ -->
 <section class="section surf-ember" id="especialidades">
   <div class="veg" data-side="left" style="top:20%;left:50%;width:clamp(98px,12vw,170px)">
-    <img class="veg-img" src="/assets/veg-cebolla.png" alt="" />
+    <Image class="veg-img" src={vegCebolla} width={400} height={401} alt="" />
   </div>
   <div class="veg veg-extra" data-side="right" style="top:64%;left:50%;width:clamp(112px,14vw,200px)">
-    <img class="veg-img" src="/assets/veg-calabacin.png" alt="" />
+    <Image class="veg-img" src={vegCalabacin} width={336} height={261} alt="" />
   </div>
   <div class="sparks">
     <i style="left:14%;animation-duration:8.4s;animation-delay:.4s"></i>
@@ -19,43 +50,29 @@
   </div>
   <div class="wrap" style="position:relative;z-index:2">
     <div class="sec-head sec-head--right">
-      <span class="eyebrow">Lo que hacemos bien</span>
+      <span class="eyebrow">{tx.eyebrow}</span>
       <!-- H2: "Brasería en Alicante" -->
-      <h2 class="h2" style="color:var(--cream)">Brasa y arroz —<br>las dos almas del local.</h2>
+      <h2 class="h2" style="color:var(--cream)" set:html={tx.h2} />
     </div>
     <div class="esp-grid">
       <div class="esp-bloque">
         <div class="esp-icon"></div>
         <!-- H3: "Restaurante de carne a la brasa Alicante" -->
-        <h3>Restaurante de Carne a la Brasa en Alicante</h3>
-        <p>
-          Entrecots, presa ibérica, lubinas y ventrescas que entran al fuego
-          con su tiempo, sin prisas. El humo hace el trabajo; nosotros,
-          solo vigilamos el punto. Las brasas en El Meu Foc no se apagan
-          hasta que el último plato sale a la sala.
-        </p>
+        <h3>{tx.h3a}</h3>
+        <p>{tx.pa}</p>
       </div>
       <div class="esp-bloque">
         <div class="esp-icon"></div>
-        <!-- H3: "Arroz a la leña Alicante" -->
-        <h3>Arroz en Alicante</h3>
-        <p>
-          El caldo entra al fuego antes de que abra el restaurante.
-          El grano se cuece a su ritmo, hasta que el socarrat
-          cruje solo. Así es el arroz en El Meu Foc: fondo artesanal,
-          grano en su punto, tradición alicantina.
-        </p>
+        <!-- H3: "Arroz y paellas en Alicante" -->
+        <h3>{tx.h3b}</h3>
+        <p>{tx.pb}</p>
       </div>
     </div>
     <!-- Platos insignia — texto para indexación SEO, sin precios -->
     <div class="signature-dishes">
-      <span class="sd-label">Platos insignia de la casa</span>
+      <span class="sd-label">{tx.sdLabel}</span>
       <ul class="sd-list">
-        <li>Arroz Mi Foc</li>
-        <li>Arroz Senyoret</li>
-        <li>Rabo de toro y setas</li>
-        <li>Chuletón madurado 30 días</li>
-        <li>Presa ibérica a la brasa</li>
+        {tx.sd.map((d) => <li>{d}</li>)}
       </ul>
     </div>
   </div>

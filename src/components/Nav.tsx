@@ -1,16 +1,32 @@
 import { useState, useEffect } from 'react';
 import { THEFORK } from '../lib/constants';
+import type { Lang } from '../i18n/ui';
+import { t, localePath } from '../i18n/utils';
+import LangSwitch from './LangSwitch';
 
-const LINKS = [
-  { href: '#historia', label: 'Historia' },
-  { href: '#especialidades', label: 'Especialidades' },
-  { href: '#restaurante', label: 'Restaurante' },
-  { href: '#arroces', label: 'Carta' },
-  { href: '#llegar', label: 'Cómo llegar' },
-  { href: '/eventos', label: 'Eventos' },
-];
+function getLinks(lang: Lang) {
+  const tr = t(lang);
+  return [
+    { href: '#historia', label: tr('nav.historia') },
+    { href: '#especialidades', label: tr('nav.especialidades') },
+    { href: '#restaurante', label: tr('nav.restaurante') },
+    { href: '#arroces', label: tr('nav.carta') },
+    { href: '#llegar', label: tr('nav.llegar') },
+    // eventos solo existe en español
+    { href: '/eventos', label: tr('nav.eventos') },
+  ];
+}
 
-export default function Nav({ logoSrc }: { logoSrc: string }) {
+interface NavProps {
+  logoSrc: string;
+  lang: Lang;
+  esHref: string;
+  enHref: string;
+}
+
+export default function Nav({ logoSrc, lang, esHref, enHref }: NavProps) {
+  const tr = t(lang);
+  const links = getLinks(lang);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -54,25 +70,26 @@ export default function Nav({ logoSrc }: { logoSrc: string }) {
 
   return (
     <header className={`hd${scrolled ? ' scrolled' : ''}${menuOpen ? ' menu-open' : ''}`}>
-      <a className="brand" href="/">
+      <a className="brand" href={localePath(lang, '/')}>
         <img src={logoSrc} alt="El Meu Foc" />
         <span className="bn">El Meu Foc</span>
       </a>
       <div className="hd-right">
         <nav className="nav">
-          {LINKS.map((l) => (
+          {links.map((l) => (
             <a key={l.href} className="lnk" href={l.href} onClick={closeMenu}>
               {l.label}
             </a>
           ))}
         </nav>
         <a className="btn" href={THEFORK} target="_blank" rel="noopener noreferrer">
-          Reservar mesa <span className="ar">→</span>
+          {tr('nav.reservar')} <span className="ar">→</span>
         </a>
+        <LangSwitch lang={lang} esHref={esHref} enHref={enHref} />
         <button
           type="button"
           className="menu-toggle"
-          aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
+          aria-label={menuOpen ? tr('nav.cerrarMenu') : tr('nav.abrirMenu')}
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen((o) => !o)}
         >

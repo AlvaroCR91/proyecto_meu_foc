@@ -1,0 +1,64 @@
+---
+import { getImage } from 'astro:assets';
+import { THEFORK } from '../lib/constants';
+import fachadaTerraza from '../assets/fachada-terraza.jpg';
+import type { Lang } from '../i18n/ui';
+
+const { lang } = Astro.props as { lang: Lang };
+const site = Astro.site!.href;
+const schemaImage = await getImage({ src: fachadaTerraza, width: 995, height: 696, format: 'webp', quality: 80 });
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Restaurant',
+  '@id': `${site}#restaurant`,
+  name: 'El Meu Foc',
+  description: lang === 'en'
+    ? 'Rice and grill restaurant in Alicante (Babel): rice dishes and paellas with socarrat, fideuà, and meat and fish grilled over charcoal.'
+    : 'Arrocería y brasería en Alicante (Babel): arroces y paellas con socarrat, fideuà, y carnes y pescados a la brasa de carbón.',
+  url: site,
+  image: new URL(schemaImage.src, site).href,
+  telephone: '+34673694605',
+  email: 'restauranteelmeufoc@gmail.com',
+  priceRange: '€€',
+  servesCuisine: lang === 'en'
+    ? ['Rice dishes', 'Paella', 'Grill', 'Chargrilled meat', 'Mediterranean cuisine']
+    : ['Arrocería', 'Arroces', 'Paella', 'Brasería', 'Carnes a la brasa', 'Cocina mediterránea'],
+  menu: lang === 'en' ? `${site}en/carta/` : `${site}carta/`,
+  acceptsReservations: THEFORK,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Calle México, 25, local 8',
+    addressLocality: 'Alicante',
+    postalCode: '03008',
+    addressRegion: 'Alicante',
+    addressCountry: 'ES',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 38.34847,
+    longitude: -0.4950838,
+  },
+  hasMap: 'https://www.google.com/maps/search/?api=1&query=Calle+Mexico+25+03008+Alicante',
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      opens: '13:00',
+      closes: '16:00',
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Friday', 'Saturday'],
+      opens: '20:00',
+      closes: '23:30',
+    },
+  ],
+  sameAs: [
+    'https://www.instagram.com/elmeufoc',
+    THEFORK,
+  ],
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

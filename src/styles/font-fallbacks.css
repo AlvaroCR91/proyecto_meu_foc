@@ -1,0 +1,95 @@
+/* Fuentes de reserva con medidas ajustadas (técnica de Astro/Capsize).
+   Mientras llegan las de Google, el texto se pinta con Times New Roman (o Noto Serif en Android)
+   reescalada para ocupar lo mismo; así, al cambiar de fuente, no se mueve nada (menos CLS).
+   Generado a partir de las métricas reales de los archivos de Google Fonts.
+   unicode-range: solo letras latinas, acentos, puntuación y €. Los símbolos que las fuentes
+   de Google no tienen (p. ej. las flechas → ←) siguen saliendo de Georgia/serif, como antes. */
+
+@font-face {
+  font-family: "Cormorant Garamond Fallback TNR";
+  font-style: normal;
+  font-weight: 600;
+  src: local("Times New Roman"), local("TimesNewRomanPSMT"), local("Liberation Serif"), local("Tinos");
+  size-adjust: 96.4923%;
+  ascent-override: 95.7589%;
+  descent-override: 29.7433%;
+  unicode-range: U+0000-00FF, U+0100-017F, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122;
+  line-gap-override: 0.0%;
+}
+@font-face {
+  font-family: "Cormorant Garamond Fallback Noto";
+  font-style: normal;
+  font-weight: 600;
+  src: local("Noto Serif"), local("NotoSerif-Regular");
+  size-adjust: 81.4969%;
+  ascent-override: 113.3786%;
+  descent-override: 35.2161%;
+  unicode-range: U+0000-00FF, U+0100-017F, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122;
+  line-gap-override: 0.0%;
+}
+@font-face {
+  font-family: "Cormorant Garamond Fallback TNR";
+  font-style: italic;
+  font-weight: 500;
+  src: local("Times New Roman Italic"), local("TimesNewRomanPS-ItalicMT"), local("Liberation Serif Italic"), local("Tinos Italic");
+  size-adjust: 87.1385%;
+  ascent-override: 106.0381%;
+  descent-override: 32.9361%;
+  unicode-range: U+0000-00FF, U+0100-017F, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122;
+  line-gap-override: 0.0%;
+}
+@font-face {
+  font-family: "Cormorant Garamond Fallback Noto";
+  font-style: italic;
+  font-weight: 500;
+  src: local("Noto Serif Italic"), local("NotoSerif-Italic");
+  size-adjust: 75.4797%;
+  ascent-override: 122.4169%;
+  descent-override: 38.0234%;
+  unicode-range: U+0000-00FF, U+0100-017F, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122;
+  line-gap-override: 0.0%;
+}
+@font-face {
+  font-family: "EB Garamond Fallback TNR";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Times New Roman"), local("TimesNewRomanPSMT"), local("Liberation Serif"), local("Tinos");
+  size-adjust: 94.7692%;
+  ascent-override: 106.2581%;
+  descent-override: 31.4448%;
+  unicode-range: U+0000-00FF, U+0100-017F, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122;
+  line-gap-override: 0.0%;
+}
+@font-face {
+  font-family: "EB Garamond Fallback Noto";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Noto Serif"), local("NotoSerif-Regular");
+  size-adjust: 80.0416%;
+  ascent-override: 125.8096%;
+  descent-override: 37.2306%;
+  unicode-range: U+0000-00FF, U+0100-017F, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122;
+  line-gap-override: 0.0%;
+}
+@font-face {
+  font-family: "EB Garamond Fallback TNR";
+  font-style: italic;
+  font-weight: 400;
+  src: local("Times New Roman Italic"), local("TimesNewRomanPS-ItalicMT"), local("Liberation Serif Italic"), local("Tinos Italic");
+  size-adjust: 92.5538%;
+  ascent-override: 108.8015%;
+  descent-override: 32.1975%;
+  unicode-range: U+0000-00FF, U+0100-017F, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122;
+  line-gap-override: 0.0%;
+}
+@font-face {
+  font-family: "EB Garamond Fallback Noto";
+  font-style: italic;
+  font-weight: 400;
+  src: local("Noto Serif Italic"), local("NotoSerif-Italic");
+  size-adjust: 80.1706%;
+  ascent-override: 125.6072%;
+  descent-override: 37.1707%;
+  unicode-range: U+0000-00FF, U+0100-017F, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122;
+  line-gap-override: 0.0%;
+}

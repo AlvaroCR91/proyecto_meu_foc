@@ -1,0 +1,217 @@
+---
+import Layout from '../layouts/Layout.astro';
+import '../styles/landing.css';
+import LangSwitch from '../components/LangSwitch';
+import type { Lang } from '../i18n/ui';
+import { localePath, altPath } from '../i18n/utils';
+
+const { lang } = Astro.props as { lang: Lang };
+// texto en el idioma de la página: L('español', 'inglés')
+const L = (es: string, en: string) => (lang === 'en' ? en : es);
+---
+
+<Layout
+  title={L('Política de Cookies — El Meu Foc', 'Cookie Policy — El Meu Foc')}
+  description={L('Política de cookies del sitio web de El Meu Foc, restaurante de arroces y brasas en Alicante.', 'Cookie policy for the website of El Meu Foc, rice and grill restaurant in Alicante.')}
+>
+
+<section class="section surf-paper legal-page">
+  <div class="wrap legal-wrap">
+    <div class="legal-top">
+      <a class="legal-back" href={localePath(lang, '/')}>{L('← Volver a la web', '← Back to the site')}</a>
+      <LangSwitch lang={lang} esHref={altPath(Astro.url.pathname, 'es')} enHref={altPath(Astro.url.pathname, 'en')} />
+    </div>
+    <div class="eyebrow">El Meu Foc</div>
+    <h1 class="h2" style="margin-top:14px">{L('Política de Cookies', 'Cookie Policy')}</h1>
+    <hr class="rule-ember" style="margin:26px 0 40px" />
+    {lang === 'en' && (
+      <p class="legal-note">This is a courtesy translation. In the event of any discrepancy, the Spanish version prevails.</p>
+    )}
+
+    <div class="legal-body">
+      {lang === 'en' ? (
+        <Fragment>
+      <h2>1. What are cookies?</h2>
+      <p>
+        Cookies are small files that a website installs in the user's browser to store and
+        retrieve information about their visit. In compliance with article 22.2 of Spanish
+        Law 34/2002 (LSSI-CE) and Regulation (EU) 2016/679 (GDPR), we inform you about the
+        cookies used by <strong>restaurantemeufoc.es</strong>.
+      </p>
+
+      <h2>2. Our own cookies</h2>
+      <p>
+        We use a single technical cookie of our own, stored in your browser
+        (<code>localStorage</code>, not an HTTP cookie), which saves your choice about this
+        cookie notice so that it is not shown to you again on every visit. It is not used
+        for advertising or analytics.
+      </p>
+      <ul>
+        <li><strong>Name:</strong> <code>meufoc_cookie_consent</code></li>
+        <li><strong>Purpose:</strong> remember whether you accepted or rejected third-party cookies</li>
+        <li><strong>Duration:</strong> persistent, until you clear your browsing data</li>
+      </ul>
+
+      <h2>3. Third-party cookies</h2>
+      <p>
+        When you accept cookies, this website loads the embedded <strong>Google Maps</strong>
+        map in the "How to get here" section, which may install its own cookies in your
+        browser for its operation and for Google's own purposes. This website does not
+        control those cookies; you can read Google's privacy policy at
+        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">policies.google.com/privacy</a>.
+      </p>
+      <p>
+        Likewise, when you accept cookies we enable <strong>Google Analytics</strong>, a
+        Google statistics service that helps us understand how the website is used (pages
+        visited, time spent, device, etc.) in aggregate form. This service installs its own
+        cookies (for example, <code>_ga</code>).
+      </p>
+      <p>
+        If you reject cookies, neither the map nor Google Analytics is loaded: in place of
+        the map, a link is shown that opens the location directly in Google Maps, in a new
+        tab, without installing any cookies on this website.
+      </p>
+
+      <h2>4. How to manage or withdraw your consent</h2>
+      <p>
+        You can change your decision at any time by clearing this site's browsing data
+        (local storage) from your browser settings, which will make the cookie notice
+        appear again on your next visit. You can also set your browser to block or delete
+        third-party cookies in general; please note that this may affect how other websites
+        work.
+      </p>
+
+      <h2>5. More information</h2>
+      <p>
+        To find out who is responsible for this website and how we process your personal
+        data, see our <a href="/en/aviso-legal">Legal Notice</a>.
+      </p>
+        </Fragment>
+      ) : (
+        <Fragment>
+      <h2>1. ¿Qué son las cookies?</h2>
+      <p>
+        Las cookies son pequeños archivos que un sitio web instala en el navegador del
+        usuario para almacenar y recuperar información sobre su visita. En cumplimiento del
+        artículo 22.2 de la Ley 34/2002 (LSSI-CE) y del Reglamento (UE) 2016/679 (RGPD), te
+        informamos sobre las cookies que utiliza <strong>restaurantemeufoc.es</strong>.
+      </p>
+
+      <h2>2. Cookies propias</h2>
+      <p>
+        Utilizamos una única cookie técnica propia, almacenada en tu navegador
+        (<code>localStorage</code>, no una cookie HTTP), que guarda tu decisión sobre este
+        aviso de cookies para no volver a mostrártelo en cada visita. No tiene fines
+        publicitarios ni de análisis.
+      </p>
+      <ul>
+        <li><strong>Nombre:</strong> <code>meufoc_cookie_consent</code></li>
+        <li><strong>Finalidad:</strong> recordar si aceptaste o rechazaste las cookies de terceros</li>
+        <li><strong>Duración:</strong> persistente, hasta que borres los datos de navegación</li>
+      </ul>
+
+      <h2>3. Cookies de terceros</h2>
+      <p>
+        Al aceptar las cookies, esta web carga el mapa incrustado de <strong>Google Maps</strong>
+        en la sección "Cómo llegar", que puede instalar sus propias cookies en tu navegador
+        para su funcionamiento y con fines propios de Google. Este sitio no controla dichas
+        cookies; puedes consultar la política de privacidad de Google en
+        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">policies.google.com/privacy</a>.
+      </p>
+      <p>
+        Igualmente, al aceptar las cookies activamos <strong>Google Analytics</strong>, un
+        servicio de estadísticas de Google que nos ayuda a entender cómo se usa la web
+        (páginas visitadas, tiempo de permanencia, dispositivo, etc.) de forma agregada.
+        Este servicio instala sus propias cookies (por ejemplo, <code>_ga</code>).
+      </p>
+      <p>
+        Si rechazas las cookies, ni el mapa ni Google Analytics se cargan: en el caso del
+        mapa se muestra en su lugar un enlace que abre la ubicación directamente en Google
+        Maps, en una pestaña nueva, sin instalar ninguna cookie en esta web.
+      </p>
+
+      <h2>4. Cómo gestionar o retirar tu consentimiento</h2>
+      <p>
+        Puedes cambiar tu decisión en cualquier momento borrando los datos de navegación
+        (almacenamiento local) de este sitio desde la configuración de tu navegador, lo que
+        hará que el aviso de cookies vuelva a mostrarse en tu siguiente visita. También
+        puedes configurar tu navegador para bloquear o eliminar cookies de terceros con
+        carácter general; ten en cuenta que esto puede afectar al funcionamiento de otros
+        sitios web.
+      </p>
+
+      <h2>5. Más información</h2>
+      <p>
+        Para conocer quién es el responsable de este sitio web y cómo tratamos tus datos
+        personales, consulta nuestro <a href="/aviso-legal">Aviso Legal</a>.
+      </p>
+        </Fragment>
+      )}
+    </div>
+  </div>
+</section>
+
+</Layout>
+
+<style>
+  .legal-page { min-height: 100vh; }
+  /* "Volver a la web" + banderas de idioma en la misma línea */
+  .legal-top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .legal-top :global(.lang-switch) { margin-top: 1px; }
+  .legal-note {
+    font-family: var(--body);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--ink-soft);
+    margin-bottom: 34px;
+  }
+  .legal-wrap { max-width: 860px; padding-block: clamp(48px, 8vw, 90px); }
+  .legal-back {
+    display: inline-block;
+    margin-bottom: 34px;
+    font-size: 16px;
+    color: var(--ink-soft);
+    border-bottom: 1px solid transparent;
+  }
+  .legal-back:hover { color: var(--ember); border-color: var(--ember); }
+  .legal-body h2 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(22px, 2.6vw, 28px);
+    color: var(--ink);
+    margin-top: 44px;
+    margin-bottom: 14px;
+  }
+  .legal-body h2:first-child { margin-top: 0; }
+  .legal-body p {
+    font-family: var(--body);
+    font-size: 18px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+    margin-bottom: 14px;
+  }
+  .legal-body ul {
+    margin: 0 0 14px 20px;
+    padding: 0;
+  }
+  .legal-body li {
+    font-family: var(--body);
+    font-size: 18px;
+    line-height: 1.9;
+    color: var(--ink-soft);
+  }
+  .legal-body code {
+    font-family: monospace;
+    font-size: 0.9em;
+    background: rgba(43,30,22,.08);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  .legal-body a {
+    color: var(--ember);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .legal-body a:hover { color: var(--ember-2); }
+  .legal-body strong { color: var(--ink); }
+</style>

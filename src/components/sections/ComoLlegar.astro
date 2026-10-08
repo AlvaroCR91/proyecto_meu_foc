@@ -1,23 +1,57 @@
+---
+import { Image } from 'astro:assets';
+import vegAlcachofa from '../../assets/veg-alcachofa.png';
+import type { Lang } from '../../i18n/ui';
+
+const { lang } = Astro.props as { lang: Lang };
+const tx = {
+  es: {
+    eyebrow: 'Arrocería en Alicante · Cómo llegar',
+    h2: 'Restaurante de Arroces y Brasas<br>en Babel, Alicante.',
+    direccion: 'Dirección',
+    horario: 'Horario',
+    horas: 'Miercoles a Domingo · 13:00–16:00<br>\n              Viernes y Sábado · 20:00–23:30<br>\n              Lunes y Martes cerrado',
+    reservas: 'Reservas',
+    siguenos: 'Síguenos',
+    mapaAviso: 'Este mapa lo sirve Google y usa cookies de terceros.',
+    mapaAceptar: 'Aceptar y ver mapa',
+    mapaAria: 'Cómo llegar a El Meu Foc en Google Maps',
+  },
+  en: {
+    eyebrow: 'Rice restaurant in Alicante · How to get here',
+    h2: 'Rice and Grill Restaurant<br>in Babel, Alicante.',
+    direccion: 'Address',
+    horario: 'Opening hours',
+    horas: 'Wednesday to Sunday · 13:00–16:00<br>\n              Friday and Saturday · 20:00–23:30<br>\n              Closed Monday and Tuesday',
+    reservas: 'Bookings',
+    siguenos: 'Follow us',
+    mapaAviso: 'This map is provided by Google and uses third-party cookies.',
+    mapaAceptar: 'Accept and view map',
+    mapaAria: 'Directions to El Meu Foc on Google Maps',
+  },
+}[lang];
+---
+
 <!-- ══════════════════════════════════════
      CÓMO LLEGAR — SEO Local
      H2: "Dónde comer arroz en Alicante" + zona/barrio
 ══════════════════════════════════════ -->
 <section class="section surf-paper" id="llegar" style="padding-top:0">
   <div class="veg veg-extra" data-side="left" style="top:34%;left:50%;width:clamp(86px,10vw,140px)">
-    <img class="veg-img" src="/assets/veg-alcachofa.png" alt="" />
+    <Image class="veg-img" src={vegAlcachofa} width={360} height={360} alt="" />
   </div>
   <div class="wrap">
     <div class="sec-head sec-head--right" style="margin-bottom:clamp(34px,4vw,56px)">
       <!-- eyebrow con keyword -->
-      <span class="eyebrow">Arrocería en Alicante · Cómo llegar</span>
+      <span class="eyebrow">{tx.eyebrow}</span>
       <!-- H2 con keyword SEO local -->
-      <h2 class="h2">Restaurante de Arroces y Brasas<br>en Babel, Alicante.</h2>
+      <h2 class="h2" set:html={tx.h2} />
     </div>
     <div class="loc-grid">
       <div class="loc-info">
         <div class="info-row">
           <div class="it">
-            <b>Dirección</b>
+            <b>{tx.direccion}</b>
             <span>
               Calle Mexico, 25, local 8 · Babel<br>
               03008 — Alicante (Alacant)
@@ -26,17 +60,13 @@
         </div>
         <div class="info-row">
           <div class="it">
-            <b>Horario</b>
-            <span>
-              Miercoles a Domingo · 13:00–16:00<br>
-              Viernes y Sábado · 20:00–23:30<br>
-              Lunes y Martes cerrado
-            </span>
+            <b>{tx.horario}</b>
+            <span set:html={tx.horas} />
           </div>
         </div>
         <div class="info-row">
           <div class="it">
-            <b>Reservas</b>
+            <b>{tx.reservas}</b>
             <span>
               <a href="tel:+34673694605">+34 673 69 46 05</a><br>
               restauranteelmeufoc@gmail.com
@@ -45,7 +75,7 @@
         </div>
         <div class="info-row">
           <div class="it">
-            <b>Síguenos</b>
+            <b>{tx.siguenos}</b>
             <span>@elmeufoc</span>
           </div>
         </div>
@@ -57,15 +87,15 @@
         data-map-src="https://www.google.com/maps?q=Calle+Mexico+25+03008+Alicante&output=embed"
       >
         <div class="map-consent-gate" id="map-consent-gate">
-          <p>Este mapa lo sirve Google y usa cookies de terceros.</p>
-          <button type="button" class="btn cookie-btn" id="map-consent-accept">Aceptar y ver mapa</button>
+          <p>{tx.mapaAviso}</p>
+          <button type="button" class="btn cookie-btn" id="map-consent-accept">{tx.mapaAceptar}</button>
         </div>
         <a
           class="map-overlay-link"
           href="https://www.google.com/maps/search/?api=1&query=Calle+Mexico+25+03008+Alicante"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Cómo llegar a El Meu Foc en Google Maps"
+          aria-label={tx.mapaAria}
         ></a>
       </div>
     </div>
@@ -114,7 +144,7 @@
     iframe.src = src;
     iframe.loading = 'lazy';
     iframe.referrerPolicy = 'no-referrer-when-downgrade';
-    iframe.title = 'Mapa de El Meu Foc';
+    iframe.title = document.documentElement.lang === 'en' ? 'Map of El Meu Foc' : 'Mapa de El Meu Foc';
     iframe.setAttribute('aria-hidden', 'true');
     iframe.tabIndex = -1;
     container.insertBefore(iframe, gate);

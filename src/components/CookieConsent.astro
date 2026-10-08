@@ -1,18 +1,23 @@
+---
+import type { Lang } from '../i18n/ui';
+import { t, localePath } from '../i18n/utils';
+
+const { lang } = Astro.props as { lang: Lang };
+const tr = t(lang);
+---
 <!-- ══════════════════════════════════════
      AVISO DE COOKIES
 ══════════════════════════════════════ -->
 <div class="cookie-banner" id="cookie-banner" hidden>
   <div class="cookie-banner__text">
     <p>
-      Usamos cookies propias, necesarias para el funcionamiento de la web, y de terceros
-      (Google Maps) para mostrarte cómo llegar al restaurante. Puedes aceptarlas o
-      rechazarlas. Más información en nuestra
-      <a href="/politica-cookies">Política de Cookies</a>.
+      {tr('cookies.texto')}
+      <a href={localePath(lang, '/politica-cookies')}>{tr('cookies.politica')}</a>.
     </p>
   </div>
   <div class="cookie-banner__actions">
-    <button type="button" class="btn btn-ghost cookie-btn" id="cookie-reject">Rechazar</button>
-    <button type="button" class="btn cookie-btn" id="cookie-accept">Aceptar</button>
+    <button type="button" class="btn btn-ghost cookie-btn" id="cookie-reject">{tr('cookies.rechazar')}</button>
+    <button type="button" class="btn cookie-btn" id="cookie-accept">{tr('cookies.aceptar')}</button>
   </div>
 </div>
 

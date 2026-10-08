@@ -1,5 +1,41 @@
 ---
+import { Image } from 'astro:assets';
 import { THEFORK } from '../../lib/constants';
+import logoWhite from '../../assets/logo-white.png';
+import type { Lang } from '../../i18n/ui';
+import { localePath } from '../../i18n/utils';
+
+const { lang } = Astro.props as { lang: Lang };
+const tx = {
+  es: {
+    visitanos: 'Visítanos',
+    horas: 'Mierc–Dom · 13:00–16:00<br>\n          Viern–Sáb · 20:00–23:30<br>\n          <em>Lunes y Martes cerrado</em>',
+    contacto: 'Contacto',
+    resena: '⭐ Déjanos tu reseña en Google',
+    reserva: 'Reserva',
+    thefork: 'Reservar en TheFork →',
+    carta: 'Ver la carta →',
+    instagram: '@elmeufoc en Instagram',
+    restaurante: 'Restaurante',
+    avisoLegal: 'Aviso Legal',
+    cookies: 'Política de Cookies',
+    hecho: 'Hecho con brasas, en Alicante.',
+  },
+  en: {
+    visitanos: 'Visit us',
+    horas: 'Wed–Sun · 13:00–16:00<br>\n          Fri–Sat · 20:00–23:30<br>\n          <em>Closed Monday and Tuesday</em>',
+    contacto: 'Contact',
+    resena: '⭐ Leave us a Google review',
+    reserva: 'Book',
+    thefork: 'Book on TheFork →',
+    carta: 'See the menu →',
+    instagram: '@elmeufoc on Instagram',
+    restaurante: 'Restaurant',
+    avisoLegal: 'Legal Notice',
+    cookies: 'Cookie Policy',
+    hecho: 'Made with embers, in Alicante.',
+  },
+}[lang];
 ---
 
 <!-- ══════════════════════════════════════
@@ -9,41 +45,36 @@ import { THEFORK } from '../../lib/constants';
   <div class="wrap">
     <div class="ft-grid">
       <div class="fcol">
-        <img class="ft-logo" src="/assets/logo-white.png" alt="El Meu Foc" />
-        <p style="margin-top:16px;font-style:italic;font-family:var(--serif);font-size:21px">
-          El arroz como lenguaje. El fuego como memoria. Alicante como hogar.
-        </p>
+        <Image class="ft-logo" src={logoWhite} width={614} height={601} alt="El Meu Foc" />
       </div>
       <div class="fcol">
-        <h4>Visítanos</h4>
+        <h4>{tx.visitanos}</h4>
         <p>
           Calle Mexico, 25, local 8<br>
           03008 — Alicante<br>
-          Mierc–Dom · 13:00–16:00<br>
-          Viern–Sáb · 20:00–23:30<br>
-          <em>Lunes y Martes cerrado</em>
+          <Fragment set:html={tx.horas} />
         </p>
       </div>
       <div class="fcol">
-        <h4>Contacto</h4>
+        <h4>{tx.contacto}</h4>
         <p>
           <a href="tel:+34673694605">+34 673 69 46 05</a><br>
           <a href="mailto:restauranteelmeufoc@gmail.com">restauranteelmeufoc@gmail.com</a><br>
-          <a href="https://g.page/elmeufoc/review" target="_blank" rel="noopener noreferrer">⭐ Déjanos tu reseña en Google</a>
+          <a href="https://g.page/elmeufoc/review" target="_blank" rel="noopener noreferrer">{tx.resena}</a>
         </p>
       </div>
       <div class="fcol">
-        <h4>Reserva</h4>
+        <h4>{tx.reserva}</h4>
         <p>
-          <a href={THEFORK} target="_blank" rel="noopener noreferrer">Reservar en TheFork →</a><br>
-          <a href="/carta-el-meu-foc.pdf" target="_blank" rel="noopener noreferrer">Ver la carta →</a><br>
-          <a href="https://www.instagram.com/elmeufoc" target="_blank" rel="noopener noreferrer">@elmeufoc en Instagram</a>
+          <a href={THEFORK} target="_blank" rel="noopener noreferrer">{tx.thefork}</a><br>
+          <a href={localePath(lang, '/carta')}>{tx.carta}</a><br>
+          <a href="https://www.instagram.com/elmeufoc" target="_blank" rel="noopener noreferrer">{tx.instagram}</a>
         </p>
       </div>
     </div>
     <div class="copy">
-      <span>© 2026 El Meu Foc · Restaurante · Alicante · <a class="copy-link" href="/aviso-legal">Aviso Legal</a> · <a class="copy-link" href="/politica-cookies">Política de Cookies</a></span>
-      <span>Hecho con brasas, en Alicante.</span>
+      <span>© 2026 El Meu Foc · {tx.restaurante} · Alicante · <a class="copy-link" href={localePath(lang, '/aviso-legal')}>{tx.avisoLegal}</a> · <a class="copy-link" href={localePath(lang, '/politica-cookies')}>{tx.cookies}</a></span>
+      <span>{tx.hecho}</span>
     </div>
   </div>
 </footer>

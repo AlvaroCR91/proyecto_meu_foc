@@ -1,15 +1,23 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import EventList from '../../components/eventos/EventList';
 import SubscribeForm from '../../components/eventos/SubscribeForm';
 import Lightbox from '../../components/sections/Lightbox.astro';
 import '../../styles/landing.css';
 import '../../styles/eventos.css';
+import muestra from '../../assets/muestra.jpeg';
+import cataMaridaje from '../../assets/cata_maridaje.jpeg';
+import tusSentidos from '../../assets/tus_sentidos.jpeg';
+import cenaCata from '../../assets/cena_cata.jpg';
+import menuSolidario from '../../assets/menu_solidario.jpeg';
+import cenaCata2 from '../../assets/cena_cata_2.jpg';
 ---
 
 <Layout
-  title="Eventos — El Meu Foc"
-  description="Próximos eventos, catas y jornadas gastronómicas en El Meu Foc, Alicante."
+  title="Eventos y catas en Alicante | El Meu Foc"
+  description="Eventos en El Meu Foc, arrocería y brasería en Alicante: catas de vino, cenas maridaje y jornadas gastronómicas. Consulta las próximas fechas."
+  alternates={false}
 >
 
 <div class="wrap">
@@ -44,22 +52,22 @@ import '../../styles/eventos.css';
     </div>
     <div class="gallery" id="eventos-gallery" style="margin-top:48px">
       <div class="img-slot g-wide">
-        <img src="/assets/muestra.jpeg" alt="Selección de tapas y cervezas artesanas servida en una cata de El Meu Foc" />
+        <Image src={muestra} width={800} height={1732} format="webp" quality={80} alt="Selección de tapas y cervezas artesanas servida en una cata de El Meu Foc" />
       </div>
       <div class="img-slot">
-        <img src="/assets/cata_maridaje.jpeg" alt="Cartel del evento Cata de Maridaje en El Meu Foc" />
+        <Image src={cataMaridaje} width={787} height={1116} format="webp" quality={80} alt="Cartel del evento Cata de Maridaje en El Meu Foc" />
       </div>
       <div class="img-slot g-tall">
-        <img src="/assets/tus_sentidos.jpeg" alt="Cartel del evento &quot;Un banquete que despierta tus sentidos&quot; en El Meu Foc" />
+        <Image src={tusSentidos} width={800} height={1422} format="webp" quality={80} alt="Cartel del evento &quot;Un banquete que despierta tus sentidos&quot; en El Meu Foc" />
       </div>
       <div class="img-slot">
-        <img src="/assets/cena_cata.jpg" alt="Cartel de la Cena con Cata de Vinos, en colaboración con Bodega Las Virtudes" />
+        <Image src={cenaCata} width={800} height={1132} format="webp" quality={80} alt="Cartel de la Cena con Cata de Vinos, en colaboración con Bodega Las Virtudes" />
       </div>
       <div class="img-slot">
-        <img src="/assets/menu_solidario.jpeg" alt="Cartel del Menú Solidario a beneficio de la protectora de animales Asoka el Grande" />
+        <Image src={menuSolidario} width={800} height={1000} format="webp" quality={80} alt="Cartel del Menú Solidario a beneficio de la protectora de animales Asoka el Grande" />
       </div>
       <div class="img-slot">
-        <img src="/assets/cena_cata_2.jpg" alt="Cartel de la Cena con Cata de Vinos — Un camino, dos historias" />
+        <Image src={cenaCata2} width={800} height={1000} format="webp" quality={80} alt="Cartel de la Cena con Cata de Vinos — Un camino, dos historias" />
       </div>
     </div>
   </div>

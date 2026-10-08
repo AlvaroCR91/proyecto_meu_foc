@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@astrojs/react": "^4.2.0",
+    "@astrojs/sitemap": "^3.7.3",
     "astro": "^6.4.8",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
