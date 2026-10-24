@@ -30,6 +30,24 @@ function hoyMadrid() {
   return new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Madrid' }).format(new Date());
 }
 
+// Valida los campos de un evento (creación y edición). Devuelve { error } o
+// { data } con la fecha ya en formato SQL y `fecha` tal cual llegó.
+function validateEvento(body) {
+  const { titulo, fecha, descripcion } = body || {};
+
+  if (typeof titulo !== 'string' || titulo.trim().length < 1 || titulo.trim().length > TITULO_MAX) {
+    return { error: 'Título inválido' };
+  }
+  if (typeof descripcion !== 'string' || descripcion.trim().length < 1 || descripcion.trim().length > DESCRIPCION_MAX) {
+    return { error: 'Descripción inválida' };
+  }
+  if (!isValidFechaLocal(fecha)) {
+    return { error: 'Fecha inválida' };
+  }
+
+  return { data: { titulo: titulo.trim(), descripcion: descripcion.trim(), fecha, fechaSql: fechaLocalToSql(fecha) } };
+}
+
 // Valida los campos de un anuncio (creación y edición). Devuelve
 // { error } o { data } con los valores listos para la BD.
 function validateAnuncio(body) {
@@ -69,6 +87,7 @@ module.exports = {
   isValidFechaDia,
   hoyMadrid,
   validateAnuncio,
+  validateEvento,
   DESCRIPCION_MAX,
   TITULO_MAX,
 };

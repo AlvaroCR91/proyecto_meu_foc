@@ -32,8 +32,14 @@ Registro de los cambios, actualizaciones y mejoras hechos en la web. Las entrada
   - El webhook de eventos ahora incluye `tipo:'evento'`. Añadido `N8N_NEW_ANUNCIO_WEBHOOK_URL=` (vacío) a `.env.example` y a los `.env` de desarrollo y producción.
   - Verificado con curl: 401 sin sesión; 400 por vigencia, título, día inexistente, temporal invertido, fin pasado e imagen no válida; la foto no queda en disco si falla la validación. Creadas las publicaciones permanente con foto, temporal y "solo hoy"; una caducada (metida por SQL) no sale en el GET. La foto se sirve por el proxy. Webhook comprobado con un receptor falso: llega `{"tipo":"anuncio",...}`.
   - Para probar sin la contraseña del usuario se usó un token de sesión de 2 h firmado con el secreto del `.env` (guardado en el scratchpad, no en el repo).
-  - **Pendiente de borrar antes de desplegar:** publicaciones de prueba (ids 1-5, título "[PRUEBA] …") y la foto de la 1 en `meu-foc-prod/server/eventos-api/uploads/eventos/`.
-- [ ] Tarea 5: API de gestión (listar, editar, borrar).
+  - Publicaciones de prueba "[PRUEBA] …": ver tarea 5.
+- [x] Tarea 5: API de gestión (todas con `requireAdmin`).
+  - `GET /api/admin/eventos` (todos, con `fecha_local` "YYYY-MM-DDTHH:MM" en hora de Madrid para el formulario) y `GET /api/admin/anuncios` (todos, también caducados).
+  - `PUT /api/admin/eventos/:id` y `PUT /api/admin/anuncios/:id`: multipart con los mismos campos que al crear; foto nueva opcional o `quitar_imagen=1`. La foto antigua se borra del disco solo si cambia. Editar no avisa a los suscriptores. En anuncios se admite al editar una fecha de fin pasada.
+  - `DELETE /api/admin/eventos/:id` y `DELETE /api/admin/anuncios/:id`: borran el registro y su foto. 404 si no existe o el id no es numérico.
+  - Código compartido: `validateEvento` (validators.js; `nuevo-evento` ahora también lo usa), `imagenUrl` y `borrarImagen` (middleware/upload.js), y el nuevo `utils/http.js` con `parseId` y `rejectAndCleanup`.
+  - Verificado con curl: 401 sin sesión en todas; evento de prueba (fecha pasada, sin foto) creado, editado y borrado sin aparecer nunca en la web pública; los 3 eventos reales intactos. En anuncios: sustituir, mantener y quitar foto, y borrar con foto (cada foto antigua desaparece del disco; quedan solo las 3 de los eventos reales); validación al editar; 404. `/api/eventos` y `/api/eventos/pasados-con-imagen` devuelven lo mismo que producción.
+  - Quedan de prueba los anuncios 1, 2, 4 y 5 (sin fotos), para el panel y el tablón; se borran antes de desplegar.
 - [ ] Tarea 6: panel admin.
 - [ ] Tarea 7: tablón en `/eventos`.
 - [ ] Tarea 8: verificación final y despliegue.

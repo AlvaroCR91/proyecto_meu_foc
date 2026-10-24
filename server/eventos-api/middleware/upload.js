@@ -49,4 +49,22 @@ function uploadEventImage(req, res, next) {
   });
 }
 
-module.exports = { uploadEventImage, UPLOADS_DIR, ALLOWED_MIME_TO_EXT };
+// URL pública de la foto recién subida, sin extensión a propósito (ver
+// routes/uploads.js), o null si no se subió ninguna.
+function imagenUrl(file) {
+  return file ? `/api/uploads/eventos/${file.filename.replace(/\.[a-z0-9]+$/i, '')}` : null;
+}
+
+const IMAGEN_URL_RE = /^\/api\/uploads\/eventos\/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i;
+
+// Borra del disco la foto de una URL guardada en la BD (best-effort: si no
+// existe o la URL no es nuestra, no hace nada).
+function borrarImagen(url) {
+  const m = typeof url === 'string' && url.match(IMAGEN_URL_RE);
+  if (!m) return;
+  for (const ext of Object.values(ALLOWED_MIME_TO_EXT)) {
+    fs.unlink(path.join(UPLOADS_DIR, `${m[1]}.${ext}`), () => {});
+  }
+}
+
+module.exports = { uploadEventImage, imagenUrl, borrarImagen, UPLOADS_DIR, ALLOWED_MIME_TO_EXT };
