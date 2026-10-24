@@ -13,3 +13,15 @@ CREATE TABLE IF NOT EXISTS suscriptores (
   email     VARCHAR(255) NOT NULL UNIQUE,
   creado_en TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS anuncios (
+  id                 INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  titulo             VARCHAR(200) NOT NULL,
+  descripcion        TEXT NOT NULL,
+  imagen_placeholder VARCHAR(500) NULL,
+  vigencia           ENUM('permanente', 'temporal', 'dia') NOT NULL,
+  fecha_inicio       DATE NULL,
+  fecha_fin          DATE NULL,
+  creado_en          TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  INDEX idx_vigencia_fin (vigencia, fecha_fin)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

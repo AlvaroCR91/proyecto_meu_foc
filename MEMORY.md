@@ -22,7 +22,10 @@ Registro de los cambios, actualizaciones y mejoras hechos en la web. Las entrada
   - Ajuste pedido por el usuario (más diferencia entre pasados y futuros): hoy y días futuros en crema al 100 %, con fondo suave y peso 500; hoy con aro de 2px; pasados al 25 % y sin fondo.
   - Eliminados los estilos `.month-strip*` y el desplazamiento automático de la tira.
   - Verificado a 1440 y 390px: octubre 2026 con 3 huecos (empieza en jueves) y noviembre con 6 (empieza en domingo); el 31 marcado; clic → tarjeta visible y realzada; navegación de meses; sin scroll horizontal ni errores JS; `astro check` sin errores. La web pública no cambia.
-- [ ] Tarea 3: tabla `anuncios`.
+- [x] Tarea 3: tabla `anuncios` en la BD real.
+  - `server/eventos-api/migrations/002_anuncios.sql` (también añadida a `schema.sql`). Campos: `id`, `titulo`, `descripcion`, `imagen_placeholder`, `vigencia ENUM('permanente','temporal','dia')`, `fecha_inicio`/`fecha_fin` DATE NULL (en "día", las dos iguales), `creado_en`, e índice `(vigencia, fecha_fin)`.
+  - Copia previa de la BD: `/home/hostv01/scripts/backups-db/restaurante_eventos-20261024-1920-antes-anuncios.sql` (solo legible por hostv01).
+  - Aplicada con `sudo mysql restaurante_eventos < migrations/002_anuncios.sql`. `eventos_app` puede leerla con sus permisos actuales (0 filas). La API publicada sigue igual (`/api/eventos` 200 y `/api/anuncios` 404 hasta el despliegue).
 - [ ] Tarea 4: API pública y creación de publicaciones.
 - [ ] Tarea 5: API de gestión (listar, editar, borrar).
 - [ ] Tarea 6: panel admin.
