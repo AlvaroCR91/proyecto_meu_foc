@@ -4,6 +4,26 @@ Registro de los cambios, actualizaciones y mejoras hechos en la web. Las entrada
 
 ---
 
+## 2026-10-24 — Nuevo flujo de trabajo: rama `develop` y producción separada (en curso)
+
+**Contexto:** se trabajaba directamente sobre `main` y en la misma carpeta que sirve producción, así que cualquier build salía a internet. Plan: trabajar en `develop` en esta carpeta, y que producción se sirva desde otra carpeta (`/home/hostv01/meu-foc-prod`, worktree de `main`), actualizada solo mediante un script de despliegue tras la aprobación del usuario.
+
+**Progreso:**
+- [x] Tarea 1: rama `develop` creada desde `idiomas-y-seo` (el estado publicado); `main` avanzada por fast-forward hasta `ee38cfe`, así que `main` = producción. Borradas en local las ramas ya integradas `idiomas-y-seo` y `eventos`. La web pública no se tocó.
+- [x] Acceso a GitHub: clave SSH de despliegue `~/.ssh/github_meu_foc` (con escritura, añadida por el usuario en Deploy keys), alias `github-meu-foc` en `~/.ssh/config` y remoto `origin` = `git@github-meu-foc:AlvaroCR91/proyecto_meu_foc.git`. Subidas `main` y `develop`.
+- [x] Borrada la rama remota `origin/eventos` (ya integrada en `main`).
+- [x] Tarea 2: carpeta de producción `/home/hostv01/meu-foc-prod` creada como `git worktree` de `main` (comparte el repositorio con esta carpeta). Instaladas las dependencias (`npm ci` en la raíz y en `server/eventos-api`), copiado `server/eventos-api/.env` y compilado su `dist/`. Comprobado que es idéntico al `dist/` publicado salvo los `uid` aleatorios de las islas de Astro. Todavía ningún servicio usa esa carpeta.
+- [x] Tarea 3: servicios `meu-foc` y `eventos-api` movidos a `/home/hostv01/meu-foc-prod` (rutas cambiadas en `/etc/systemd/system/{meu-foc,eventos-api}.service`; copia de los originales en `/home/hostv01/scripts/backup-units-2026-10-24/`). Copiado `server/eventos-api/uploads/` justo antes de reiniciar. Verificado: 7 rutas responden 200 en local y en restaurantemeufoc.es, `/api/health` ok, las imágenes de eventos se sirven y la portada pública es igual al build de producción (la única diferencia es la ocultación del email que añade Cloudflare). Desde ahora `dist/` y `uploads/` de esta carpeta (`proyecto_meu_foc`) ya no son los de producción: las fotos que se suban desde el panel van a `meu-foc-prod`.
+- [x] Tarea 4: script de despliegue `/home/hostv01/scripts/deploy-meu-foc.sh` (el usuario eligió fast-forward):
+  - `--check`: lista los commits y archivos que se publicarían, sin tocar nada.
+  - Sin opciones: comprueba que `meu-foc-prod` está limpia y en `main` (avisa si `proyecto_meu_foc` tiene cambios sin commitear, que no se publican), hace `git merge --ff-only develop`, `npm ci` solo si cambió el lockfile, compila en `dist-new` (si falla, deshace el merge y no toca producción), cambia `dist` → `dist-prev` y `dist-new` → `dist`, reinicia `eventos-api` solo si cambió `server/eventos-api`, comprueba que web y API responden, etiqueta `deploy-AAAAMMDD-HHMM` y sube `main`, `develop` y la etiqueta a GitHub.
+  - `--rollback`: intercambia `dist` y `dist-prev` (solo la web; `main` no se toca).
+  - `dist-new/`, `dist-prev/` y `dist-rollback/` añadidos a `.git/info/exclude`. Comprobado aparte que `serve` sirve la carpeta nueva tras el cambio de nombre sin reiniciarse.
+- [ ] Tarea 5: prueba completa.
+- [ ] Tarea 6: actualizar memorias.
+
+---
+
 **Aviso importante (2026-10-08):** la web pública restaurantemeufoc.es se sirve directamente desde `dist/` (servicio `meu-foc`: `serve -l 8521 dist`). Cada `npm run build` publica al instante. Todos los cambios de estas secciones ya están en producción, y durante el trabajo también lo estuvieron los estados intermedios. A partir de ahora las pruebas se compilan en otra carpeta.
 
 ## 2026-10-08 — SEO (2): "paella" visible, corrección de "leña" y velocidad (terminado)
