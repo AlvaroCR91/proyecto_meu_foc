@@ -40,7 +40,13 @@ Registro de los cambios, actualizaciones y mejoras hechos en la web. Las entrada
   - Código compartido: `validateEvento` (validators.js; `nuevo-evento` ahora también lo usa), `imagenUrl` y `borrarImagen` (middleware/upload.js), y el nuevo `utils/http.js` con `parseId` y `rejectAndCleanup`.
   - Verificado con curl: 401 sin sesión en todas; evento de prueba (fecha pasada, sin foto) creado, editado y borrado sin aparecer nunca en la web pública; los 3 eventos reales intactos. En anuncios: sustituir, mantener y quitar foto, y borrar con foto (cada foto antigua desaparece del disco; quedan solo las 3 de los eventos reales); validación al editar; 404. `/api/eventos` y `/api/eventos/pasados-con-imagen` devuelven lo mismo que producción.
   - Quedan de prueba los anuncios 1, 2, 4 y 5 (sin fotos), para el panel y el tablón; se borran antes de desplegar.
-- [ ] Tarea 6: panel admin.
+- [x] Tarea 6: panel admin (`AdminPanel.tsx`, `api.ts`, `eventos.css`, `pages/eventos/admin.astro`).
+  - Selector "Evento / Publicación" (con explicación corta en cada opción). Un solo formulario para crear y editar los dos tipos. En publicación, la vigencia va en radios: "Sin fecha de fin (menú permanente, noticia)", "Temporal" (desde/hasta, con `min` en "hasta") o "Un día concreto".
+  - `ImagePicker` ampliado: al editar muestra la foto actual y permite cambiarla o quitarla (envía `quitar_imagen=1`).
+  - Debajo, las listas "Publicaciones del tablón" y "Eventos", con estado (Vigente / Programada / Caducada; Próximo / Pasado), fechas y "con foto", y botones Editar y Borrar. Borrar pide confirmación; si es un evento pasado con foto, avisa de que desaparecerá de "Eventos anteriores". Editar sube al formulario, marca la fila y bloquea el otro tipo; "Cancelar" vacía el formulario. Si la sesión caduca en cualquier acción, vuelve al login.
+  - `api.ts`: tipos `EventoAdmin`, `Anuncio` y `Vigencia`; funciones para crear, editar, borrar y listar los dos tipos, más `getAnuncios`; `toForm` construye el multipart.
+  - Título de la página: "Eventos y tablón".
+  - Verificado en navegador sin interfaz (con el token de prueba): listas cargadas; crear publicación temporal; editarla a "un día" con foto; volver a editar y quitar la foto; cancelar; error del servidor mostrado; evento de prueba (pasado) creado, editado y borrado; publicación borrada; sin scroll horizontal a 390px; `astro check` sin errores. BD y disco quedan como antes (3 eventos reales, 3 fotos).
 - [ ] Tarea 7: tablón en `/eventos`.
 - [ ] Tarea 8: verificación final y despliegue.
 
