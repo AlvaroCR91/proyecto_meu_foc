@@ -4,7 +4,7 @@ Registro de los cambios, actualizaciones y mejoras hechos en la web. Las entrada
 
 ---
 
-## 2026-10-24 — Eventos: calendario mensual, tablón de anuncios y gestión en el panel (en curso)
+## 2026-10-24 — Eventos: calendario mensual, tablón de anuncios y gestión en el panel (pendiente de desplegar)
 
 **Contexto:** primera prueba del flujo `develop` → `main`. Se cambia el calendario de tira a hoja de mes, se añade un tablón de anuncios (publicaciones con vigencia sin fecha de fin, temporal o de un día) que avisa por webhook a n8n como los eventos, y el panel podrá listar, editar y borrar. Decisión del usuario: usar la BD real también en local (sin BD de pruebas). Regla para las pruebas: eventos con fecha pasada y sin foto (la web pública no los muestra), y borrarlos al acabar.
 
@@ -56,6 +56,10 @@ Registro de los cambios, actualizaciones y mejoras hechos en la web. Las entrada
   - Petición del usuario: botones "Eventos ↓" y "Novedades ↓" en la cabecera de `/eventos` (`nav.jump-nav` con dos `.btn`), que bajan con scroll suave a "Reserva la fecha" (nueva ancla `#proximos-eventos`) y a `#novedades`. Son enlaces de ancla, sin JS (el scroll suave ya lo da `landing.css`). "Novedades" se oculta por CSS (`body:has(#novedades)`) cuando no hay tablón. Verificado a 1440 y 390px: cada botón deja su encabezado en la mitad superior de la pantalla; sin publicaciones solo se ve "Eventos".
   - Añadidas más publicaciones de prueba ("[PRUEBA] Arroz del mes" con foto, "Menú especial" y "Navidad") para verlo en local; se borran antes de desplegar.
 - [ ] Tarea 8: verificación final y despliegue.
+  - [x] `astro check` sin errores; build correcto (10 páginas). Comparado con el build de producción, solo cambian `/eventos/` y `/eventos/admin/`; el resto de páginas son idénticas.
+  - [x] Repetidas todas las pruebas en navegador (calendario, tablón, botones, panel completo) a 1440 y 390px: todo correcto. Durante las pruebas saltó el límite general de la API (100 peticiones cada 15 min por IP) en la API de desarrollo; se reinició para vaciar el contador. En producción el límite sigue igual: cada visita a `/eventos` hace ahora 3 llamadas más las fotos.
+  - [x] Limpieza: borradas por la API las 7 publicaciones "[PRUEBA]" (también la foto de prueba del disco). Quedan 0 anuncios, los 3 eventos reales y sus 3 fotos. Eliminados el token de sesión de prueba y el PNG de prueba.
+  - [ ] Despliegue con `~/scripts/deploy-meu-foc.sh` tras el OK del usuario.
 
 ---
 
