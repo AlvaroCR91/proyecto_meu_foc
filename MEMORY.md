@@ -4,7 +4,7 @@ Registro de los cambios, actualizaciones y mejoras hechos en la web. Las entrada
 
 ---
 
-## 2026-10-24 — Nuevo flujo de trabajo: rama `develop` y producción separada (en curso)
+## 2026-10-24 — Nuevo flujo de trabajo: rama `develop` y producción separada (terminado)
 
 **Contexto:** se trabajaba directamente sobre `main` y en la misma carpeta que sirve producción, así que cualquier build salía a internet. Plan: trabajar en `develop` en esta carpeta, y que producción se sirva desde otra carpeta (`/home/hostv01/meu-foc-prod`, worktree de `main`), actualizada solo mediante un script de despliegue tras la aprobación del usuario.
 
@@ -18,13 +18,18 @@ Registro de los cambios, actualizaciones y mejoras hechos en la web. Las entrada
   - `--check`: lista los commits y archivos que se publicarían, sin tocar nada.
   - Sin opciones: comprueba que `meu-foc-prod` está limpia y en `main` (avisa si `proyecto_meu_foc` tiene cambios sin commitear, que no se publican), hace `git merge --ff-only develop`, `npm ci` solo si cambió el lockfile, compila en `dist-new` (si falla, deshace el merge y no toca producción), cambia `dist` → `dist-prev` y `dist-new` → `dist`, reinicia `eventos-api` solo si cambió `server/eventos-api`, comprueba que web y API responden, etiqueta `deploy-AAAAMMDD-HHMM` y sube `main`, `develop` y la etiqueta a GitHub.
   - `--rollback`: intercambia `dist` y `dist-prev` (solo la web; `main` no se toca).
+  - `--rebuild`: recompila y publica `main` tal cual, sin merge ni etiqueta (para volver tras un `--rollback`). Añadido durante la tarea 5.
   - `dist-new/`, `dist-prev/` y `dist-rollback/` añadidos a `.git/info/exclude`. Comprobado aparte que `serve` sirve la carpeta nueva tras el cambio de nombre sin reiniciarse.
-- [ ] Tarea 5: prueba completa.
-- [ ] Tarea 6: actualizar memorias.
+- [x] Tarea 5: prueba completa.
+  - Build en `proyecto_meu_foc` con un archivo de prueba en `public/`: aparece en su `dist/` pero da 404 en restaurantemeufoc.es, y el `dist/` de producción no se tocó.
+  - Desplegado el commit `44fc128` (este changelog) con el script: fast-forward de `main`, build, cambio de carpeta, 5 comprobaciones en 200, etiqueta `deploy-20261024-1836` y subida a GitHub de `main`, `develop` y la etiqueta.
+  - `--rollback` devolvió la carpeta anterior (mismo inode) con la web respondiendo; `--rebuild` volvió a publicar `main`. Después, `--check` dice "Nada que publicar".
+  - La web pública coincide con el build de producción en `/`, `/en/`, `/carta/` y `/eventos/`; solo cambian los emails, que Cloudflare cifra de forma distinta en cada petición.
+- [x] Tarea 6: README con la sección "Cómo trabajar y desplegar" (y `npm run build` marcado como solo local); memoria del asistente actualizada con el flujo final.
 
 ---
 
-**Aviso importante (2026-10-08):** la web pública restaurantemeufoc.es se sirve directamente desde `dist/` (servicio `meu-foc`: `serve -l 8521 dist`). Cada `npm run build` publica al instante. Todos los cambios de estas secciones ya están en producción, y durante el trabajo también lo estuvieron los estados intermedios. A partir de ahora las pruebas se compilan en otra carpeta.
+**Aviso importante (2026-10-08, ya no vigente desde el 2026-10-24, ver arriba):** la web pública restaurantemeufoc.es se sirve directamente desde `dist/` (servicio `meu-foc`: `serve -l 8521 dist`). Cada `npm run build` publica al instante. Todos los cambios de estas secciones ya están en producción, y durante el trabajo también lo estuvieron los estados intermedios. A partir de ahora las pruebas se compilan en otra carpeta.
 
 ## 2026-10-08 — SEO (2): "paella" visible, corrección de "leña" y velocidad (terminado)
 
