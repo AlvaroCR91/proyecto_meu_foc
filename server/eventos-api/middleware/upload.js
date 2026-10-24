@@ -3,7 +3,9 @@ const path = require('path');
 const crypto = require('crypto');
 const multer = require('multer');
 
-const UPLOADS_DIR = path.join(__dirname, '..', 'uploads', 'eventos');
+// UPLOADS_DIR por env solo para la API de desarrollo, que comparte BD con
+// producción y por tanto debe leer y guardar las fotos en la misma carpeta.
+const UPLOADS_DIR = process.env.UPLOADS_DIR || path.join(__dirname, '..', 'uploads', 'eventos');
 fs.mkdirSync(UPLOADS_DIR, { recursive: true });
 
 const ALLOWED_MIME_TO_EXT = {

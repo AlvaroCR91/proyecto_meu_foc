@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "PORT=8533 COOKIE_SECURE=false UPLOADS_DIR=/home/hostv01/meu-foc-prod/server/eventos-api/uploads/eventos N8N_SUBSCRIBE_WEBHOOK_URL= N8N_NEW_EVENT_WEBHOOK_URL= N8N_NEW_ANUNCIO_WEBHOOK_URL= node --watch server.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

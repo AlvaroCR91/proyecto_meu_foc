@@ -6,7 +6,9 @@ const { requireAdmin, COOKIE_NAME } = require('../middleware/auth');
 
 const COOKIE_OPTS = {
   httpOnly: true,
-  secure: true,
+  // Solo la API de desarrollo lo desactiva (COOKIE_SECURE=false), para poder
+  // entrar al panel por http desde otro equipo de la red.
+  secure: process.env.COOKIE_SECURE !== 'false',
   sameSite: 'strict',
   maxAge: 8 * 60 * 60 * 1000, // 8h
   path: '/',

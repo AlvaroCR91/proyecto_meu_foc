@@ -4,6 +4,27 @@ Registro de los cambios, actualizaciones y mejoras hechos en la web. Las entrada
 
 ---
 
+## 2026-10-24 — Eventos: calendario mensual, tablón de anuncios y gestión en el panel (en curso)
+
+**Contexto:** primera prueba del flujo `develop` → `main`. Se cambia el calendario de tira a hoja de mes, se añade un tablón de anuncios (publicaciones con vigencia sin fecha de fin, temporal o de un día) que avisa por webhook a n8n como los eventos, y el panel podrá listar, editar y borrar. Decisión del usuario: usar la BD real también en local (sin BD de pruebas). Regla para las pruebas: eventos con fecha pasada y sin foto (la web pública no los muestra), y borrarlos al acabar.
+
+**Progreso:**
+- [x] Tarea 1: entorno local.
+  - `astro.config.mjs`: proxy `/api` → `localhost:8533` solo en `dev` y `preview`.
+  - `middleware/upload.js`: `UPLOADS_DIR` configurable por env (por defecto igual que antes).
+  - `server/eventos-api/package.json`: script `dev` (puerto 8533, fotos en la carpeta de producción, URLs de n8n vacías a la fuerza, `node --watch`). Documentado en el README.
+  - Para abrirlo desde el equipo del usuario (conectado por VPN desde 10.9.0.10; el reenvío de puertos de VS Code no le llegaba): `server.host: '0.0.0.0'` en `astro.config.mjs` (solo dev/preview), y la API de desarrollo arranca con `COOKIE_SECURE=false` (`routes/admin.js` lee esa variable; en producción la cookie sigue siendo `secure`). URL local: http://10.20.20.250:4321. El usuario entró al panel desde Opera.
+  - Verificado: `/eventos/` en :4321 muestra lo mismo que la web pública (1 evento, día 31 marcado, 8 imágenes en la galería, sin errores JS), las fotos se sirven por el proxy y `/api/admin/me` da 401 sin sesión.
+- [ ] Tarea 2: calendario mensual.
+- [ ] Tarea 3: tabla `anuncios`.
+- [ ] Tarea 4: API pública y creación de publicaciones.
+- [ ] Tarea 5: API de gestión (listar, editar, borrar).
+- [ ] Tarea 6: panel admin.
+- [ ] Tarea 7: tablón en `/eventos`.
+- [ ] Tarea 8: verificación final y despliegue.
+
+---
+
 ## 2026-10-24 — Nuevo flujo de trabajo: rama `develop` y producción separada (terminado)
 
 **Contexto:** se trabajaba directamente sobre `main` y en la misma carpeta que sirve producción, así que cualquier build salía a internet. Plan: trabajar en `develop` en esta carpeta, y que producción se sirva desde otra carpeta (`/home/hostv01/meu-foc-prod`, worktree de `main`), actualizada solo mediante un script de despliegue tras la aprobación del usuario.

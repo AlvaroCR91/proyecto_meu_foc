@@ -47,7 +47,7 @@ Hay dos carpetas del mismo repositorio (`git worktree`):
 
 restaurantemeufoc.es la sirven los servicios systemd `meu-foc` (`serve -l 8521 dist`) y `eventos-api` (:8523) desde `meu-foc-prod`. Las fotos subidas desde el panel de eventos se guardan en `meu-foc-prod/server/eventos-api/uploads/`. Ojo: la base de datos es la misma en local y en producción.
 
-1. **Trabajar** en `proyecto_meu_foc` (rama `develop`) y ver los cambios en local con `npm run dev` (http://localhost:4321) o con `npm run build && npm run preview`.
+1. **Trabajar** en `proyecto_meu_foc` (rama `develop`) y ver los cambios en local con `npm run dev` (http://10.20.20.250:4321 desde otro equipo de la red, o http://localhost:4321 en el servidor) o con `npm run build && npm run preview`. Para que funcionen los eventos y el panel, arrancar también la API de desarrollo: `cd server/eventos-api && npm run dev` (puerto 8533; Astro le reenvía `/api`). Usa la **BD real** y la carpeta de fotos de producción, pero nunca envía avisos a n8n. Todo lo que se cree o borre desde local afecta a la web publicada.
 2. **Hacer commit** en `develop` cuando esté bien. Lo que no esté commiteado no se publica.
 3. **Revisar qué se publicaría:** `~/scripts/deploy-meu-foc.sh --check`
 4. **Publicar:** `~/scripts/deploy-meu-foc.sh`. Hace fast-forward de `main` a `develop`, compila en `dist-new` (si falla, no toca nada), cambia la web de golpe dejando la anterior en `dist-prev`, reinicia la API solo si cambió `server/eventos-api`, comprueba que todo responde, etiqueta `deploy-AAAAMMDD-HHMM` y sube `main`, `develop` y la etiqueta a GitHub.
