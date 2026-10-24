@@ -15,7 +15,13 @@ Registro de los cambios, actualizaciones y mejoras hechos en la web. Las entrada
   - `server/eventos-api/package.json`: script `dev` (puerto 8533, fotos en la carpeta de producción, URLs de n8n vacías a la fuerza, `node --watch`). Documentado en el README.
   - Para abrirlo desde el equipo del usuario (conectado por VPN desde 10.9.0.10; el reenvío de puertos de VS Code no le llegaba): `server.host: '0.0.0.0'` en `astro.config.mjs` (solo dev/preview), y la API de desarrollo arranca con `COOKIE_SECURE=false` (`routes/admin.js` lee esa variable; en producción la cookie sigue siendo `secure`). URL local: http://10.20.20.250:4321. El usuario entró al panel desde Opera.
   - Verificado: `/eventos/` en :4321 muestra lo mismo que la web pública (1 evento, día 31 marcado, 8 imágenes en la galería, sin errores JS), las fotos se sirven por el proxy y `/api/admin/me` da 401 sin sesión.
-- [ ] Tarea 2: calendario mensual.
+- [x] Tarea 2: calendario mensual (`EventList.tsx`, `eventos.css`).
+  - `MonthStrip` (tira horizontal) sustituido por `MonthCalendar`: hoja de mes en una tarjeta de 420px como máximo, cabecera "‹ mes ›" y cuadrícula L–D con la semana empezando en lunes.
+  - Días con evento en color brasa y pulsables, con `aria-label` "sábado, 31 de octubre: 1 evento". Hoy con contorno, días pasados atenuados y el resto deshabilitados. Abre en el mes del próximo evento (calculado en hora de Madrid).
+  - Al pulsar un día se baja a la tarjeta del evento, como antes, y la tarjeta se realza 1,6 s (sin animación si el sistema pide movimiento reducido).
+  - Ajuste pedido por el usuario (más diferencia entre pasados y futuros): hoy y días futuros en crema al 100 %, con fondo suave y peso 500; hoy con aro de 2px; pasados al 25 % y sin fondo.
+  - Eliminados los estilos `.month-strip*` y el desplazamiento automático de la tira.
+  - Verificado a 1440 y 390px: octubre 2026 con 3 huecos (empieza en jueves) y noviembre con 6 (empieza en domingo); el 31 marcado; clic → tarjeta visible y realzada; navegación de meses; sin scroll horizontal ni errores JS; `astro check` sin errores. La web pública no cambia.
 - [ ] Tarea 3: tabla `anuncios`.
 - [ ] Tarea 4: API pública y creación de publicaciones.
 - [ ] Tarea 5: API de gestión (listar, editar, borrar).

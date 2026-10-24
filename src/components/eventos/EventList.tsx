@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, useRef } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { getEventos, type Evento } from './api';
 
 const TZ = 'Europe/Madrid';
@@ -33,7 +33,13 @@ function monthLabel(d: Date) {
   return label.charAt(0).toUpperCase() + label.slice(1);
 }
 
-function MonthStrip({ eventos, onSelectDay }: { eventos: Evento[]; onSelectDay: (key: string) => void }) {
+const WEEKDAYS = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
+
+function dayLabel(d: Date) {
+  return new Intl.DateTimeFormat('es-ES', { timeZone: TZ, weekday: 'long', day: 'numeric', month: 'long' }).format(d);
+}
+
+function MonthCalendar({ eventos, onSelectDay }: { eventos: Evento[]; onSelectDay: (key: string) => void }) {
   const eventDays = useMemo(() => {
     const map = new Map<string, number>();
     for (const ev of eventos) {
@@ -43,58 +49,61 @@ function MonthStrip({ eventos, onSelectDay }: { eventos: Evento[]; onSelectDay: 
     return map;
   }, [eventos]);
 
+  // Abre en el mes del próximo evento (los eventos llegan ordenados por fecha).
   const initialCursor = useMemo(() => {
-    const base = eventos.length ? new Date(eventos[0].fecha) : new Date();
-    return new Date(Date.UTC(base.getUTCFullYear(), base.getUTCMonth(), 1, 12));
+    const [y, m] = dateKey(eventos.length ? new Date(eventos[0].fecha) : new Date()).split('-').map(Number);
+    return new Date(Date.UTC(y, m - 1, 1, 12));
   }, [eventos]);
 
   const [cursor, setCursor] = useState(initialCursor);
   const todayKey = dateKey(new Date());
-  const daysRef = useRef<HTMLDivElement>(null);
 
-  const days = useMemo(() => {
+  // Celdas del mes: huecos vacíos hasta el primer día (semana de lunes a
+  // domingo) y después un día por celda.
+  const cells = useMemo(() => {
     const year = cursor.getUTCFullYear();
     const month = cursor.getUTCMonth();
     const total = new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
-    return Array.from({ length: total }, (_, i) => {
-      const d = new Date(Date.UTC(year, month, i + 1, 12));
-      const key = dateKey(d);
-      return { day: i + 1, key, hasEvent: eventDays.has(key) };
+    const leading = (new Date(Date.UTC(year, month, 1, 12)).getUTCDay() + 6) % 7;
+    const days = Array.from({ length: total }, (_, i) => {
+      const date = new Date(Date.UTC(year, month, i + 1, 12));
+      const key = dateKey(date);
+      return { day: i + 1, key, date, count: eventDays.get(key) || 0 };
     });
+    return [...Array.from({ length: leading }, () => null), ...days];
   }, [cursor, eventDays]);
 
   function shiftMonth(delta: number) {
     setCursor((c) => new Date(Date.UTC(c.getUTCFullYear(), c.getUTCMonth() + delta, 1, 12)));
   }
 
-  // Al cargar o cambiar de mes, desplaza la tira para que el primer día con
-  // evento quede visible sin que el usuario tenga que buscarlo a mano.
-  useEffect(() => {
-    const container = daysRef.current;
-    if (!container) return;
-    const target = container.querySelector<HTMLElement>('.has-event') || container.firstElementChild as HTMLElement | null;
-    target?.scrollIntoView({ behavior: 'auto', inline: 'center', block: 'nearest' });
-  }, [cursor, eventDays]);
-
   return (
-    <div className="month-strip">
-      <div className="month-strip-header">
-        <button type="button" className="month-strip-nav" onClick={() => shiftMonth(-1)} aria-label="Mes anterior">‹</button>
-        <span className="month-strip-label">{monthLabel(cursor)}</span>
-        <button type="button" className="month-strip-nav" onClick={() => shiftMonth(1)} aria-label="Mes siguiente">›</button>
+    <div className="month-cal">
+      <div className="month-cal-header">
+        <button type="button" className="month-cal-nav" onClick={() => shiftMonth(-1)} aria-label="Mes anterior">‹</button>
+        <span className="month-cal-label" aria-live="polite">{monthLabel(cursor)}</span>
+        <button type="button" className="month-cal-nav" onClick={() => shiftMonth(1)} aria-label="Mes siguiente">›</button>
       </div>
-      <div className="month-strip-days" ref={daysRef}>
-        {days.map(({ day, key, hasEvent }) => (
-          <button
-            type="button"
-            key={key}
-            className={`month-strip-day${hasEvent ? ' has-event' : ''}${key === todayKey ? ' is-today' : ''}`}
-            disabled={!hasEvent}
-            onClick={() => onSelectDay(key)}
-          >
-            {day}
-          </button>
+      <div className="month-cal-grid">
+        {WEEKDAYS.map((w) => (
+          <span className="month-cal-weekday" key={w} aria-hidden="true">{w}</span>
         ))}
+        {cells.map((cell, i) =>
+          cell === null ? (
+            <span className="month-cal-blank" key={`blank-${i}`} />
+          ) : (
+            <button
+              type="button"
+              key={cell.key}
+              className={`month-cal-day${cell.count ? ' has-event' : ''}${cell.key === todayKey ? ' is-today' : ''}${cell.key < todayKey ? ' is-past' : ''}`}
+              disabled={!cell.count}
+              aria-label={cell.count ? `${dayLabel(cell.date)}: ${cell.count === 1 ? '1 evento' : `${cell.count} eventos`}` : undefined}
+              onClick={() => onSelectDay(cell.key)}
+            >
+              {cell.day}
+            </button>
+          )
+        )}
       </div>
     </div>
   );
@@ -118,18 +127,24 @@ export default function EventList() {
   function scrollToDay(key: string) {
     const first = eventos.find((ev) => dateKey(new Date(ev.fecha)) === key);
     if (!first) return;
-    document.getElementById(`event-${first.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const card = document.getElementById(`event-${first.id}`);
+    if (!card) return;
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    // Realce breve para que se vea qué tarjeta corresponde al día pulsado.
+    card.classList.remove('is-highlighted');
+    void card.offsetWidth;
+    card.classList.add('is-highlighted');
   }
 
   if (state === 'loading') {
     return <p className="event-empty">Cargando próximos eventos…</p>;
   }
 
-  // La tira de mes se muestra siempre (aunque esté vacía) para que la sección
+  // El calendario se muestra siempre (aunque esté vacía) para que la sección
   // no parezca incompleta; solo el contenido de debajo cambia según el estado.
   return (
     <>
-      <MonthStrip eventos={eventos} onSelectDay={scrollToDay} />
+      <MonthCalendar eventos={eventos} onSelectDay={scrollToDay} />
       {state === 'error' && (
         <p className="event-empty">No hemos podido cargar los eventos. Inténtalo más tarde.</p>
       )}
