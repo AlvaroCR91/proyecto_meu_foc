@@ -259,6 +259,18 @@
 }
 .surf-ember .event-empty { color: rgba(244, 236, 220, 0.6); }
 
+/* ── tablón de anuncios ── */
+.anuncio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  gap: 24px;
+  max-width: 1040px;
+  margin: 40px auto 0;
+}
+/* el texto del anuncio respeta los saltos de línea escritos en el panel */
+.anuncio-card-title { font-size: 30px; }
+.anuncio-card-text { font-size: 18px; max-width: none; white-space: pre-line; }
+
 /* ── admin ── */
 .admin-shell {
   max-width: 640px;

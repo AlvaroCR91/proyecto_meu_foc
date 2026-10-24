@@ -47,7 +47,13 @@ Registro de los cambios, actualizaciones y mejoras hechos en la web. Las entrada
   - `api.ts`: tipos `EventoAdmin`, `Anuncio` y `Vigencia`; funciones para crear, editar, borrar y listar los dos tipos, más `getAnuncios`; `toForm` construye el multipart.
   - Título de la página: "Eventos y tablón".
   - Verificado en navegador sin interfaz (con el token de prueba): listas cargadas; crear publicación temporal; editarla a "un día" con foto; volver a editar y quitar la foto; cancelar; error del servidor mostrado; evento de prueba (pasado) creado, editado y borrado; publicación borrada; sin scroll horizontal a 390px; `astro check` sin errores. BD y disco quedan como antes (3 eventos reales, 3 fotos).
-- [ ] Tarea 7: tablón en `/eventos`.
+- [x] Tarea 7: tablón "Novedades" en `/eventos` (nuevo `AnuncioList.tsx`, `pages/eventos/index.astro`, `eventos.css`).
+  - Sección "Tablón de la casa / Novedades" entre "Reserva la fecha" y "Eventos anteriores". El componente pinta la sección entera y no la muestra si no hay publicaciones vigentes o si la API falla.
+  - Tarjetas con el estilo de las de eventos, en rejilla de 2 columnas en escritorio y 1 en móvil. El texto respeta los saltos de línea del panel. Etiqueta: "Novedad" (sin fecha de fin), "Del 25 de octubre al 15 de noviembre" (temporal; año solo si no es el actual) y "Solo el sábado 14 de noviembre" (día). La foto abre el visor, porque lleva también la clase `.event-card-image` que ya usa el lightbox.
+  - Textos de suscripción: "Avísame de nuevos eventos y novedades" y "¡Gracias! Te avisaremos de los próximos eventos y novedades." (`suscriptores.js`).
+  - No se cambió la meta descripción de la página (queda como sugerencia: mencionar "novedades y nuevos menús").
+  - Verificado a 1440 y 390px: orden de secciones, etiquetas de los 3 tipos (incluido cambio de año), foto y visor, saltos de línea, sin scroll horizontal ni errores JS. Con la API vacía o con error la sección no aparece. `astro check` sin errores. La web pública no cambia.
+  - Añadidas más publicaciones de prueba ("[PRUEBA] Arroz del mes" con foto, "Menú especial" y "Navidad") para verlo en local; se borran antes de desplegar.
 - [ ] Tarea 8: verificación final y despliegue.
 
 ---

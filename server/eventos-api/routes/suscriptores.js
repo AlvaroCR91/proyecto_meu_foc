@@ -22,7 +22,7 @@ router.post('/suscribirse', subscribeLimiter, async (req, res, next) => {
   try {
     await pool.execute('INSERT INTO suscriptores (email) VALUES (:email)', { email });
     notifyWebhook(process.env.N8N_SUBSCRIBE_WEBHOOK_URL, { email });
-    res.status(201).json({ ok: true, message: '¡Gracias! Te avisaremos de los próximos eventos.' });
+    res.status(201).json({ ok: true, message: '¡Gracias! Te avisaremos de los próximos eventos y novedades.' });
   } catch (err) {
     if (err.code === 'ER_DUP_ENTRY') {
       return res.status(409).json({ ok: false, error: 'Este email ya está suscrito.' });

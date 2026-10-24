@@ -18,7 +18,7 @@ export default function SubscribeForm() {
   return (
     <form className="subscribe-form" onSubmit={onSubmit}>
       <div className="field">
-        <label htmlFor="sub-email">Avísame de nuevos eventos</label>
+        <label htmlFor="sub-email">Avísame de nuevos eventos y novedades</label>
         <input
           id="sub-email"
           className="input"

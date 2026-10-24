@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import EventList from '../../components/eventos/EventList';
 import SubscribeForm from '../../components/eventos/SubscribeForm';
+import AnuncioList from '../../components/eventos/AnuncioList';
 import Lightbox from '../../components/sections/Lightbox.astro';
 import '../../styles/landing.css';
 import '../../styles/eventos.css';
@@ -43,6 +44,8 @@ import cenaCata2 from '../../assets/cena_cata_2.jpg';
     <EventList client:load />
   </div>
 </section>
+
+<AnuncioList client:load />
 
 <section class="section surf-paper">
   <div class="wrap">
