@@ -15,6 +15,19 @@
 .surf-ember .back-link { color: rgba(244, 236, 220, 0.75); }
 .surf-ember .back-link:hover { color: var(--ember-2); }
 
+/* ── botones de salto (cabecera de /eventos) ── */
+.jump-nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 32px;
+}
+/* "Novedades" solo aparece si existe la sección del tablón, que se pinta
+   solo cuando hay publicaciones vigentes */
+.jump-nav-novedades { display: none; }
+body:has(#novedades) .jump-nav-novedades { display: inline-flex; }
+
 /* ── placeholder de foto (mismo patrón que carta.css, no está en landing.css) ── */
 .img-slot-label {
   font-family: var(--body);

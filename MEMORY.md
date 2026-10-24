@@ -53,6 +53,7 @@ Registro de los cambios, actualizaciones y mejoras hechos en la web. Las entrada
   - Textos de suscripción: "Avísame de nuevos eventos y novedades" y "¡Gracias! Te avisaremos de los próximos eventos y novedades." (`suscriptores.js`).
   - No se cambió la meta descripción de la página (queda como sugerencia: mencionar "novedades y nuevos menús").
   - Verificado a 1440 y 390px: orden de secciones, etiquetas de los 3 tipos (incluido cambio de año), foto y visor, saltos de línea, sin scroll horizontal ni errores JS. Con la API vacía o con error la sección no aparece. `astro check` sin errores. La web pública no cambia.
+  - Petición del usuario: botones "Eventos ↓" y "Novedades ↓" en la cabecera de `/eventos` (`nav.jump-nav` con dos `.btn`), que bajan con scroll suave a "Reserva la fecha" (nueva ancla `#proximos-eventos`) y a `#novedades`. Son enlaces de ancla, sin JS (el scroll suave ya lo da `landing.css`). "Novedades" se oculta por CSS (`body:has(#novedades)`) cuando no hay tablón. Verificado a 1440 y 390px: cada botón deja su encabezado en la mitad superior de la pantalla; sin publicaciones solo se ve "Eventos".
   - Añadidas más publicaciones de prueba ("[PRUEBA] Arroz del mes" con foto, "Menú especial" y "Navidad") para verlo en local; se borran antes de desplegar.
 - [ ] Tarea 8: verificación final y despliegue.
 
