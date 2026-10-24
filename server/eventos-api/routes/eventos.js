@@ -85,7 +85,7 @@ router.post('/admin/nuevo-evento', requireAdmin, uploadEventImage, async (req, r
       imagen_placeholder: imagen,
     };
 
-    notifyWebhook(process.env.N8N_NEW_EVENT_WEBHOOK_URL, nuevoEvento);
+    notifyWebhook(process.env.N8N_NEW_EVENT_WEBHOOK_URL, { tipo: 'evento', ...nuevoEvento });
 
     res.status(201).json({ ok: true, evento: nuevoEvento });
   } catch (err) {

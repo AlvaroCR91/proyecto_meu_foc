@@ -34,6 +34,7 @@ app.use('/api', globalLimiter);
 app.use('/api', require('./routes/health'));
 app.use('/api', require('./routes/uploads'));
 app.use('/api', require('./routes/eventos'));
+app.use('/api', require('./routes/anuncios'));
 app.use('/api', require('./routes/suscriptores'));
 app.use('/api', require('./routes/admin'));
 

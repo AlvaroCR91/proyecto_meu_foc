@@ -26,7 +26,13 @@ Registro de los cambios, actualizaciones y mejoras hechos en la web. Las entrada
   - `server/eventos-api/migrations/002_anuncios.sql` (también añadida a `schema.sql`). Campos: `id`, `titulo`, `descripcion`, `imagen_placeholder`, `vigencia ENUM('permanente','temporal','dia')`, `fecha_inicio`/`fecha_fin` DATE NULL (en "día", las dos iguales), `creado_en`, e índice `(vigencia, fecha_fin)`.
   - Copia previa de la BD: `/home/hostv01/scripts/backups-db/restaurante_eventos-20261024-1920-antes-anuncios.sql` (solo legible por hostv01).
   - Aplicada con `sudo mysql restaurante_eventos < migrations/002_anuncios.sql`. `eventos_app` puede leerla con sus permisos actuales (0 filas). La API publicada sigue igual (`/api/eventos` 200 y `/api/anuncios` 404 hasta el despliegue).
-- [ ] Tarea 4: API pública y creación de publicaciones.
+- [x] Tarea 4: API pública y creación de publicaciones (`routes/anuncios.js`, registrada en `server.js`).
+  - `GET /api/anuncios`: vigentes (permanentes siempre; temporal y día mientras `fecha_fin >= CURDATE()`, también por adelantado), de más nueva a más antigua. Fechas como texto `YYYY-MM-DD` (`DATE_FORMAT`) para que no se desplacen al pasar a JSON. La BD está en hora de Madrid, así que `CURDATE()` es el día del restaurante.
+  - `POST /api/admin/nuevo-anuncio`: `requireAdmin` + `uploadEventImage`. Validación en `validateAnuncio` (`utils/validators.js`, reutilizable al editar), con `isValidFechaDia` (descarta días inexistentes) y `hoyMadrid`. Al crear rechaza una fecha de fin ya pasada. Si los datos fallan, borra la foto subida. Aviso con `notifyWebhook(N8N_NEW_ANUNCIO_WEBHOOK_URL, {tipo:'anuncio', …})`.
+  - El webhook de eventos ahora incluye `tipo:'evento'`. Añadido `N8N_NEW_ANUNCIO_WEBHOOK_URL=` (vacío) a `.env.example` y a los `.env` de desarrollo y producción.
+  - Verificado con curl: 401 sin sesión; 400 por vigencia, título, día inexistente, temporal invertido, fin pasado e imagen no válida; la foto no queda en disco si falla la validación. Creadas las publicaciones permanente con foto, temporal y "solo hoy"; una caducada (metida por SQL) no sale en el GET. La foto se sirve por el proxy. Webhook comprobado con un receptor falso: llega `{"tipo":"anuncio",...}`.
+  - Para probar sin la contraseña del usuario se usó un token de sesión de 2 h firmado con el secreto del `.env` (guardado en el scratchpad, no en el repo).
+  - **Pendiente de borrar antes de desplegar:** publicaciones de prueba (ids 1-5, título "[PRUEBA] …") y la foto de la 1 en `meu-foc-prod/server/eventos-api/uploads/eventos/`.
 - [ ] Tarea 5: API de gestión (listar, editar, borrar).
 - [ ] Tarea 6: panel admin.
 - [ ] Tarea 7: tablón en `/eventos`.
